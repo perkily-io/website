@@ -1,17 +1,27 @@
 // Features.tsx
+
 'use client'
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
-import { ChartBarIcon, HeartIcon, CpuChipIcon, ArrowsRightLeftIcon, PlayCircleIcon } from '@heroicons/react/24/outline'
+import Lottie from 'lottie-react'
+
+// Import Lottie animation JSON files
+import loyaltyProgramAnimation from '../app/assets/lottie/loyaltyProgramAnimation.json'
+import patientEngagementAnimation from '../app/assets/lottie/patientEngagementAnimation.json'
+import analyticsDashboardAnimation from '../app/assets/lottie/analyticsDashboardAnimation.json'
+import integrationCapabilitiesAnimation from '../app/assets/lottie/integrationCapabilitiesAnimation.json'
+import playAnimation from '../app/assets/lottie/playAnimation.json' // New Play animation
+
+// Import the Card components
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 
 const Features = () => {
   const features = [
     {
       title: 'Loyalty Program Management',
       description: 'Create and manage customized loyalty programs that reward patients for regular visits, preventive care, and healthy behaviors.',
-      icon: <ChartBarIcon className="w-8 h-8" />,
+      animation: loyaltyProgramAnimation,
       details: [
         'Customizable point systems',
         'Multiple reward tiers',
@@ -22,7 +32,7 @@ const Features = () => {
     {
       title: 'Patient Engagement',
       description: 'Keep patients engaged with personalized communications and rewards that encourage regular visits and preventive care.',
-      icon: <HeartIcon className="w-8 h-8" />,
+      animation: patientEngagementAnimation,
       details: [
         'Automated notifications',
         'Birthday rewards',
@@ -33,7 +43,7 @@ const Features = () => {
     {
       title: 'Analytics Dashboard',
       description: 'Track program performance and patient engagement with detailed analytics and insights.',
-      icon: <CpuChipIcon className="w-8 h-8" />,
+      animation: analyticsDashboardAnimation,
       details: [
         'Real-time program metrics',
         'Patient engagement tracking',
@@ -44,7 +54,7 @@ const Features = () => {
     {
       title: 'Integration Capabilities',
       description: 'Seamlessly integrate with your existing practice management and EMR systems.',
-      icon: <ArrowsRightLeftIcon className="w-8 h-8" />,
+      animation: integrationCapabilitiesAnimation,
       details: [
         'EMR integration',
         'Practice management software',
@@ -52,10 +62,11 @@ const Features = () => {
         'Communication platforms'
       ]
     }
-  ];
+  ]
 
   return (
     <div className="min-h-screen bg-gray-50 relative z-0">
+      {/* Features Header Section */}
       <section className="pt-32 pb-20 bg-gradient-to-r from-indigo-900 to-blue-900 text-white relative z-0">
         <div className="container mx-auto px-6">
           <motion.div
@@ -70,26 +81,28 @@ const Features = () => {
             </p>
           </motion.div>
 
+          {/* Feature Highlight Cards */}
           <div className="grid md:grid-cols-3 gap-8">
             <FeatureHighlightCard
-              title="Easy to Manage"
-              description="Intuitive dashboard for creating and managing loyalty programs with just a few clicks."
-              icon={<ChartBarIcon className="w-8 h-8" />}
+              title="Loyalty Program Management"
+              description="Create and manage customized loyalty programs that reward patients for regular visits, preventive care, and healthy behaviors."
+              animation={loyaltyProgramAnimation}
             />
             <FeatureHighlightCard
               title="Patient Engagement"
-              description="Keep patients engaged with personalized rewards and automated communications."
-              icon={<HeartIcon className="w-8 h-8" />}
+              description="Keep patients engaged with personalized communications and rewards that encourage regular visits and preventive care."
+              animation={patientEngagementAnimation}
             />
             <FeatureHighlightCard
-              title="Data Insights"
-              description="Track program performance and patient behavior with detailed analytics."
-              icon={<CpuChipIcon className="w-8 h-8" />}
+              title="Analytics Dashboard"
+              description="Track program performance and patient engagement with detailed analytics and insights."
+              animation={analyticsDashboardAnimation}
             />
           </div>
         </div>
       </section>
 
+      {/* Detailed Features Section */}
       <motion.section 
         className="py-20 relative z-10"
         initial={{ opacity: 0 }}
@@ -98,33 +111,37 @@ const Features = () => {
       >
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12">
-            {features.map((feature, index) => (
-              <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-shadow"
-              >
-                <div className="w-16 h-16 mb-6 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
-                  {feature.icon}
-                </div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-900">{feature.title}</h3>
-                <p className="text-gray-600 mb-6">{feature.description}</p>
-                <ul className="space-y-3">
-                  {feature.details.map((detail) => (
-                    <li key={detail} className="flex items-center text-gray-700">
-                      <span className="text-indigo-600 mr-3">✓</span>
-                      {detail}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
+            {features.map((feature) => (
+              <Card key={feature.title} className="shadow-xl p-8 hover:shadow-2xl transition-shadow">
+                <CardHeader>
+                  <div className="w-32 h-32 mb-6 rounded-xl bg-indigo-50 flex items-center justify-center"> {/* Increased from w-24 h-24 to w-32 h-32 */}
+                    <Lottie 
+                      animationData={feature.animation} 
+                      loop 
+                      className="w-24 h-24" /* Increased from w-16 h-16 to w-24 h-24 */
+                      style={{ pointerEvents: 'none' }}
+                    />
+                  </div>
+                  <CardTitle>{feature.title}</CardTitle>
+                  <CardDescription>{feature.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {feature.details.map((detail) => (
+                      <li key={detail} className="flex items-center text-gray-700">
+                        <span className="text-indigo-600 mr-3">✓</span>
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
       </motion.section>
 
+      {/* Video Demo Section */}
       <section className="py-20 bg-white relative z-10">
         <div className="container mx-auto px-6">
           <motion.div
@@ -139,8 +156,16 @@ const Features = () => {
           </motion.div>
           <div className="max-w-4xl mx-auto bg-gray-100 rounded-2xl aspect-video overflow-hidden">
             <div className="flex items-center justify-center h-full bg-gradient-to-r from-indigo-500 to-blue-600">
-              <button className="bg-white text-indigo-600 px-8 py-3 rounded-xl font-semibold hover:bg-indigo-50 transition-colors flex items-center gap-2">
-                <PlayCircleIcon className="w-6 h-6" />
+              <button 
+                className="bg-white text-indigo-600 px-8 py-3 rounded-xl font-semibold hover:bg-indigo-50 transition-colors flex items-center gap-2"
+                aria-label="Watch Demo Video" // Added for accessibility
+              >
+                <Lottie 
+                  animationData={playAnimation} 
+                  loop={false} 
+                  className="w-8 h-8" /* Increased from w-6 h-6 to w-8 h-8 */
+                  style={{ pointerEvents: 'none' }}
+                />
                 Watch Demo
               </button>
             </div>
@@ -148,6 +173,7 @@ const Features = () => {
         </div>
       </section>
 
+      {/* Integration Partners Section */}
       <section className="py-20 bg-gray-50 relative z-10">
         <div className="container mx-auto px-6">
           <motion.div
@@ -174,46 +200,31 @@ const Features = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-r from-indigo-900 to-blue-900 text-white relative z-10">
-        <div className="container mx-auto px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="max-w-3xl mx-auto"
-          >
-            <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-blue-300 to-white bg-clip-text text-transparent">
-              Ready to Transform Patient Loyalty?
-            </h2>
-            <div className="flex flex-col md:flex-row gap-6 justify-center">
-              <button className="bg-indigo-500 text-white px-8 py-4 rounded-xl font-semibold hover:bg-indigo-600 transition-all duration-300 hover:shadow-2xl">
-                Start Free Trial
-              </button>
-              <button className="border-2 border-indigo-300 text-indigo-100 px-8 py-4 rounded-xl font-semibold hover:bg-indigo-500/10 transition-all duration-300">
-                Schedule Demo
-              </button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/* Call to Action Section */}
+      
     </div>
   )
 }
 
-const FeatureHighlightCard = ({ title, description, icon }: { 
+const FeatureHighlightCard = ({ title, description, animation }: { 
   title: string
   description: string
-  icon: React.ReactNode
+  animation: Record<string, unknown> // Type for JSON animation data
 }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    className="bg-white/10 p-8 rounded-2xl backdrop-blur-lg border border-white/20"
-  >
-    <div className="text-indigo-300 mb-4">{icon}</div>
-    <h3 className="text-xl font-bold mb-4 text-white">{title}</h3>
-    <p className="text-white/80">{description}</p>
-  </motion.div>
+  <Card className="bg-white/10 p-8 rounded-2xl backdrop-blur-lg border border-white/20">
+    <CardHeader>
+      <div className="w-24 h-24 mb-4">
+        <Lottie 
+          animationData={animation} 
+          loop 
+          className="w-full h-full" 
+          style={{ pointerEvents: 'none' }}
+        />
+      </div>
+      <CardTitle className="text-white">{title}</CardTitle>
+      <CardDescription className="text-white/80">{description}</CardDescription>
+    </CardHeader>
+  </Card>
 )
 
 export default Features

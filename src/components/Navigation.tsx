@@ -3,15 +3,13 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
-import logo from '../../assets/Logo.png'
+import logo from '../app/assets/Logo.png'
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const pathname = usePathname()
 
   return (
     <nav className="fixed w-full z-50 bg-transparent backdrop-blur-sm">
