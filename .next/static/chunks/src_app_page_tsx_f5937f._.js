@@ -11,8 +11,9 @@
     "static/chunks/src_app_assets_lottie_mission_json_c031f4._.js",
     "static/chunks/src_app_assets_lottie_1d2be9._.js",
     "static/chunks/src_app_page_tsx_8b213b._.js",
-    "static/chunks/src_30c611._.js",
-    "static/chunks/node_modules_374c33._.js"
+    "static/chunks/src_components_c965a2._.js",
+    "static/chunks/src_lib_utils_ts_70d15c._.js",
+    "static/chunks/node_modules_1a8cd3._.js"
   ],
   "source": "dynamic"
 });

@@ -47,7 +47,7 @@ const Navigation = () => {
             <Link href="/login" className="hover:text-indigo-200 transition-colors px-4 py-2 hover:bg-white/10 rounded-lg">
               Login
             </Link>
-            <Link href="/signup" className={buttonLink + " bg-indigo-500/90 hover:bg-indigo-600/90"}>
+            <Link href="/contact" className={buttonLink + " bg-indigo-500/90 hover:bg-indigo-600/90"}>
               Get Started
             </Link>
           </div>
@@ -55,7 +55,7 @@ const Navigation = () => {
           {/* Mobile Toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-white"
+            className="md:hidden p-2 text-blue"
             aria-label="Toggle navigation menu"
           >
             {isOpen ? (
@@ -87,7 +87,7 @@ const Navigation = () => {
               <Link href="/login" className="block py-2 hover:text-indigo-200" onClick={handleLinkClick}>
                 Login
               </Link>
-              <Link href="/signup" className={buttonLink + " w-full text-center block"} onClick={handleLinkClick}>
+              <Link href="/contact" className={buttonLink + " w-full text-center block"} onClick={handleLinkClick}>
                 Get Started
               </Link>
             </motion.div>
