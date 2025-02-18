@@ -56,7 +56,7 @@ const Pricing = () => {
         >
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Simple, transparent pricing</h2>
           <p className="text-xl text-gray-600">
-            Choose the plan that's right for your practice. All plans include unlimited patient rewards and full access to our platform.
+            Choose the plan thats right for your practice and all the needs to better work for your customer. All plans include unlimited patient rewards and full access to our platform.
           </p>
         </motion.div>
 
