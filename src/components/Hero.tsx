@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] pt-20 sm:pt-24 md:pt-32 pb-16 sm:pb-20 md:pb-24 px-5 sm:px-6 overflow-hidden">
+    <section className="relative min-h-[calc(100vh-4rem)] pt-28 sm:pt-32 md:pt-32 pb-16 sm:pb-20 md:pb-24 px-5 sm:px-6 overflow-hidden">
       {/* Ambient background effects */}
       <div className="absolute top-0 left-0 w-full h-full">
         <div className="absolute top-20 left-1/4 w-[250px] sm:w-[400px] md:w-[600px] h-[250px] sm:h-[400px] md:h-[600px] bg-[#00A3FF]/5 rounded-full blur-[80px] sm:blur-[150px] animate-pulse-slow"></div>
