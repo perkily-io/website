@@ -17,10 +17,10 @@ const SEO = ({
   description,
   canonical = 'https://perkily.io',
   keywords = 'healthcare, AI, medical technology, patient care, healthcare rewards, medical professionals',
-  ogImage = 'https://perkily.io/og-image.jpg',
   ogType = 'website',
   twitterCard = 'summary_large_image',
   noindex = false,
+  ogImage
 }: SEOProps) => {
   const fullTitle = `${title} | Perkily Health Technologies`;
   
@@ -38,7 +38,7 @@ const SEO = ({
       <meta property="og:description" content={description} />
       <meta property="og:type" content={ogType} />
       <meta property="og:url" content={canonical} />
-      <meta property="og:image" content={ogImage} />
+      {ogImage && <meta property="og:image" content={ogImage} />}
       <meta property="og:site_name" content="Perkily Health Technologies" />
       <meta property="og:locale" content="en_US" />
 
@@ -47,7 +47,7 @@ const SEO = ({
       <meta name="twitter:site" content="@HelloPerkily" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={ogImage} />
+      {ogImage && <meta name="twitter:image" content={ogImage} />}
 
       {/* Additional SEO Tags */}
       <meta name="application-name" content="Perkily" />
