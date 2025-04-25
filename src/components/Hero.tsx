@@ -28,7 +28,8 @@ const Hero = () => {
                 <span className="block mt-1 sm:mt-0">Healthcare<span className="text-gradient-blue">.</span></span>
               </h1>
               <p className="text-lg sm:text-xl text-white/60 max-w-lg font-light leading-relaxed">
-                Two intelligent platforms. One seamless ecosystem. 
+                Two intelligent platforms. One seamless ecosystem.
+                <br />
                 <span className="text-white">For patients and professionals alike.</span>
               </p>
             </div>
