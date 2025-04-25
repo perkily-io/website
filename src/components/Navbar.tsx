@@ -53,8 +53,9 @@ const Navbar = () => {
       <div className="container max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex-shrink-0">
-            <span className="font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-[#00A3FF] to-[#00FFB2]">
+          <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
+            <img src="/logos/perkily-logo.png" alt="Perkily Logo" className="h-20 w-20" />
+            <span className="font-bold text-2xl text-white font-['Montserrat']">
               Perkily
             </span>
           </Link>
