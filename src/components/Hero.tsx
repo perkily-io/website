@@ -35,10 +35,15 @@ const Hero = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-4 w-full sm:w-auto pt-2">
-              <Button className="group bg-[#00A3FF] hover:bg-[#0090FF] text-white px-6 py-6 rounded-xl text-base transition-all duration-300 w-full sm:w-auto">
+              <a 
+                href="https://calendly.com/hello-perkily"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group bg-[#00A3FF] hover:bg-[#0090FF] text-white px-6 py-6 rounded-xl text-base transition-all duration-300 w-full sm:w-auto inline-flex items-center justify-center"
+              >
                 Book a Demo
                 <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </Button>
+              </a>
               <Link to="/about">
                 <Button variant="outline" className="border-white/10 hover:bg-white/[0.03] text-white px-6 py-6 rounded-xl text-base w-full sm:w-auto">
                   About Perkily
