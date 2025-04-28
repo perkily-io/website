@@ -93,10 +93,13 @@ const RewardPartners = () => {
                 </p>
               </div>
               <Button 
+                asChild
                 className="group bg-white/[0.05] hover:bg-white/[0.1] text-white border border-white/[0.1] hover:border-white/[0.2] transition-all duration-200 whitespace-nowrap w-full sm:w-auto"
               >
-                Get notified
-                <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" />
+                <Link to="/partners">
+                  Become a partner
+                  <ArrowRight className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-200" />
+                </Link>
               </Button>
             </div>
 

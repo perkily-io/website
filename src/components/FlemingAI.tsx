@@ -132,12 +132,12 @@ const FlemingAI = () => {
             </div>
 
             {/* Decorative elements */}
-            <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-500/5 via-purple-500/5 to-transparent" />
-            <div className="absolute bottom-0 left-0 w-1/2 h-full bg-gradient-to-r from-pink-500/5 via-purple-500/5 to-transparent" />
+            <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-500/5 via-purple-500/5 to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-1/2 h-full bg-gradient-to-r from-pink-500/5 via-purple-500/5 to-transparent pointer-events-none" />
             
             {/* Floating orbs */}
-            <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl" />
-            <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl" />
+            <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
           </div>
         </section>
       </div>
