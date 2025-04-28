@@ -244,7 +244,7 @@ ${formData.message}
               </div>
               <div>
                 <h4 className="text-sm font-medium text-white">Call Us</h4>
-                <p className="text-sm text-white/60">+27 (0) 12 345 6789</p>
+                <p className="text-sm text-white/60">+27 73 954 4493</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
