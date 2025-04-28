@@ -8,10 +8,17 @@ import WhyPerkily from '@/components/WhyPerkily';
 import PerkilyApps from '@/components/PerkilyApps';
 import CallToAction from '@/components/CallToAction';
 import Footer from '@/components/Footer';
+import SEO from '@/components/SEO';
 
 const Index = () => {
   return (
     <main className="min-h-screen bg-black">
+      <SEO 
+        title="Home"
+        description="Reimagining healthcare through AI-powered solutions, intuitive design, and seamless experiences. For patients and professionals alike."
+        keywords="healthcare, AI, medical technology, patient care, healthcare rewards, medical professionals"
+        canonical="https://www.perkily.io/"
+      />
       <Navbar />
       <Hero />
       <RewardPartners />
