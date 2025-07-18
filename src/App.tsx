@@ -14,6 +14,7 @@ import TermsOfService from "./pages/TermsOfService";
 import Careers from "./pages/Careers";
 import Partners from "./pages/Partners";
 import ComingSoon from "./pages/ComingSoon";
+import PerkilyPro from "./pages/PerkilyPro";
 
 // ScrollToTop component that handles scrolling on route changes
 const ScrollToTop = () => {
@@ -49,6 +50,7 @@ const App = () => (
             <Route path="/press" element={<ComingSoon />} />
             <Route path="/docs" element={<ComingSoon />} />
             <Route path="/help" element={<ComingSoon />} />
+            <Route path="/perkily-pro" element={<PerkilyPro />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

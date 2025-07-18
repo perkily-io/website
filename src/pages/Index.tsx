@@ -16,7 +16,7 @@ const Index = () => {
       <SEO 
         title="Home"
         description="Reimagining healthcare through AI-powered solutions, intuitive design, and seamless experiences. For patients and professionals alike."
-        keywords="healthcare, AI, medical technology, patient care, healthcare rewards, medical professionals"
+        keywords="healthcare, AI, medical technology, patient care, healthcare rewards, medical professionals, Perkily, Perkily AI, Perkily Apps, Perkily Rewards, Perkily Benefits, Perkily Perks, Perkily Rewards Program, Perkily Rewards App, Perkily Rewards Card, Perkily Rewards Card App, Perkily Rewards Card App Download, Perkily Rewards Card App Download for Android, Perkily Rewards Card App Download for iOS"
         canonical="https://www.perkily.io/"
       />
       <Navbar />

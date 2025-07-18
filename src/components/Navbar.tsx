@@ -64,6 +64,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-8">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/about">About</NavLink>
+            <NavLink to="/perkily-pro">Perkily Pro</NavLink>
             <NavLink to="/contact">Contact</NavLink>
           </div>
 
@@ -109,6 +110,9 @@ const Navbar = () => {
             </Link>
             <Link to="/about" className="block text-white/70 hover:text-white transition-colors duration-200 py-2">
               About
+            </Link>
+            <Link to="/perkily-pro" className="block text-white/70 hover:text-white transition-colors duration-200 py-2">
+              Perkily Pro
             </Link>
             <Link to="/contact" className="block text-white/70 hover:text-white transition-colors duration-200 py-2">
               Contact
