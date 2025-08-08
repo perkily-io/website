@@ -119,7 +119,7 @@ export default {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'glow-blue': 'radial-gradient(circle, rgba(30,174,219,0.15) 0%, rgba(30,174,219,0) 70%)',
-        'glow-emerald': 'radial-gradient(circle, rgba(16,185,129,0.15) 0%, rgba(16,185,129,0) 70%)',
+        'glow-emerald': 'radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(139,92,246,0) 70%)',
       },
     }
   },

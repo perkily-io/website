@@ -18,7 +18,7 @@ const FeatureCard = ({
       <div className={`absolute inset-0 rounded-3xl ${accentColor} opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-10`} />
       
       <div className="glass-card p-8 h-full transition-all duration-500 group-hover:scale-[1.02] group-hover:border-white/10">
-        <div className={`w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/[0.05] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500 ${accentColor.includes('blue') ? 'text-[#00A3FF]' : 'text-[#00FFB2]'}`}>
+      <div className={`w-14 h-14 rounded-2xl bg-white/[0.03] border border-white/[0.05] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500 ${accentColor.includes('blue') ? 'text-[#00A3FF]' : 'text-[#8B5CF6]'}`}>
           {icon}
         </div>
         
@@ -26,7 +26,7 @@ const FeatureCard = ({
         <p className="text-white/60 text-base leading-relaxed">{description}</p>
         
         <div className="mt-8 flex items-center text-sm font-medium">
-          <span className={`${accentColor.includes('blue') ? 'text-[#00A3FF]' : 'text-[#00FFB2]'} group-hover:translate-x-1 transition-transform duration-300`}>
+          <span className={`${accentColor.includes('blue') ? 'text-[#00A3FF]' : 'text-[#8B5CF6]'} group-hover:translate-x-1 transition-transform duration-300`}>
             Learn more →
           </span>
         </div>
@@ -62,7 +62,7 @@ const Features = () => {
             icon={<Shield className="w-8 h-8" />}
             title="Secure Platform"
             description="Industry-leading security standards protect your data. HIPAA-compliant infrastructure with end-to-end encryption."
-            accentColor="from-[#00FFB2]/20 to-transparent"
+            accentColor="from-[#8B5CF6]/20 to-transparent"
           />
           
           <FeatureCard 

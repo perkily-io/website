@@ -121,7 +121,7 @@ const Careers = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-3xl sm:text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#00A3FF] to-[#00FFB2]"
+            className="text-3xl sm:text-4xl font-bold mb-12 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#00A3FF] to-[#8B5CF6]"
           >
             Open Positions
           </motion.h2>
@@ -168,7 +168,7 @@ const Careers = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-3xl sm:text-4xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#00A3FF] to-[#00FFB2]"
+            className="text-3xl sm:text-4xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-r from-[#00A3FF] to-[#8B5CF6]"
           >
             Why Join Perkily
           </motion.h2>
@@ -221,7 +221,7 @@ const Careers = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <Button
-                className="bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-white px-8 py-6 text-lg hover:opacity-90 transition-all duration-300"
+                className="bg-gradient-to-r from-[#00A3FF] to-[#8B5CF6] text-white px-8 py-6 text-lg hover:opacity-90 transition-all duration-300"
               >
                 Submit Your Resume
                 <ArrowRight className="ml-2 w-5 h-5" />

@@ -15,7 +15,11 @@ import TermsOfService from "./pages/TermsOfService";
 import Careers from "./pages/Careers";
 import Partners from "./pages/Partners";
 import ComingSoon from "./pages/ComingSoon";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import PerkilyPro from "./pages/PerkilyPro";
+import Docs from "./pages/Docs";
+import Help from "./pages/Help";
 
 // ScrollToTop component that handles scrolling on route changes
 const ScrollToTop = () => {
@@ -46,11 +50,13 @@ const App = () => (
             <Route path="/partners" element={<Partners />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
+            {/* Blog */}
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             {/* Coming Soon Pages */}
-            <Route path="/blog" element={<ComingSoon />} />
             <Route path="/press" element={<ComingSoon />} />
-            <Route path="/docs" element={<ComingSoon />} />
-            <Route path="/help" element={<ComingSoon />} />
+            <Route path="/docs" element={<Docs />} />
+            <Route path="/help" element={<Help />} />
             <Route path="/perkily-pro" element={<PerkilyPro />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

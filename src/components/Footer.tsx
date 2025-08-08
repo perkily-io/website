@@ -32,7 +32,7 @@ const Footer = () => {
       {/* Ambient Gradients */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#00A3FF]/5 rounded-full blur-[100px]" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#00FFB2]/5 rounded-full blur-[100px]" />
+      <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#8B5CF6]/5 rounded-full blur-[100px]" />
       </div>
 
       {/* Grid Pattern */}
@@ -146,7 +146,7 @@ const Footer = () => {
               <Link to="/cookies" className="hover:text-white transition-colors duration-200">Cookies</Link>
             </div>
             <div className="flex items-center gap-2 text-white/40 mt-4 md:mt-0">
-              <div className="w-1.5 h-1.5 rounded-full bg-[#00FFB2]" />
+            <div className="w-1.5 h-1.5 rounded-full bg-[#8B5CF6]" />
               South Africa
             </div>
           </div>

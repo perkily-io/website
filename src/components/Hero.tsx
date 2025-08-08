@@ -9,7 +9,7 @@ const Hero = () => {
       {/* Ambient background effects */}
       <div className="absolute top-0 left-0 w-full h-full">
         <div className="absolute top-20 left-1/4 w-[250px] sm:w-[400px] md:w-[600px] h-[250px] sm:h-[400px] md:h-[600px] bg-[#00A3FF]/5 rounded-full blur-[80px] sm:blur-[150px] animate-pulse-slow"></div>
-        <div className="absolute bottom-20 right-1/4 w-[250px] sm:w-[400px] md:w-[600px] h-[250px] sm:h-[400px] md:h-[600px] bg-[#00FFB2]/5 rounded-full blur-[80px] sm:blur-[150px] animate-pulse-slow delay-1000"></div>
+        <div className="absolute bottom-20 right-1/4 w-[250px] sm:w-[400px] md:w-[600px] h-[250px] sm:h-[400px] md:h-[600px] bg-[#8B5CF6]/5 rounded-full blur-[80px] sm:blur-[150px] animate-pulse-slow delay-1000"></div>
         <div className="absolute w-full h-full bg-[url('/grid.svg')] opacity-[0.02] mix-blend-lighten"></div>
       </div>
       
@@ -18,7 +18,7 @@ const Hero = () => {
           {/* Left Side - Copy */}
           <div className="relative space-y-6 sm:space-y-8 animate-fade-in z-10">
             <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.05]">
-              <span className="text-sm text-[#00FFB2]">New</span>
+              <span className="text-sm text-[#8B5CF6]">New</span>
               <span className="text-sm text-white/60">Fleming AI 2.0 Released</span>
             </div>
             

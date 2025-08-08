@@ -64,7 +64,7 @@
   }
   
   .text-gradient-emerald {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#00FFB2] to-[#00DC82];
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA];
   }
   
   .glow {
@@ -72,7 +72,7 @@
   }
   
   .glow-emerald {
-    box-shadow: 0 0 30px 2px rgba(0, 255, 178, 0.1);
+    box-shadow: 0 0 30px 2px rgba(139, 92, 246, 0.12);
   }
   
   .glow-subtle {

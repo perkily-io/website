@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
+import CTAGalleryDemo from '@/components/ui/cta-gallery-demo';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
@@ -450,8 +451,8 @@ const FinalCTASection = () => (
   <section className="py-16 bg-black">
     <div className="container mx-auto px-6">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to modernize your practice?</h2>
-        <p className="text-gray-300 mb-8">Start with AI clinical notes and automated claims—expand into full practice management whenever you’re ready.</p>
+        <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Get started with Perkily Pro</h2>
+        <p className="text-gray-300 mb-8">Start with AI clinical notes and automated claims — expand into full practice management whenever you’re ready.</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button className="bg-emerald-500 hover:bg-emerald-600 text-black font-semibold px-8 py-3 text-lg">
             Start free
@@ -480,6 +481,7 @@ const PerkilyPro = () => {
       <PerkilyProHero />
       <HowItWorks />
       <MediaShowcase />
+      <CTAGalleryDemo />
       <CorePillars />
       <PracticeManagement />
       <RewardsSection />

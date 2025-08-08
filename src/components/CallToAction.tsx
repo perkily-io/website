@@ -12,18 +12,18 @@ const CallToAction = () => {
         <div className="glass-card relative rounded-[2rem] border border-white/[0.05] backdrop-blur-xl p-12 md:p-20">
           {/* Gradient orbs */}
           <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-gradient-to-br from-[#00A3FF]/20 to-transparent rounded-full blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-[#00FFB2]/20 to-transparent rounded-full blur-3xl opacity-50 translate-x-1/2 translate-y-1/2" />
+  <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-[#8B5CF6]/20 to-transparent rounded-full blur-3xl opacity-50 translate-x-1/2 translate-y-1/2" />
           
           <div className="relative z-10">
             <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
               <div className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.05] mb-8">
-                <Building2 className="w-5 h-5 text-[#00FFB2] mr-2" />
+        <Building2 className="w-5 h-5 text-[#8B5CF6] mr-2" />
                 <span className="text-sm text-white/70">Partner Program</span>
               </div>
 
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
                 Become a{' '}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00A3FF] to-[#00FFB2]">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00A3FF] to-[#8B5CF6]">
                   Perkily Partner
                 </span>
               </h2>
@@ -33,7 +33,7 @@ const CallToAction = () => {
               </p>
               
               <Button 
-                className="group bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-white px-8 py-6 rounded-full hover:opacity-90 transition-all duration-300 text-lg"
+      className="group bg-gradient-to-r from-[#00A3FF] to-[#8B5CF6] text-white px-8 py-6 rounded-full hover:opacity-90 transition-all duration-300 text-lg"
                 onClick={() => window.location.href = 'https://perkily.io/partners'}
               >
                 Become a Partner

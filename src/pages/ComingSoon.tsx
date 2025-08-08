@@ -74,7 +74,7 @@ Email: ${email}
         {/* Ambient Gradients */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#00A3FF]/5 rounded-full blur-[100px]" />
-          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#00FFB2]/5 rounded-full blur-[100px]" />
+          <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#8B5CF6]/5 rounded-full blur-[100px]" />
         </div>
 
         {/* Grid Pattern */}
@@ -83,7 +83,7 @@ Email: ${email}
         {/* Content */}
         <div className="relative text-center max-w-2xl mx-auto pt-20">
           <h1 className="text-3xl sm:text-5xl font-bold tracking-tight mb-6">
-            {formattedPageName} <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00A3FF] to-[#00FFB2]">Coming Soon</span>
+            {formattedPageName} <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00A3FF] to-[#8B5CF6]">Coming Soon</span>
           </h1>
           <p className="text-lg text-white/60 mb-8">
             We're working hard to bring you something amazing. Stay tuned for updates!
@@ -113,7 +113,7 @@ Email: ${email}
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-[#00FFB2]/20"
+                className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-[#8B5CF6]/20"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -121,7 +121,7 @@ Email: ${email}
               <Button 
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-black hover:opacity-90 transition-opacity whitespace-nowrap"
+                className="bg-gradient-to-r from-[#00A3FF] to-[#8B5CF6] text-black hover:opacity-90 transition-opacity whitespace-nowrap"
               >
                 {isSubmitting ? 'Submitting...' : 'Notify Me'}
               </Button>

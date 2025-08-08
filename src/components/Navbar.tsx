@@ -12,15 +12,17 @@ const NavLink = ({ to, children }: { to: string; children: React.ReactNode }) =>
     <Link 
       to={to} 
       className={cn(
-        "relative text-sm font-medium transition-colors duration-200 group",
+        "relative inline-flex items-center px-3 py-1.5 text-sm font-medium transition-colors duration-200 group",
         isActive ? "text-white" : "text-white/70 hover:text-white"
       )}
     >
-      {children}
-      <span className={cn(
-        "absolute left-0 right-0 bottom-0 h-0.5 bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] transform transition-transform duration-300 origin-left",
-        isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-      )} />
+      <span
+        className={cn(
+          "absolute inset-0 -z-10 rounded-lg border border-white/10 bg-white/5 opacity-0 scale-95 transition-all duration-300",
+          isActive ? "opacity-100 scale-100" : "group-hover:opacity-100 group-hover:scale-100"
+        )}
+      />
+      <span className="relative z-10">{children}</span>
     </Link>
   );
 };
@@ -65,23 +67,24 @@ const Navbar = () => {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/about">About</NavLink>
             <NavLink to="/perkily-pro">Perkily Pro</NavLink>
+            <NavLink to="/help">Help</NavLink>
             <NavLink to="/contact">Contact</NavLink>
           </div>
 
           {/* CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3">
             <Button 
-              variant="ghost" 
-              className="text-white/70 hover:text-white hover:bg-white/[0.05] transition-colors duration-200"
+              variant="outline"
+              className="border-white/15 bg-white/5 text-white hover:bg-white/10"
               onClick={() => window.location.href = 'https://app.perkily.io/auth'}
             >
               Log in
             </Button>
             <Button 
-              className="bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-white hover:opacity-90 transition-opacity duration-200"
+              className="h-9 px-4 text-sm border-white/15 bg-white text-black hover:bg-white/90"
               onClick={() => window.location.href = 'https://app.perkily.io/auth'}
             >
-              Get Started
+              Open the app
             </Button>
           </div>
 
@@ -117,19 +120,22 @@ const Navbar = () => {
             <Link to="/contact" className="block text-white/70 hover:text-white transition-colors duration-200 py-2">
               Contact
             </Link>
-            <div className="pt-4 space-y-3">
+            <Link to="/help" className="block text-white/70 hover:text-white transition-colors duration-200 py-2">
+              Help
+            </Link>
+            <div className="pt-4 grid grid-cols-2 gap-3">
               <Button 
-                variant="ghost" 
-                className="w-full text-white/70 hover:text-white hover:bg-white/[0.05] transition-colors duration-200"
+                variant="outline" 
+                className="w-full border-white/15 bg-white/5 text-white hover:bg-white/10"
                 onClick={() => window.location.href = 'https://app.perkily.io/auth'}
               >
                 Log in
               </Button>
               <Button 
-                className="w-full bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-white hover:opacity-90 transition-opacity duration-200"
+                className="w-full border-white/15 bg-white text-black hover:bg-white/90"
                 onClick={() => window.location.href = 'https://app.perkily.io/auth'}
               >
-                Get Started
+                Open the app
               </Button>
             </div>
           </div>

@@ -38,7 +38,7 @@ const AppSection = ({
     <div className="glass-card relative overflow-hidden p-8 sm:p-10 rounded-[2rem] border border-white/[0.05] backdrop-blur-xl transition-all duration-500 group-hover:border-white/[0.1]">
       {/* Status Badge */}
       {isNew && (
-        <span className="absolute top-8 right-8 px-3 py-1 rounded-full text-xs font-medium bg-[#00FFB2]/10 text-[#00FFB2]">
+        <span className="absolute top-8 right-8 px-3 py-1 rounded-full text-xs font-medium bg-[#8B5CF6]/10 text-[#8B5CF6]">
           New
         </span>
       )}
@@ -94,7 +94,7 @@ const PerkilyApps = () => {
         {/* Section Header */}
         <div className="text-center mb-12 sm:mb-20 relative">
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-semibold tracking-tight mb-4 sm:mb-6">
-            Choose Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00A3FF] to-[#00FFB2]">Platform</span>
+            Choose Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00A3FF] to-[#8B5CF6]">Platform</span>
           </h2>
           <p className="text-sm sm:text-lg text-white/60 max-w-2xl mx-auto">
             Two powerful platforms designed to transform healthcare experiences for everyone
@@ -119,17 +119,17 @@ const PerkilyApps = () => {
             description="Advanced platform for healthcare professionals. Streamline your practice with AI-powered tools and analytics."
             features={['AI Documentation', 'Patient Analytics', 'Team Management', 'Integrations']}
             cta={{ text: 'Start Your Free Trial', link: 'https://pro.perkily.io/' }}
-            gradientFrom="#00FFB2"
-            gradientTo="#00CC8E"
+            gradientFrom="#8B5CF6"
+            gradientTo="#A78BFA"
             icon={Brain}
           />
         </div>
 
         {/* Bottom Note */}
         <div className="mt-12 sm:mt-16 text-center">
-          <p className="text-white/40 text-xs sm:text-sm">
+            <p className="text-white/40 text-xs sm:text-sm">
             Access Perkily anywhere through your web browser.
-            <button className="ml-2 text-[#00FFB2] hover:text-[#00FFB2]/80 transition-colors duration-200">
+            <button className="ml-2 text-[#8B5CF6] hover:text-[#8B5CF6]/80 transition-colors duration-200">
               Learn more about our platform →
             </button>
           </p>

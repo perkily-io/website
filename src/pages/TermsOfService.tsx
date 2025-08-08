@@ -15,7 +15,7 @@ const TermsOfService = () => {
           </BreadcrumbList>
         </Breadcrumb>
 
-        <h1 className="text-4xl font-bold mt-8 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#00A3FF] to-[#00FFB2]">
+        <h1 className="text-4xl font-bold mt-8 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#00A3FF] to-[#8B5CF6]">
           Terms of Service
         </h1>
 

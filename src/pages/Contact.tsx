@@ -1,7 +1,11 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useMemo, useState } from 'react';
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
-import { Heart, Building2, Stethoscope, ArrowRight, Mail, Phone, MapPin } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Heart, Building2, Stethoscope, ArrowRight, Mail, Phone, MapPin, ShieldCheck, Sparkles, MessageSquare, Loader2 } from 'lucide-react';
 import SEO from '@/components/SEO';
 
 type UserType = 'patient' | 'professional' | 'company';
@@ -85,6 +89,8 @@ ${formData.message}
     }
   };
 
+  const SelectedIcon = useMemo(() => userTypes.find(t => t.id === selectedType)?.icon ?? Heart, [selectedType]);
+
   return (
     <Layout>
       <SEO 
@@ -94,169 +100,194 @@ ${formData.message}
         canonical="https://perkily.io/contact"
       />
       
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6 pt-24 pb-16">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 pt-24 pb-16">
         {/* Header */}
-        <div className="text-center mb-12 sm:mb-16">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            Get in <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00A3FF] to-[#00FFB2]">Touch</span>
+        <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
+            <Sparkles className="h-3.5 w-3.5" />
+            We reply within 24 hours
+          </div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+            Talk to the team
           </h1>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Whether you're a patient, healthcare provider, or medical company, we're here to help you transform healthcare experiences.
+          <p className="mt-3 text-white/70 text-lg">
+            We love working with patients, clinicians, and partners. Tell us a bit about you and we’ll get back fast.
           </p>
         </div>
 
-        {/* User Type Selection */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-12">
-          {userTypes.map((type) => {
-            const Icon = type.icon;
-            return (
-              <button
-                key={type.id}
-                onClick={() => setSelectedType(type.id as UserType)}
-                className={`relative group p-6 rounded-2xl border transition-all duration-300 ${
-                  selectedType === type.id
-                    ? 'border-[#00FFB2]/30 bg-[#00FFB2]/5'
-                    : 'border-white/5 hover:border-white/10 bg-white/[0.02]'
-                }`}
-              >
-                <div className="flex flex-col items-center text-center">
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-4 transition-colors duration-300 ${
-                    selectedType === type.id
-                      ? 'bg-[#00FFB2]/10 text-[#00FFB2]'
-                      : 'bg-white/5 text-white/60 group-hover:bg-white/10'
-                  }`}>
-                    <Icon className="w-6 h-6" />
+        {/* Two-column layout */}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          {/* Left: Audience selection + contact info */}
+          <div className="space-y-6">
+            <Card className="border-white/10 bg-white/5">
+              <CardHeader>
+                <div className="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-md bg-white/10">
+                  <SelectedIcon className="h-5 w-5" />
+                </div>
+                <CardTitle>Who are you?</CardTitle>
+                <CardDescription className="text-white/70">Choose the option that best describes you. We’ll tailor our reply.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                  {userTypes.map((type) => {
+                    const Icon = type.icon;
+                    const isActive = selectedType === type.id;
+                    return (
+                      <button
+                        key={type.id}
+                        onClick={() => setSelectedType(type.id as UserType)}
+                        className={`group rounded-xl border p-4 text-left transition-colors ${isActive ? 'border-white/20 bg-white/10' : 'border-white/10 bg-white/5 hover:bg-white/7'}`}
+                      >
+                        <div className={`mb-3 inline-flex h-9 w-9 items-center justify-center rounded-md ${isActive ? 'bg-white/15' : 'bg-white/10'}`}>
+                          <Icon className="h-4 w-4" />
+                        </div>
+                        <div className="text-sm font-medium">{type.title}</div>
+                        <div className="mt-1 text-xs text-white/70">{type.description}</div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-white/10 bg-white/5">
+              <CardHeader>
+                <CardTitle>Other ways to reach us</CardTitle>
+                <CardDescription className="text-white/70">Prefer email or a quick call? We’re flexible.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10">
+                      <Mail className="h-5 w-5 text-[#8B5CF6]" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-medium">Email</div>
+                      <div className="text-xs text-white/70">hello@perkily.io</div>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-medium text-white mb-2">{type.title}</h3>
-                  <p className="text-sm text-white/60">{type.description}</p>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10">
+                      <Phone className="h-5 w-5 text-[#8B5CF6]" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-medium">Phone</div>
+                      <div className="text-xs text-white/70">+27 73 954 4493</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10">
+                      <MapPin className="h-5 w-5 text-[#8B5CF6]" />
+                    </div>
+                    <div>
+                      <div className="text-sm font-medium">Location</div>
+                      <div className="text-xs text-white/70">Johannesburg, South Africa</div>
+                    </div>
+                  </div>
                 </div>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Contact Form */}
-        <div className="max-w-3xl mx-auto">
-          <div className="glass-card rounded-3xl border border-white/5 p-6 sm:p-8 md:p-10 backdrop-blur-xl">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-white/80 mb-2">First Name</label>
-                  <input
-                    type="text"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[#00FFB2]/50"
-                    placeholder="Enter your first name"
-                    value={formData.firstName}
-                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-white/80 mb-2">Last Name</label>
-                  <input
-                    type="text"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[#00FFB2]/50"
-                    placeholder="Enter your last name"
-                    value={formData.lastName}
-                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-white/80 mb-2">Email</label>
-                <input
-                  type="email"
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[#00FFB2]/50"
-                  placeholder="Enter your email address"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required
-                />
-              </div>
-
-              {selectedType === 'professional' && (
-                <div>
-                  <label className="block text-sm font-medium text-white/80 mb-2">Medical Practice Name</label>
-                  <input
-                    type="text"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[#00FFB2]/50"
-                    placeholder="Enter your practice name"
-                    value={formData.practiceName}
-                    onChange={(e) => setFormData({ ...formData, practiceName: e.target.value })}
-                    required
-                  />
-                </div>
-              )}
-
-              {selectedType === 'company' && (
-                <div>
-                  <label className="block text-sm font-medium text-white/80 mb-2">Company Name</label>
-                  <input
-                    type="text"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[#00FFB2]/50"
-                    placeholder="Enter your company name"
-                    value={formData.companyName}
-                    onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
-                    required
-                  />
-                </div>
-              )}
-
-              <div>
-                <label className="block text-sm font-medium text-white/80 mb-2">Message</label>
-                <textarea
-                  rows={4}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-[#00FFB2]/50"
-                  placeholder="How can we help you?"
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  required
-                />
-              </div>
-
-              <Button 
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full group bg-gradient-to-r from-[#00A3FF] to-[#00FFB2] text-white py-6 rounded-xl text-base transition-all duration-300"
-              >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-                <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </form>
+              </CardContent>
+            </Card>
           </div>
 
-          {/* Additional Contact Info */}
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
-                <Mail className="w-5 h-5 text-[#00FFB2]" />
-              </div>
-              <div>
-                <h4 className="text-sm font-medium text-white">Email Us</h4>
-                <p className="text-sm text-white/60">hello@perkily.io</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
-                <Phone className="w-5 h-5 text-[#00FFB2]" />
-              </div>
-              <div>
-                <h4 className="text-sm font-medium text-white">Call Us</h4>
-                <p className="text-sm text-white/60">+27 73 954 4493</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
-                <MapPin className="w-5 h-5 text-[#00FFB2]" />
-              </div>
-              <div>
-                <h4 className="text-sm font-medium text-white">Visit Us</h4>
-                <p className="text-sm text-white/60">Johannesburg, South Africa</p>
-              </div>
-            </div>
-          </div>
+          {/* Right: Form */}
+          <Card className="border-white/10 bg-white/5">
+            <CardHeader>
+              <CardTitle>Send us a message</CardTitle>
+              <CardDescription className="text-white/70">We’ll route it to the right person and reply within a day.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <div>
+                    <label className="mb-2 block text-sm text-white/80">First name</label>
+                    <Input
+                      type="text"
+                      placeholder="Jane"
+                      value={formData.firstName}
+                      onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                      required
+                      className="border-white/10 bg-white/5 text-white placeholder:text-white/40"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-2 block text-sm text-white/80">Last name</label>
+                    <Input
+                      type="text"
+                      placeholder="Doe"
+                      value={formData.lastName}
+                      onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                      required
+                      className="border-white/10 bg-white/5 text-white placeholder:text-white/40"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="mb-2 block text-sm text-white/80">Email</label>
+                  <Input
+                    type="email"
+                    placeholder="jane@example.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    required
+                    className="border-white/10 bg-white/5 text-white placeholder:text-white/40"
+                  />
+                </div>
+
+                {selectedType === 'professional' && (
+                  <div>
+                    <label className="mb-2 block text-sm text-white/80">Medical practice name</label>
+                    <Input
+                      type="text"
+                      placeholder="Your practice"
+                      value={formData.practiceName}
+                      onChange={(e) => setFormData({ ...formData, practiceName: e.target.value })}
+                      required
+                      className="border-white/10 bg-white/5 text-white placeholder:text-white/40"
+                    />
+                  </div>
+                )}
+
+                {selectedType === 'company' && (
+                  <div>
+                    <label className="mb-2 block text-sm text-white/80">Company name</label>
+                    <Input
+                      type="text"
+                      placeholder="Your company"
+                      value={formData.companyName}
+                      onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
+                      required
+                      className="border-white/10 bg-white/5 text-white placeholder:text-white/40"
+                    />
+                  </div>
+                )}
+
+                <div>
+                  <label className="mb-2 block text-sm text-white/80">Message</label>
+                  <Textarea
+                    rows={5}
+                    placeholder="How can we help?"
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    required
+                    className="border-white/10 bg-white/5 text-white placeholder:text-white/40"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  variant="default"
+                  className="group w-full text-white py-6 rounded-xl text-base"
+                >
+                  {isSubmitting ? (
+                    <span className="inline-flex items-center"><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Sending</span>
+                  ) : (
+                    <span className="inline-flex items-center">Send message <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" /></span>
+                  )}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </Layout>
