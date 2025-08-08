@@ -322,15 +322,9 @@ const Index = () => {
                     <div>
                       <AspectRatio ratio={16 / 9}>
                         <div className="relative h-full w-full overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-                          <video
-                            src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"
-                            poster="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2400&auto=format&fit=crop"
-                            muted
-                            loop
-                            autoPlay
-                            playsInline
-                            className="h-full w-full object-cover"
-                          />
+                          <div className="flex h-full w-full items-center justify-center bg-black/70">
+                            <span className="text-sm font-medium text-white/70">Coming soon</span>
+                          </div>
                           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.55),transparent_40%)]" />
                         </div>
                       </AspectRatio>
@@ -359,15 +353,9 @@ const Index = () => {
                     <div>
                       <AspectRatio ratio={16 / 9}>
                         <div className="relative h-full w-full overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-                          <video
-                            src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                            poster="https://images.unsplash.com/photo-1516542076529-1ea3854896e1?q=80&w=2400&auto=format&fit=crop"
-                            muted
-                            loop
-                            autoPlay
-                            playsInline
-                            className="h-full w-full object-cover"
-                          />
+                          <div className="flex h-full w-full items-center justify-center bg-black/70">
+                            <span className="text-sm font-medium text-white/70">Coming soon</span>
+                          </div>
                           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.55),transparent_40%)]" />
                         </div>
                       </AspectRatio>
@@ -396,15 +384,9 @@ const Index = () => {
                     <div>
                       <AspectRatio ratio={16 / 9}>
                         <div className="relative h-full w-full overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-                          <video
-                            src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-                            poster="https://images.unsplash.com/photo-1576678927484-cc907957088c?q=80&w=2400&auto=format&fit=crop"
-                            muted
-                            loop
-                            autoPlay
-                            playsInline
-                            className="h-full w-full object-cover"
-                          />
+                          <div className="flex h-full w-full items-center justify-center bg-black/70">
+                            <span className="text-sm font-medium text-white/70">Coming soon</span>
+                          </div>
                           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.55),transparent_40%)]" />
                         </div>
                       </AspectRatio>
