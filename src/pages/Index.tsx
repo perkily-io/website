@@ -78,7 +78,7 @@ const Index = () => {
                   <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
               </a>
-              <a href="https://app.perkily.io" target="_blank" rel="noreferrer">
+              <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
                 <Button size="lg" variant="outline" className="h-11 border-white/15 bg-white/5 px-6 text-white hover:bg-white/10">
                   Chat with Fleming
                   <Bot className="ml-1 h-4 w-4" />
@@ -147,7 +147,7 @@ const Index = () => {
                 <a href="https://app.perkily.io" target="_blank" rel="noreferrer">
                   <Button className="px-4">Open the app</Button>
                 </a>
-                <a href="https://app.perkily.io" target="_blank" rel="noreferrer">
+                <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
                   <Button variant="outline" className="border-white/15 bg-white/5 px-4 text-white hover:bg-white/10">Chat to Fleming</Button>
                 </a>
               </div>
@@ -198,7 +198,7 @@ const Index = () => {
                 <li className="flex items-start gap-2"><Clock className="mt-0.5 h-4 w-4" /> Study on your schedule</li>
               </ul>
               <div className="mt-5 flex flex-wrap gap-3">
-                <a href="https://app.perkily.io" target="_blank" rel="noreferrer">
+                <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
                   <Button className="px-4">Start with Fleming</Button>
                 </a>
                 <a href="/contact">
@@ -253,7 +253,7 @@ const Index = () => {
             </Tabs>
 
             <div className="mt-6 flex gap-3">
-              <a href="https://app.perkily.io" target="_blank" rel="noreferrer">
+              <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
                 <Button className="px-4">Try Fleming</Button>
               </a>
               <a href="/contact">
@@ -314,7 +314,7 @@ const Index = () => {
                         <a href="https://app.perkily.io" target="_blank" rel="noreferrer">
                           <Button className="px-4">Open the app</Button>
                         </a>
-                        <a href="https://app.perkily.io" target="_blank" rel="noreferrer">
+                        <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
                           <Button variant="outline" className="border-white/15 bg-white/5 px-4 text-white hover:bg-white/10">Chat to Fleming</Button>
                         </a>
                       </div>
@@ -373,7 +373,7 @@ const Index = () => {
                       <h4 className="text-xl font-semibold">Fleming, ready to help</h4>
                       <p className="mt-2 text-white/70">Instant guidance for general users, assistive drafting and triage for professionals, and safe learning patterns for medical students.</p>
                       <div className="mt-4 flex flex-wrap gap-3">
-                        <a href="https://app.perkily.io" target="_blank" rel="noreferrer">
+                        <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
                           <Button className="px-4">Chat with Fleming</Button>
                         </a>
                         <a href="/contact">
