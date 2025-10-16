@@ -1,73 +1,88 @@
-# Welcome to your Lovable project
+# Perkily Website
 
-## Project info
+A modern, responsive website for Perkily - reimagining healthcare through AI-powered solutions, intuitive design, and seamless experiences.
 
-**URL**: https://lovable.dev/projects/07aaf53d-4ba6-477d-9408-d66460228074
+## Features
 
-## How can I edit this code?
+- **Modern React Architecture**: Built with React 18, TypeScript, and Vite
+- **Beautiful UI Components**: Using shadcn/ui components with Tailwind CSS
+- **Responsive Design**: Optimized for all device sizes
+- **SEO Optimized**: Meta tags, structured data, and performance optimized
+- **Blog System**: Dynamic blog with filtering and search capabilities
+- **Supabase Integration**: Backend services and database connectivity
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- **Frontend**: React 18, TypeScript, Vite
+- **Styling**: Tailwind CSS, shadcn/ui components
+- **Backend**: Supabase
+- **Deployment**: Vercel
+- **Analytics**: Vercel Analytics
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/07aaf53d-4ba6-477d-9408-d66460228074) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js (v18 or higher)
+- npm or yarn
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
+1. Clone the repository:
+```bash
 git clone <YOUR_GIT_URL>
+cd website
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2. Install dependencies:
+```bash
+npm install
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Open your browser and navigate to `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Available Scripts
 
-**Use GitHub Codespaces**
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run build:dev` - Build for development
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project Structure
 
-## What technologies are used for this project?
+```
+src/
+├── components/          # Reusable UI components
+│   ├── ui/             # shadcn/ui components
+│   └── ...             # Custom components
+├── pages/              # Page components
+├── hooks/              # Custom React hooks
+├── lib/                # Utility functions and configurations
+└── services/           # API and service layer
+```
 
-This project is built with:
+## Deployment
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+The website is deployed on Vercel. Any changes pushed to the main branch will automatically trigger a deployment.
 
-## How can I deploy this project?
+### Custom Domain
 
-Simply open [Lovable](https://lovable.dev/projects/07aaf53d-4ba6-477d-9408-d66460228074) and click on Share -> Publish.
+To connect a custom domain, configure your DNS settings to point to your Vercel deployment.
 
-## Can I connect a custom domain to my Lovable project?
+## Contributing
 
-Yes, you can!
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## License
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+This project is proprietary to Perkily.

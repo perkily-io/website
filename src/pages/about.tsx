@@ -294,7 +294,7 @@ const About = () => {
             <Button
               variant="default"
               className="w-full sm:w-auto text-white px-6 sm:px-8 py-4 sm:py-5 rounded-full text-base sm:text-lg group"
-              onClick={() => (window.location.href = 'https://app.perkily.io/auth')}
+              onClick={() => (window.location.href = 'https://pro.perkily.io/login')}
             >
               Get started
               <ArrowRight className="ml-2 w-4 sm:w-5 h-4 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" />

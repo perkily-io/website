@@ -128,14 +128,15 @@ const PerkilyProHero = () => (
     <div className="container mx-auto px-6 py-16">
       <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
-          AI clinical notes, instant claims, and practice management in one.
+          Pro.<br />
+          <span className="text-white/70">Practice management, reimagined.</span>
         </h1>
         <p className="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-          Record the consultation, receive SOAP notes automatically, get diagnostic insights, and submit medical aid claims instantly. Simple, sleek, and secure.
+          Voice to SOAP notes. Diagnostic insights. Automated claims. Complete practice management. All powered by AI.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button className="bg-[#00A3FF] hover:bg-[#0090FF] text-white font-semibold px-8 py-3 text-lg">
-            Start free
+            Try Pro
           </Button>
           <Button variant="outline" className="border-white/20 text-white hover:bg-white/5 px-8 py-3 text-lg">
             Book a demo
@@ -178,10 +179,10 @@ const MediaShowcase = () => (
           {/* Screenshot grid */}
           <div className="grid grid-cols-2 gap-3">
             {[
-              '/img/app.perkily.io_(iPhone 12 Pro).png',
-              '/img/app.perkily.io_(iPhone 12 Pro) (1).png',
-              '/img/app.perkily.io_(iPhone 12 Pro).png',
-              '/img/app.perkily.io_(iPhone 12 Pro) (1).png'
+              '/img/pro.perkily.io_(iPhone 12 Pro).png',
+              '/img/pro.perkily.io_(iPhone 12 Pro) (1).png',
+              '/img/pro.perkily.io_(iPhone 12 Pro).png',
+              '/img/pro.perkily.io_(iPhone 12 Pro) (1).png'
             ].map((src, idx) => (
               <div key={idx} className="rounded-lg border border-white/10 bg-neutral-950 p-2">
                 <AspectRatio ratio={16 / 10}>
@@ -455,7 +456,7 @@ const FinalCTASection = () => (
         <p className="text-gray-300 mb-8">Start with AI clinical notes and automated claims — expand into full practice management whenever you’re ready.</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button className="bg-emerald-500 hover:bg-emerald-600 text-black font-semibold px-8 py-3 text-lg">
-            Start free
+            Try Pro
           </Button>
           <Button variant="outline" className="border-white/20 text-white hover:bg-white/5 px-8 py-3 text-lg">
             Book a demo
@@ -473,9 +474,9 @@ const PerkilyPro = () => {
     <main className="min-h-screen bg-black">
       <Navbar />
       <SEO
-        title="Perkily Pro | AI Clinical Notes, Instant Claims, Practice Management"
-        description="Record patient conversations, get automatic SOAP notes, see diagnostic insights, and submit medical aid claims instantly. Plus full practice management—appointments, patients, sales, inventory, billing, and rewards."
-        keywords="AI clinical notes, SOAP notes, diagnostic reasoning, automated medical aid claims, instant claim responses, practice management, appointments, patient management, inventory, sales, billing, healthcare software, South Africa, doctor software, practice loyalty rewards"
+        title="Pro | AI-Powered Practice Management"
+        description="Voice to SOAP notes. Diagnostic insights. Automated claims. Complete practice management. All powered by AI."
+        keywords="AI practice management, clinical notes, SOAP notes, automated claims, diagnostic insights, healthcare software, practice management system"
         canonical="https://www.perkily.io/perkily-pro"
       />
       <PerkilyProHero />

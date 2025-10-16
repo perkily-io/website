@@ -19,18 +19,18 @@ const Hero = () => {
           <div className="relative space-y-6 sm:space-y-8 animate-fade-in z-10">
             <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.05]">
               <span className="text-sm text-[#8B5CF6]">New</span>
-              <span className="text-sm text-white/60">Fleming AI 2.0 Released</span>
+              <span className="text-sm text-white/60">AskFleming Available</span>
             </div>
             
             <div className="space-y-4 sm:space-y-6">
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
-                <span className="block">Reimagining</span>
-                <span className="block mt-1 sm:mt-0">Healthcare<span className="text-gradient-blue">.</span></span>
+                <span className="block">Healthcare.</span>
+                <span className="block mt-1 sm:mt-0 text-white/70">Reimagined.</span>
               </h1>
               <p className="text-lg sm:text-xl text-white/60 max-w-lg font-light leading-relaxed">
-                Two intelligent platforms. One seamless ecosystem.
+                Pro for professionals. AskFleming for everyone.
                 <br />
-                <span className="text-white">For patients and professionals alike.</span>
+                <span className="text-white">AI-powered healthcare, simplified.</span>
               </p>
             </div>
             
@@ -73,7 +73,7 @@ const Hero = () => {
                 <div className="relative w-full h-full overflow-hidden rounded-[1.7rem] border border-white/10">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
                   <img 
-                    src="/img/app.perkily.io_(iPhone 12 Pro) (1).png"
+                    src="/img/pro.perkily.io_(iPhone 12 Pro) (1).png"
                     alt="Perkily Patient App"
                     className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
                   />
@@ -85,7 +85,7 @@ const Hero = () => {
                 <div className="relative w-full h-full overflow-hidden rounded-[1.7rem] border border-white/10">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
                   <img 
-                    src="/img/app.perkily.io_(iPhone 12 Pro).png"
+                    src="/img/pro.perkily.io_(iPhone 12 Pro).png"
                     alt="Perkily Pro App"
                     className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
                   />

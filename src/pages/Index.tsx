@@ -8,8 +8,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CanvasRevealEffect } from '@/components/ui/canvas-reveal-effect';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from '@/components/ui/carousel';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { ArrowRight, ArrowLeft, Bot, Stethoscope, GraduationCap, Sparkles, Shield, Smartphone, Gift, Building2, Rocket, Check, CalendarDays, MessagesSquare, Workflow, ShieldCheck, HeartPulse, Award, Activity, MapPin, Clock, Layers, Zap } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Bot, Stethoscope, GraduationCap, Sparkles, Shield, Smartphone, Gift, Building2, Rocket, Check, CalendarDays, MessagesSquare, Workflow, ShieldCheck, HeartPulse, Award, Activity, MapPin, Clock, Layers, Zap, Brain, Mic, CreditCard, Calendar } from 'lucide-react';
 import { GlowingEffectDemo } from '@/components/ui/glowing-effect-demo';
+import { BlurText } from '@/components/ui/animated-blur-text';
+import { Awards } from '@/components/ui/award';
 
 const Index = () => {
   const [ctaCarouselApi, setCtaCarouselApi] = React.useState<CarouselApi | null>(null)
@@ -49,53 +51,93 @@ const Index = () => {
   return (
     <main className="min-h-screen bg-black text-white selection:bg-white/10">
       <SEO 
-        title="Care that connects everyone"
-        description="Perkily is a healthcare company building AI-first experiences across the care journey. Book appointments, earn rewards, and get instant answers with Fleming — whether you’re a patient, clinician, or student."
-        keywords="Perkily, healthcare AI, Fleming, book appointments, patient rewards, clinicians, medical students, Perkily Pro, healthcare platform"
+        title="AI-Powered Healthcare. Simplified."
+        description="Two products that transform healthcare: Pro, the AI-powered practice management platform, and AskFleming, the intelligent healthcare assistant for everyone."
+        keywords="Perkily Pro, AskFleming, AI practice management, healthcare AI, medical software, clinical notes, healthcare assistant"
         canonical="https://www.perkily.io/"
       />
       <Navbar />
 
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_-10%,rgba(59,130,246,0.35),rgba(0,0,0,0))]" />
-        <div className="mx-auto max-w-7xl px-6 pt-24 pb-20 sm:pt-32 sm:pb-28">
-          <div className="max-w-3xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
-              <Rocket className="h-3.5 w-3.5 text-white/80" />
-              Now live: Fleming for everyone
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Ambient background effects */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
+          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.02]" />
+        </div>
+        
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+        
+        <div className="relative z-10 mx-auto max-w-7xl px-6 text-left">
+          <div className="max-w-4xl">
+            {/* Badge */}
+            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80 backdrop-blur-sm">
+              <Rocket className="h-4 w-4 text-blue-400" />
+              Now live: AskFleming
             </div>
-            <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl md:text-6xl">
-              Healthcare that feels personal. Software that gets out of the way.
-            </h1>
-            <p className="mt-6 max-w-2xl text-pretty text-lg text-white/70">
-              Perkily brings care, rewards, and guidance into one simple experience. Open the app to book across practices, earn rewards for healthy actions, and chat to Fleming for instant, reliable help.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a href="https://app.perkily.io" target="_blank" rel="noreferrer">
-                <Button size="lg" className="h-11 px-6">
-                  Open the app
-                  <ArrowRight className="ml-1 h-4 w-4" />
+            
+            {/* Animated Headline */}
+            <div className="mb-8">
+              <BlurText
+                text="Healthcare. Reimagined."
+                delay={100}
+                animateBy="words"
+                direction="top"
+                className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-white leading-[0.9] tracking-tight"
+              />
+            </div>
+            
+            {/* Animated Description */}
+            <div className="mb-12 max-w-3xl">
+              <BlurText
+                text="Two powerful products. One vision: making healthcare smarter, faster, and more accessible for everyone."
+                delay={80}
+                animateBy="words"
+                direction="bottom"
+                className="text-xl sm:text-2xl text-white/70 leading-relaxed"
+              />
+            </div>
+            
+            {/* CTA Buttons */}
+            <div className="mb-12 flex flex-col sm:flex-row items-start gap-4">
+              <a href="https://pro.perkily.io/login" target="_blank" rel="noreferrer">
+                <Button size="lg" className="h-14 px-8 text-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white border-0 shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105">
+                  Try Pro
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </a>
               <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
-                <Button size="lg" variant="outline" className="h-11 border-white/15 bg-white/5 px-6 text-white hover:bg-white/10">
-                  Chat with Fleming
-                  <Bot className="ml-1 h-4 w-4" />
+                <Button size="lg" variant="outline" className="h-14 px-8 text-lg border-2 border-white/20 bg-white/5 backdrop-blur-sm text-white hover:bg-white/10 hover:border-white/30 transition-all duration-300 hover:scale-105">
+                  Ask Fleming
+                  <Bot className="ml-2 h-5 w-5" />
                 </Button>
               </a>
             </div>
-            <div className="mt-8 flex flex-wrap items-center gap-6 text-sm text-white/60">
-              <div className="inline-flex items-center gap-2">
-                <Shield className="h-4 w-4" /> Secure by design
+            
+            {/* Feature badges */}
+            <div className="flex flex-wrap items-start gap-6 text-sm text-white/60">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
+                <Shield className="h-4 w-4 text-green-400" />
+                Secure by design
               </div>
-              <div className="inline-flex items-center gap-2">
-                <Gift className="h-4 w-4" /> Rewards built in
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
+                <Gift className="h-4 w-4 text-yellow-400" />
+                Rewards built in
               </div>
-              <div className="inline-flex items-center gap-2">
-                <Smartphone className="h-4 w-4" /> Works on any device
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
+                <Smartphone className="h-4 w-4 text-blue-400" />
+                Works on any device
               </div>
             </div>
+          </div>
+        </div>
+        
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-bounce" />
           </div>
         </div>
       </section>
@@ -125,88 +167,108 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Audience sections - richer layout */}
-      <section className="mx-auto max-w-7xl px-6 pb-6 sm:pb-12">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          {/* Patients */}
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.03] p-6">
-            <div className="pointer-events-none absolute -inset-x-6 -top-20 h-40 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(59,130,246,0.32),transparent_70%)]" />
-            <div className="relative">
-              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-md bg-white/10">
-                <Sparkles className="h-5 w-5" />
+
+      {/* Minimalist Products Section */}
+      <section className="mx-auto max-w-7xl px-6 py-24">
+        {/* Section header */}
+        <div className="mb-20 text-center">
+          <h2 className="text-4xl sm:text-5xl font-light text-white mb-6 tracking-tight">
+            Two products.<br />
+            <span className="text-white/60">One vision.</span>
+          </h2>
+          <p className="text-lg text-white/50 max-w-xl mx-auto font-light">
+            Designed for every role in healthcare
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
+          {/* AskFleming */}
+          <div className="text-center lg:text-left">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 border border-white/10 mb-8">
+              <Brain className="w-8 h-8 text-white" />
+            </div>
+            
+            <h3 className="text-3xl font-light text-white mb-4 tracking-tight">
+              AskFleming
+            </h3>
+            
+            <p className="text-lg text-white/60 mb-8 leading-relaxed font-light">
+              Your intelligent healthcare assistant. Safe, accurate answers to any health question, anytime.
+            </p>
+            
+            <div className="space-y-3 mb-10">
+              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
+                <Check className="w-4 h-4" />
+                <span className="text-sm">Safe, grounded responses</span>
               </div>
-              <h3 className="text-xl font-semibold">For patients</h3>
-              <p className="mt-2 text-white/70">Book quickly, get guidance, and earn rewards for staying on top of your health.</p>
-              <ul className="mt-4 space-y-2 text-sm text-white/80">
-                <li className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4" /> One login across practices</li>
-                <li className="flex items-start gap-2"><CalendarDays className="mt-0.5 h-4 w-4" /> Real-time booking and reminders</li>
-                <li className="flex items-start gap-2"><MessagesSquare className="mt-0.5 h-4 w-4" /> Chat to Fleming for safe next steps</li>
-                <li className="flex items-start gap-2"><Award className="mt-0.5 h-4 w-4" /> Rewards you can actually use</li>
-              </ul>
-              <div className="mt-5 flex flex-wrap gap-3">
-                <a href="https://app.perkily.io" target="_blank" rel="noreferrer">
-                  <Button className="px-4">Open the app</Button>
-                </a>
-                <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
-                  <Button variant="outline" className="border-white/15 bg-white/5 px-4 text-white hover:bg-white/10">Chat to Fleming</Button>
-                </a>
+              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
+                <MessagesSquare className="w-4 h-4" />
+                <span className="text-sm">Instant health guidance</span>
+              </div>
+              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
+                <Shield className="w-4 h-4" />
+                <span className="text-sm">Privacy-first design</span>
+              </div>
+              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
+                <Activity className="w-4 h-4" />
+                <span className="text-sm">Medical-grade accuracy</span>
               </div>
             </div>
-            <div className="pointer-events-none absolute bottom-0 right-0 h-28 w-28 translate-x-6 translate-y-6 rounded-full bg-white/[0.06]" />
+            
+            <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
+              <Button variant="outline" className="border border-white/20 bg-transparent text-white hover:bg-white/5 px-8 py-3 font-light">
+                Ask Fleming
+                <ArrowRight className="ml-2 w-4 h-4" />
+              </Button>
+            </a>
           </div>
 
-          {/* Professionals */}
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.03] p-6">
-            <div className="pointer-events-none absolute -inset-x-6 -top-20 h-40 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(16,185,129,0.28),transparent_70%)]" />
-            <div className="relative">
-              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-md bg-white/10">
-                <Stethoscope className="h-5 w-5" />
+          {/* Pro */}
+          <div className="text-center lg:text-left">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 border border-white/10 mb-8">
+              <Stethoscope className="w-8 h-8 text-white" />
+            </div>
+            
+            <h3 className="text-3xl font-light text-white mb-4 tracking-tight">
+              Pro
+            </h3>
+            
+            <p className="text-lg text-white/60 mb-8 leading-relaxed font-light">
+              AI-powered practice management platform. Voice to SOAP notes, diagnostic insights, and automated claims.
+            </p>
+            
+            <div className="space-y-3 mb-10">
+              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
+                <Mic className="w-4 h-4" />
+                <span className="text-sm">Voice to SOAP notes</span>
               </div>
-              <h3 className="text-xl font-semibold">For healthcare professionals</h3>
-              <p className="mt-2 text-white/70">Tools that reduce admin and help you focus on care — from intake to follow-up.</p>
-              <ul className="mt-4 space-y-2 text-sm text-white/80">
-                <li className="flex items-start gap-2"><Workflow className="mt-0.5 h-4 w-4" /> Structured, explainable triage</li>
-                <li className="flex items-start gap-2"><MessagesSquare className="mt-0.5 h-4 w-4" /> Patient comms and education, drafted for you</li>
-                <li className="flex items-start gap-2"><ShieldCheck className="mt-0.5 h-4 w-4" /> Safety checks and escalation paths</li>
-                <li className="flex items-start gap-2"><Layers className="mt-0.5 h-4 w-4" /> Fits around your existing tools</li>
-              </ul>
-              <div className="mt-5 flex flex-wrap gap-3">
-                <a href="/perkily-pro">
-                  <Button className="px-4">Explore Perkily Pro</Button>
-                </a>
-                <a href="/contact">
-                  <Button variant="outline" className="border-white/15 bg-white/5 px-4 text-white hover:bg-white/10">Talk to us</Button>
-                </a>
+              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
+                <Brain className="w-4 h-4" />
+                <span className="text-sm">Diagnostic insights</span>
+              </div>
+              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
+                <CreditCard className="w-4 h-4" />
+                <span className="text-sm">Automated claims</span>
+              </div>
+              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
+                <Calendar className="w-4 h-4" />
+                <span className="text-sm">Complete practice management</span>
               </div>
             </div>
-            <div className="pointer-events-none absolute bottom-0 right-0 h-28 w-28 translate-x-6 translate-y-6 rounded-full bg-white/[0.06]" />
-          </div>
-
-          {/* Students */}
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.03] p-6">
-            <div className="pointer-events-none absolute -inset-x-6 -top-20 h-40 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(168,85,247,0.28),transparent_70%)]" />
-            <div className="relative">
-              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-md bg-white/10">
-                <GraduationCap className="h-5 w-5" />
-              </div>
-              <h3 className="text-xl font-semibold">For medical students</h3>
-              <p className="mt-2 text-white/70">Learn safe patterns, differential thinking, and patient communication faster.</p>
-              <ul className="mt-4 space-y-2 text-sm text-white/80">
-                <li className="flex items-start gap-2"><HeartPulse className="mt-0.5 h-4 w-4" /> Cases that mirror real consults</li>
-                <li className="flex items-start gap-2"><MessagesSquare className="mt-0.5 h-4 w-4" /> Practise bedside questions</li>
-                <li className="flex items-start gap-2"><Activity className="mt-0.5 h-4 w-4" /> Feedback that builds confidence</li>
-                <li className="flex items-start gap-2"><Clock className="mt-0.5 h-4 w-4" /> Study on your schedule</li>
-              </ul>
-              <div className="mt-5 flex flex-wrap gap-3">
-                <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
-                  <Button className="px-4">Start with Fleming</Button>
-                </a>
-                <a href="/contact">
-                  <Button variant="outline" className="border-white/15 bg-white/5 px-4 text-white hover:bg-white/10">Educator partnerships</Button>
-                </a>
-              </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a href="https://pro.perkily.io/login" target="_blank" rel="noreferrer">
+                <Button className="bg-white text-black hover:bg-white/90 px-8 py-3 font-light">
+                  Try Pro
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </a>
+              <a href="/perkily-pro">
+                <Button variant="outline" className="border border-white/20 bg-transparent text-white hover:bg-white/5 px-8 py-3 font-light">
+                  Learn More
+                </Button>
+              </a>
             </div>
-            <div className="pointer-events-none absolute bottom-0 right-0 h-28 w-28 translate-x-6 translate-y-6 rounded-full bg-white/[0.06]" />
           </div>
         </div>
       </section>
@@ -216,11 +278,11 @@ const Index = () => {
         <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
-              <Bot className="h-3.5 w-3.5" /> Meet Fleming
+              <Bot className="h-3.5 w-3.5" /> AskFleming
             </div>
-            <h2 className="mt-4 text-pretty text-3xl font-semibold tracking-tight sm:text-4xl">An AI companion built for healthcare</h2>
+            <h2 className="mt-4 text-pretty text-3xl font-semibold tracking-tight sm:text-4xl">Your intelligent healthcare assistant</h2>
             <p className="mt-4 max-w-xl text-white/70">
-              Fleming helps you ask better questions, understand next steps, and navigate care. Grounded, careful, and available in seconds.
+              Safe, accurate, and always available. AskFleming provides instant health guidance for everyone—from patients to professionals to students.
             </p>
 
             <Tabs defaultValue="patients" className="mt-6">
@@ -231,30 +293,30 @@ const Index = () => {
               </TabsList>
               <TabsContent value="patients" className="mt-4">
                 <ul className="space-y-2 text-white/80">
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Symptom guidance and safe next steps</li>
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Prep for your visit — what to bring and what to expect</li>
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Connect to booking and rewards</li>
+                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Instant health guidance</li>
+                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Safe symptom assessment</li>
+                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Clear next steps</li>
                 </ul>
               </TabsContent>
               <TabsContent value="professionals" className="mt-4">
                 <ul className="space-y-2 text-white/80">
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Draft patient comms and education in plain language</li>
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Assist triage with structured, explainable intake</li>
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Fits around your existing tools</li>
+                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Clinical decision support</li>
+                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Evidence-based guidance</li>
+                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Patient education tools</li>
                 </ul>
               </TabsContent>
               <TabsContent value="students" className="mt-4">
                 <ul className="space-y-2 text-white/80">
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Cases that teach differentials and safety nets</li>
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Build confidence in clinical communication</li>
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Study on your schedule</li>
+                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Clinical reasoning practice</li>
+                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Safe learning environment</li>
+                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Evidence-based answers</li>
                 </ul>
               </TabsContent>
             </Tabs>
 
             <div className="mt-6 flex gap-3">
               <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
-                <Button className="px-4">Try Fleming</Button>
+                <Button className="px-4">Ask Fleming</Button>
               </a>
               <a href="/contact">
                 <Button variant="outline" className="border-white/15 bg-white/5 px-4 text-white hover:bg-white/10">Partner with us</Button>
@@ -294,9 +356,9 @@ const Index = () => {
         <div className="relative overflow-hidden border-y border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] py-10">
           <div className="pointer-events-none absolute -inset-x-10 -top-20 h-48 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(99,102,241,0.25),transparent_70%)]" />
           <div className="mx-auto mb-8 max-w-3xl px-6 text-center relative">
-            <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">Explore Perkily</span>
-            <h3 className="text-2xl font-semibold sm:text-3xl">Choose your starting point</h3>
-            <p className="mt-2 text-white/70">A quick look at our experiences for patients, professionals, and students.</p>
+            <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">Two Products</span>
+            <h3 className="text-2xl font-semibold sm:text-3xl">Choose your path</h3>
+            <p className="mt-2 text-white/70">Pro for professionals. AskFleming for everyone.</p>
           </div>
           <div className="relative mx-auto max-w-7xl px-6">
             <Carousel opts={{ align: 'start', loop: true }} setApi={setCtaCarouselApi} className="">
@@ -306,16 +368,13 @@ const Index = () => {
                   <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
                     <div>
                       <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
-                        <Smartphone className="h-3.5 w-3.5" /> Patients
+                        <Bot className="h-3.5 w-3.5" /> AskFleming
                       </div>
-                      <h4 className="text-xl font-semibold">Book, chat, earn</h4>
-                      <p className="mt-2 text-white/70">Open the app to book across practices, chat to Fleming for guidance, and earn rewards for healthy actions.</p>
+                      <h4 className="text-xl font-semibold">Your health assistant</h4>
+                      <p className="mt-2 text-white/70">Ask any health question and get safe, accurate answers instantly. Perfect for patients, students, and professionals.</p>
                       <div className="mt-4 flex flex-wrap gap-3">
-                        <a href="https://app.perkily.io" target="_blank" rel="noreferrer">
-                          <Button className="px-4">Open the app</Button>
-                        </a>
                         <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
-                          <Button variant="outline" className="border-white/15 bg-white/5 px-4 text-white hover:bg-white/10">Chat to Fleming</Button>
+                          <Button className="px-4">Ask Fleming</Button>
                         </a>
                       </div>
                     </div>
@@ -337,16 +396,16 @@ const Index = () => {
                   <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
                     <div>
                       <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
-                        <Stethoscope className="h-3.5 w-3.5" /> Professionals
+                        <Stethoscope className="h-3.5 w-3.5" /> Pro
                       </div>
-                      <h4 className="text-xl font-semibold">AI notes and instant claims</h4>
-                      <p className="mt-2 text-white/70">Record once, get structured SOAP notes, see insights, and submit medical aid claims instantly within Perkily Pro.</p>
+                      <h4 className="text-xl font-semibold">AI-powered practice management</h4>
+                      <p className="mt-2 text-white/70">Voice to SOAP notes, diagnostic insights, automated claims, and complete practice management in one platform.</p>
                       <div className="mt-4 flex flex-wrap gap-3">
-                        <a href="/perkily-pro">
-                          <Button className="px-4">Explore Perkily Pro</Button>
+                        <a href="https://pro.perkily.io/login" target="_blank" rel="noreferrer">
+                          <Button className="px-4">Try Pro</Button>
                         </a>
-                        <a href="/contact">
-                          <Button variant="outline" className="border-white/15 bg-white/5 px-4 text-white hover:bg-white/10">Book a demo</Button>
+                        <a href="/perkily-pro">
+                          <Button variant="outline" className="border-white/15 bg-white/5 px-4 text-white hover:bg-white/10">Learn More</Button>
                         </a>
                       </div>
                     </div>
@@ -510,6 +569,35 @@ const Index = () => {
         })()}
       </section>
 
+      {/* Award Banner */}
+      <section className="border-t border-white/10 bg-white/[0.02]">
+        <div className="mx-auto max-w-7xl px-6 py-16">
+          <div className="flex flex-col items-center justify-center gap-8 text-center">
+            <div className="flex items-center gap-4">
+              <div className="w-1 h-1 rounded-full bg-white/40"></div>
+              <span className="text-sm text-white/50 font-light tracking-wider uppercase">Recognition</span>
+              <div className="w-1 h-1 rounded-full bg-white/40"></div>
+            </div>
+            
+            <div className="flex items-center justify-center">
+              <Awards
+                variant="badge"
+                title="Startup of the Year"
+                subtitle="EPF Tech Awards"
+                date="2025"
+                level="gold"
+                className="text-white"
+              />
+            </div>
+            
+            <div className="max-w-2xl">
+              <p className="text-white/60 font-light leading-relaxed">
+                Recognized for innovation in healthcare technology and our commitment to making healthcare more accessible through AI.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
       
       <Footer />
     </main>

@@ -4,23 +4,23 @@ import { motion } from 'framer-motion';
 const FlemingAI = () => {
   const features = [
     {
-      title: 'Symptom Analysis',
-      description: 'Advanced AI-powered symptom analysis for accurate health insights',
+      title: 'Safe Guidance',
+      description: 'Evidence-based health guidance with built-in safety guardrails',
       gradient: 'from-blue-500/20 to-purple-500/20'
     },
     {
-      title: 'Medication Guide',
-      description: 'Personalized medication management and reminders',
+      title: 'Instant Answers',
+      description: 'Get accurate responses to your health questions in seconds',
       gradient: 'from-purple-500/20 to-pink-500/20'
     },
     {
-      title: 'Healthcare Network',
-      description: 'Access to our extensive network of healthcare providers',
+      title: 'Medical-Grade Accuracy',
+      description: 'Trained on medical literature with clinical validation',
       gradient: 'from-pink-500/20 to-orange-500/20'
     },
     {
-      title: 'Preventative Care',
-      description: 'Proactive health recommendations and wellness tracking',
+      title: 'Privacy First',
+      description: 'Your conversations are private and secure by design',
       gradient: 'from-orange-500/20 to-blue-500/20'
     }
   ];
@@ -60,7 +60,7 @@ const FlemingAI = () => {
                     transition={{ duration: 0.6 }}
                   >
                     <h2 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-white tracking-tight leading-[1.1]">
-                      Fleming<span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">AI</span>
+                      Ask<span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-transparent bg-clip-text">Fleming</span>
                     </h2>
                   </motion.div>
                   <motion.p 
@@ -69,7 +69,7 @@ const FlemingAI = () => {
                     transition={{ duration: 0.6, delay: 0.1 }}
                     className="text-[#8E8E93] text-xl xl:text-2xl font-light leading-relaxed max-w-xl"
                   >
-                    Your intelligent healthcare companion, powered by advanced artificial intelligence
+                    Your intelligent healthcare assistant. Safe, accurate, and always available.
                   </motion.p>
                 </div>
                 
@@ -79,13 +79,13 @@ const FlemingAI = () => {
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
                   <a 
-                    href="https://app.perkily.io/fleming-ai" 
+                    href="https://askfleming.perkily.io" 
                     target="_blank"
                     rel="noopener noreferrer" 
                     className="group relative inline-flex px-10 py-5 rounded-2xl bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white font-medium text-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/25 hover:scale-[1.02]"
                   >
                     <span className="relative z-10 flex items-center gap-2">
-                      Experience FlemingAI
+                      Ask Fleming
                       <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>

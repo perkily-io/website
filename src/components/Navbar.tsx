@@ -76,15 +76,15 @@ const Navbar = () => {
             <Button 
               variant="outline"
               className="border-white/15 bg-white/5 text-white hover:bg-white/10"
-              onClick={() => window.location.href = 'https://app.perkily.io/auth'}
+              onClick={() => window.location.href = 'https://pro.perkily.io/login'}
             >
               Log in
             </Button>
             <Button 
               className="h-9 px-4 text-sm border-white/15 bg-white text-black hover:bg-white/90"
-              onClick={() => window.location.href = 'https://app.perkily.io/auth'}
+              onClick={() => window.location.href = 'https://pro.perkily.io/login'}
             >
-              Open the app
+              Try Pro
             </Button>
           </div>
 
@@ -127,15 +127,15 @@ const Navbar = () => {
               <Button 
                 variant="outline" 
                 className="w-full border-white/15 bg-white/5 text-white hover:bg-white/10"
-                onClick={() => window.location.href = 'https://app.perkily.io/auth'}
+                onClick={() => window.location.href = 'https://pro.perkily.io/login'}
               >
                 Log in
               </Button>
               <Button 
                 className="w-full border-white/15 bg-white text-black hover:bg-white/90"
-                onClick={() => window.location.href = 'https://app.perkily.io/auth'}
+                onClick={() => window.location.href = 'https://pro.perkily.io/login'}
               >
-                Open the app
+                Try Pro
               </Button>
             </div>
           </div>
