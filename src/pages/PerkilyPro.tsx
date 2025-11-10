@@ -135,12 +135,16 @@ const PerkilyProHero = () => (
           Voice to SOAP notes. Diagnostic insights. Automated claims. Complete practice management. All powered by AI.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button className="bg-[#00A3FF] hover:bg-[#0090FF] text-white font-semibold px-8 py-3 text-lg">
-            Try Pro
-          </Button>
-          <Button variant="outline" className="border-white/20 text-white hover:bg-white/5 px-8 py-3 text-lg">
-            Book a demo
-          </Button>
+          <a href="https://pro.perkily.io/login" target="_blank" rel="noreferrer">
+            <Button className="bg-[#00A3FF] hover:bg-[#0090FF] text-white font-semibold px-8 py-3 text-lg">
+              Try Pro
+            </Button>
+          </a>
+          <a href="/contact">
+            <Button variant="outline" className="border-white/20 text-white hover:bg-white/5 px-8 py-3 text-lg">
+              Book a demo
+            </Button>
+          </a>
         </div>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400">
           <div className="flex items-center gap-2"><Mic className="w-4 h-4 text-[#00A3FF]" /> Voice to SOAP notes</div>
@@ -455,12 +459,16 @@ const FinalCTASection = () => (
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Get started with Perkily Pro</h2>
         <p className="text-gray-300 mb-8">Start with AI clinical notes and automated claims — expand into full practice management whenever you’re ready.</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button className="bg-emerald-500 hover:bg-emerald-600 text-black font-semibold px-8 py-3 text-lg">
-            Try Pro
-          </Button>
-          <Button variant="outline" className="border-white/20 text-white hover:bg-white/5 px-8 py-3 text-lg">
-            Book a demo
-          </Button>
+          <a href="https://pro.perkily.io/login" target="_blank" rel="noreferrer">
+            <Button className="bg-emerald-500 hover:bg-emerald-600 text-black font-semibold px-8 py-3 text-lg">
+              Try Pro
+            </Button>
+          </a>
+          <a href="/contact">
+            <Button variant="outline" className="border-white/20 text-white hover:bg-white/5 px-8 py-3 text-lg">
+              Book a demo
+            </Button>
+          </a>
         </div>
       </div>
     </div>

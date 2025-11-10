@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CanvasRevealEffect } from '@/components/ui/canvas-reveal-effect';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from '@/components/ui/carousel';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { ArrowRight, ArrowLeft, Bot, Stethoscope, GraduationCap, Sparkles, Shield, Smartphone, Gift, Building2, Rocket, Check, CalendarDays, MessagesSquare, Workflow, ShieldCheck, HeartPulse, Award, Activity, MapPin, Clock, Layers, Zap, Brain, Mic, CreditCard, Calendar } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Bot, Stethoscope, GraduationCap, Sparkles, Shield, Smartphone, Gift, Building2, Check, CalendarDays, MessagesSquare, Workflow, ShieldCheck, HeartPulse, Award, Activity, MapPin, Clock, Layers, Zap, Brain, Mic, CreditCard, Calendar } from 'lucide-react';
 import { GlowingEffectDemo } from '@/components/ui/glowing-effect-demo';
 import { BlurText } from '@/components/ui/animated-blur-text';
 import { Awards } from '@/components/ui/award';
@@ -72,12 +72,6 @@ const Index = () => {
         
         <div className="relative z-10 mx-auto max-w-7xl px-6 text-left">
           <div className="max-w-4xl">
-            {/* Badge */}
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80 backdrop-blur-sm">
-              <Rocket className="h-4 w-4 text-blue-400" />
-              Now live: AskFleming
-            </div>
-            
             {/* Animated Headline */}
             <div className="mb-8">
               <BlurText
@@ -116,21 +110,6 @@ const Index = () => {
               </a>
             </div>
             
-            {/* Feature badges */}
-            <div className="flex flex-wrap items-start gap-6 text-sm text-white/60">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
-                <Shield className="h-4 w-4 text-green-400" />
-                Secure by design
-              </div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
-                <Gift className="h-4 w-4 text-yellow-400" />
-                Rewards built in
-              </div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
-                <Smartphone className="h-4 w-4 text-blue-400" />
-                Works on any device
-              </div>
-            </div>
           </div>
         </div>
         
