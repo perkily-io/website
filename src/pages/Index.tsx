@@ -1,125 +1,105 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
+import { HeroSection } from '@/components/ui/hero-section-5';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CanvasRevealEffect } from '@/components/ui/canvas-reveal-effect';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from '@/components/ui/carousel';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { ArrowRight, ArrowLeft, Bot, Stethoscope, GraduationCap, Sparkles, Shield, Smartphone, Gift, Building2, Check, CalendarDays, MessagesSquare, Workflow, ShieldCheck, HeartPulse, Award, Activity, MapPin, Clock, Layers, Zap, Brain, Mic, CreditCard, Calendar } from 'lucide-react';
+import { ArrowRight, Bot, Sparkles, Check } from 'lucide-react';
 import { GlowingEffectDemo } from '@/components/ui/glowing-effect-demo';
 import { BlurText } from '@/components/ui/animated-blur-text';
 import { Awards } from '@/components/ui/award';
+import { TextRevealByWord } from '@/components/ui/text-reveal';
+import { Features } from '@/components/ui/features-6';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-const Index = () => {
-  const [ctaCarouselApi, setCtaCarouselApi] = React.useState<CarouselApi | null>(null)
-  const [ctaCurrent, setCtaCurrent] = React.useState(0)
+// Combined Text Reveal and Image Component
+const InterfaceTextAndImage = () => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  const { scrollYProgress } = useScroll({
+    target: scrollContainerRef,
+    offset: ["start 0.8", "end 0.2"]
+  });
 
-  React.useEffect(() => {
-    if (!ctaCarouselApi) return
-    const handleSelect = () => setCtaCurrent(ctaCarouselApi.selectedScrollSnap())
-    handleSelect()
-    ctaCarouselApi.on('select', handleSelect)
-    return () => {
-      // Optional: Embla may not expose 'off' in some typings
-      if (typeof (ctaCarouselApi as any).off === 'function') {
-        ;(ctaCarouselApi as any).off('select', handleSelect)
-      }
-    }
-  }, [ctaCarouselApi])
+  // Animate image opacity based on scroll progress - fades in as text reveals
+  const imageOpacity = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0, 1, 0.8]);
+  // Animate scale for parallax effect
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.85, 1, 0.95]);
+  // Animate y position for smooth flow with text
+  const imageY = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
-  React.useEffect(() => {
-    if (!ctaCarouselApi) return
-    let paused = false
-    const root = ctaCarouselApi.rootNode?.() as HTMLElement | undefined
-    const onEnter = () => { paused = true }
-    const onLeave = () => { paused = false }
-    root?.addEventListener('mouseenter', onEnter)
-    root?.addEventListener('mouseleave', onLeave)
-    const id = window.setInterval(() => {
-      if (!paused) ctaCarouselApi.scrollNext()
-    }, 6000)
-    return () => {
-      window.clearInterval(id)
-      root?.removeEventListener('mouseenter', onEnter)
-      root?.removeEventListener('mouseleave', onLeave)
-    }
-  }, [ctaCarouselApi])
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
+  return (
+    <div ref={scrollContainerRef} className="relative" style={{ marginBottom: '200px' }}>
+      {/* Text Reveal Component - creates its own 200vh container */}
+      <TextRevealByWord 
+        text="Technology is at its best when it disappears. The Interface is a masterpiece of ambient engineering. It clips to your scrubs and stays out of the way, capturing every nuance of the patient encounter so you never have to look at a screen during a consultation again."
+        className="h-[200vh]"
+      />
+      
+      {/* Scroll-Synced Product Image - Top overlaps with bottom of text */}
+      <div 
+        className="absolute left-0 right-0 z-10" 
+        style={{ 
+          top: isMobile ? 'calc(160vh + 250px)' : 'calc(175vh + 80px)'
+        }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="relative w-full max-w-5xl mx-auto">
+            <motion.div
+              style={{ opacity: imageOpacity, scale: imageScale, y: imageY }}
+              className="mb-0"
+            >
+              <div className="scale-110 sm:scale-125 origin-center">
+                <img 
+                  src="/img/productimage.png" 
+                  alt="The Interface Product"
+                  className="w-full h-auto object-contain drop-shadow-2xl pointer-events-none"
+                />
+              </div>
+            </motion.div>
+            {/* Request Early Access Button - Positioned below image with proper spacing */}
+            <div className="flex justify-center mt-3 sm:mt-2 md:-mt-[50px] relative z-20">
+              <button
+                className="rounded-full px-6 sm:px-8 h-12 text-sm sm:text-base font-medium transition-all active:scale-95 hover:bg-gray-50 border-0 inline-flex items-center justify-center gap-2"
+                style={{ backgroundColor: '#ffffff', color: '#000000' }}
+                onClick={() => window.open('https://calendly.com/hello-perkily', '_blank')}
+              >
+                Request Early Access <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const Index: React.FC = () => {
   return (
     <main className="min-h-screen bg-black text-white selection:bg-white/10">
       <SEO 
-        title="AI-Powered Healthcare. Simplified."
-        description="Two products that transform healthcare: Pro, the AI-powered practice management platform, and AskFleming, the intelligent healthcare assistant for everyone."
-        keywords="Perkily Pro, AskFleming, AI practice management, healthcare AI, medical software, clinical notes, healthcare assistant"
+        title="The Clinical Operating System of the Future"
+        description="Built for the era of ambient intelligence. Perkily unifies the clinic, the clinician, and the patient into a single, seamless ecosystem."
+        keywords="ClinicalOS, Perkily, ambient intelligence, practice management, healthcare AI, medical software, clinical notes"
         canonical="https://www.perkily.io/"
       />
-      <Navbar />
 
-      {/* Hero */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Ambient background effects */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
-          <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.02]" />
-        </div>
-        
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
-        
-        <div className="relative z-10 mx-auto max-w-7xl px-6 text-left">
-          <div className="max-w-4xl">
-            {/* Animated Headline */}
-            <div className="mb-8">
-              <BlurText
-                text="Healthcare. Reimagined."
-                delay={100}
-                animateBy="words"
-                direction="top"
-                className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-white leading-[0.9] tracking-tight"
-              />
-            </div>
-            
-            {/* Animated Description */}
-            <div className="mb-12 max-w-3xl">
-              <BlurText
-                text="Two powerful products. One vision: making healthcare smarter, faster, and more accessible for everyone."
-                delay={80}
-                animateBy="words"
-                direction="bottom"
-                className="text-xl sm:text-2xl text-white/70 leading-relaxed"
-              />
-            </div>
-            
-            {/* CTA Buttons */}
-            <div className="mb-12 flex flex-col sm:flex-row items-start gap-4">
-              <a href="https://pro.perkily.io/login" target="_blank" rel="noreferrer">
-                <Button size="lg" className="h-14 px-8 text-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white border-0 shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105">
-                  Try Pro
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </a>
-              <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
-                <Button size="lg" variant="outline" className="h-14 px-8 text-lg border-2 border-white/20 bg-white/5 backdrop-blur-sm text-white hover:bg-white/10 hover:border-white/30 transition-all duration-300 hover:scale-105">
-                  Ask Fleming
-                  <Bot className="ml-2 h-5 w-5" />
-                </Button>
-              </a>
-            </div>
-            
-          </div>
-        </div>
-        
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-bounce" />
-          </div>
-        </div>
-      </section>
+      <Navbar />
+      
+      <HeroSection />
 
       {/* Canvas reveal section */}
       <section className="relative mx-auto w-full px-0 pb-8 sm:pb-12">
@@ -135,8 +115,8 @@ const Index = () => {
           <div className="absolute inset-x-0 bottom-0 mx-auto max-w-7xl px-6 py-4">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-2xl font-semibold tracking-tight">Built with care</h3>
-                <p className="mt-1 max-w-2xl text-white/70">Thoughtful software for professionals, general users, and medical students — privacy and performance at the core.</p>
+                <h3 className="text-2xl font-semibold tracking-tight">The era of the Paperwork Doctor is over.</h3>
+                <p className="mt-1 max-w-2xl text-white/70">The era of the Ambient Physician has begun.</p>
               </div>
               <div className="hidden sm:flex items-center gap-2 text-white/60 text-sm">
                 <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400" /> Live
@@ -146,315 +126,136 @@ const Index = () => {
         </div>
       </section>
 
-
-      {/* Minimalist Products Section */}
-      <section className="mx-auto max-w-7xl px-6 py-24">
-        {/* Section header */}
-        <div className="mb-20 text-center">
-          <h2 className="text-4xl sm:text-5xl font-light text-white mb-6 tracking-tight">
-            Two products.<br />
-            <span className="text-white/60">One vision.</span>
+      {/* Products Section - Bento Grid */}
+      <section id="products" className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
+        <div className="mb-20">
+          <h2 className="text-5xl sm:text-7xl font-light text-white mb-6 tracking-tighter">
+            Three products.<br />
+            <span className="text-white/40">One seamless experience.</span>
           </h2>
-          <p className="text-lg text-white/50 max-w-xl mx-auto font-light">
-            Designed for every role in healthcare
+          <p className="text-xl text-white/60 max-w-xl font-light leading-relaxed">
+            The backbone. The interface. The intelligence. Working in perfect harmony.
           </p>
         </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-6 md:grid-rows-4 gap-4 h-auto md:h-[800px]">
+          {/* ClinicalOS - Large Left Card */}
+          <div className="md:col-span-3 md:row-span-2 group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <h3 className="text-2xl font-medium text-white mb-3">ClinicalOS</h3>
+              <p className="text-white/50 text-sm leading-relaxed">
+                The backbone. A beautiful, radical reimagining of practice management.
+              </p>
+            </div>
+            <Button 
+              variant="link" 
+              className="text-white/70 pl-0 hover:text-white transition-colors text-sm p-0 h-auto w-fit" 
+              onClick={() => window.open('https://pro.perkily.io/login', '_blank')}
+            >
+              Request Access <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
-          {/* AskFleming */}
-          <div className="text-center lg:text-left">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 border border-white/10 mb-8">
-              <Brain className="w-8 h-8 text-white" />
+          {/* The Interface - Tall Right Card with Image */}
+          <div className="md:col-span-3 md:row-span-4 group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 flex flex-col">
+            <div className="p-8 pb-2">
+              <h3 className="text-2xl font-medium text-white mb-3">The Interface</h3>
+              <p className="text-white/50 text-sm leading-relaxed mb-4">
+                A discreet, clip-on engine that turns conversation into care.
+              </p>
             </div>
-            
-            <h3 className="text-3xl font-light text-white mb-4 tracking-tight">
-              AskFleming
-            </h3>
-            
-            <p className="text-lg text-white/60 mb-8 leading-relaxed font-light">
-              Your intelligent healthcare assistant. Safe, accurate answers to any health question, anytime.
-            </p>
-            
-            <div className="space-y-3 mb-10">
-              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
-                <Check className="w-4 h-4" />
-                <span className="text-sm">Safe, grounded responses</span>
-              </div>
-              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
-                <MessagesSquare className="w-4 h-4" />
-                <span className="text-sm">Instant health guidance</span>
-              </div>
-              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
-                <Shield className="w-4 h-4" />
-                <span className="text-sm">Privacy-first design</span>
-              </div>
-              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
-                <Activity className="w-4 h-4" />
-                <span className="text-sm">Medical-grade accuracy</span>
-              </div>
+            {/* Hardware Image Preview */}
+            <div className="flex-1 relative overflow-hidden border-t border-white/5">
+              <img
+                src="/img/hardwarepreview.png"
+                alt="The Interface Hardware"
+                className="w-full h-full object-cover object-bottom"
+              />
+              <div 
+                className="absolute inset-0" 
+                style={{ background: 'linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 30%, rgba(0, 0, 0, 0.4) 55%, rgba(0, 0, 0, 0.1) 80%, transparent 100%)' }}
+              />
             </div>
-            
-            <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
-              <Button variant="outline" className="border border-white/20 bg-transparent text-white hover:bg-white/5 px-8 py-3 font-light">
-                Ask Fleming
-                <ArrowRight className="ml-2 w-4 h-4" />
+            <div className="p-8 pt-4">
+              <Button 
+                variant="link" 
+                className="text-white/70 pl-0 hover:text-white transition-colors text-sm p-0 h-auto w-fit" 
+                onClick={() => window.open('https://calendly.com/hello-perkily', '_blank')}
+              >
+                Request Early Access <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-            </a>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
 
-          {/* Pro */}
-          <div className="text-center lg:text-left">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/5 border border-white/10 mb-8">
-              <Stethoscope className="w-8 h-8 text-white" />
+          {/* Fleming - Bottom Left Card */}
+          <div className="md:col-span-3 md:row-span-2 group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <h3 className="text-2xl font-medium text-white mb-3">Fleming</h3>
+              <p className="text-white/50 text-sm leading-relaxed">
+                The intelligence. A medical-grade AI trained to think like a physician and care like a human.
+              </p>
             </div>
-            
-            <h3 className="text-3xl font-light text-white mb-4 tracking-tight">
-              Pro
-            </h3>
-            
-            <p className="text-lg text-white/60 mb-8 leading-relaxed font-light">
-              AI-powered practice management platform. Voice to SOAP notes, diagnostic insights, and automated claims.
-            </p>
-            
-            <div className="space-y-3 mb-10">
-              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
-                <Mic className="w-4 h-4" />
-                <span className="text-sm">Voice to SOAP notes</span>
-              </div>
-              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
-                <Brain className="w-4 h-4" />
-                <span className="text-sm">Diagnostic insights</span>
-              </div>
-              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
-                <CreditCard className="w-4 h-4" />
-                <span className="text-sm">Automated claims</span>
-              </div>
-              <div className="flex items-center justify-center lg:justify-start gap-3 text-white/70">
-                <Calendar className="w-4 h-4" />
-                <span className="text-sm">Complete practice management</span>
-              </div>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <a href="https://pro.perkily.io/login" target="_blank" rel="noreferrer">
-                <Button className="bg-white text-black hover:bg-white/90 px-8 py-3 font-light">
-                  Try Pro
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </a>
-              <a href="/perkily-pro">
-                <Button variant="outline" className="border border-white/20 bg-transparent text-white hover:bg-white/5 px-8 py-3 font-light">
-                  Learn More
-                </Button>
-              </a>
-            </div>
+            <Button 
+              variant="link" 
+              className="text-white/70 pl-0 hover:text-white transition-colors text-sm p-0 h-auto w-fit" 
+              onClick={() => window.open('https://askfleming.perkily.io', '_blank')}
+            >
+              Try Fleming <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </div>
         </div>
       </section>
 
-      {/* Fleming section */}
-      <section id="fleming" className="mx-auto max-w-7xl px-6 py-14 sm:py-20">
-        <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-2">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
-              <Bot className="h-3.5 w-3.5" /> AskFleming
-            </div>
-            <h2 className="mt-4 text-pretty text-3xl font-semibold tracking-tight sm:text-4xl">Your intelligent healthcare assistant</h2>
-            <p className="mt-4 max-w-xl text-white/70">
-              Safe, accurate, and always available. AskFleming provides instant health guidance for everyone—from patients to professionals to students.
-            </p>
-
-            <Tabs defaultValue="patients" className="mt-6">
-              <TabsList className="bg-white/5">
-                <TabsTrigger value="patients">Patients</TabsTrigger>
-                <TabsTrigger value="professionals">Professionals</TabsTrigger>
-                <TabsTrigger value="students">Students</TabsTrigger>
-              </TabsList>
-              <TabsContent value="patients" className="mt-4">
-                <ul className="space-y-2 text-white/80">
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Instant health guidance</li>
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Safe symptom assessment</li>
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Clear next steps</li>
-                </ul>
-              </TabsContent>
-              <TabsContent value="professionals" className="mt-4">
-                <ul className="space-y-2 text-white/80">
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Clinical decision support</li>
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Evidence-based guidance</li>
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Patient education tools</li>
-                </ul>
-              </TabsContent>
-              <TabsContent value="students" className="mt-4">
-                <ul className="space-y-2 text-white/80">
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Clinical reasoning practice</li>
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Safe learning environment</li>
-                  <li className="flex items-start gap-2"><ArrowRight className="mt-1 h-4 w-4" /> Evidence-based answers</li>
-                </ul>
-              </TabsContent>
-            </Tabs>
-
-            <div className="mt-6 flex gap-3">
-              <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
-                <Button className="px-4">Ask Fleming</Button>
-              </a>
-              <a href="/contact">
-                <Button variant="outline" className="border-white/15 bg-white/5 px-4 text-white hover:bg-white/10">Partner with us</Button>
-              </a>
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="absolute -inset-x-6 -inset-y-6 rounded-3xl bg-[conic-gradient(at_50%_50%,rgba(59,130,246,0.2),transparent_30%)] blur-2xl" />
-            <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="mb-4 text-sm font-medium text-white/80">A better chat for care</div>
-              <div className="space-y-3 text-sm leading-6 text-white/80">
-                <div className="rounded-lg border border-white/10 bg-black/40 p-4">Hi Fleming — I have a sore throat and mild fever. Should I be worried?</div>
-                <div className="rounded-lg border border-white/10 bg-white/5 p-4">Let’s figure it out together. I’ll ask a few quick questions to check for red flags, then suggest safe next steps and when to see someone in person.</div>
-                <div className="rounded-lg border border-white/10 bg-black/40 p-4">What should I bring to my appointment?</div>
-                <div className="rounded-lg border border-white/10 bg-white/5 p-4">Bring a list of medications, allergies, and any recent test results. I can help you summarise symptoms before you go.</div>
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Fleming Section - New Features Style */}
+      <section id="fleming" className="mx-auto max-w-7xl">
+        <Features />
       </section>
 
-      {/* Platform features - GlowingEffectDemo layout */}
-      <section className="mx-auto max-w-7xl px-6 py-16 sm:py-24">
+      {/* ClinicalOS Features Section */}
+      <section id="features" className="mx-auto max-w-7xl px-6 py-16 sm:py-24">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">Platform</span>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">One platform, many ways to help</h2>
-          <p className="mt-2 text-white/70">From first question to follow‑up, Perkily ties the journey together — with care, speed, and trust.</p>
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">ClinicalOS</span>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Design for Doctors. Not Data Entry.</h2>
+          <p className="mt-2 text-white/70">Most systems were built for billing. ClinicalOS was built for healing. It's a unified workspace that predicts your needs, automates your billing, and clears your schedule—all before you finish your morning rounds.</p>
         </div>
         <div className="mt-10">
           <GlowingEffectDemo />
         </div>
       </section>
 
-      {/* Multi-platform CTA slider with demo videos */}
-      <section className="mx-auto w-full px-0 pb-24 sm:pb-32">
-        <div className="relative overflow-hidden border-y border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] py-10">
-          <div className="pointer-events-none absolute -inset-x-10 -top-20 h-48 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(99,102,241,0.25),transparent_70%)]" />
-          <div className="mx-auto mb-8 max-w-3xl px-6 text-center relative">
-            <span className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">Two Products</span>
-            <h3 className="text-2xl font-semibold sm:text-3xl">Choose your path</h3>
-            <p className="mt-2 text-white/70">Pro for professionals. AskFleming for everyone.</p>
-          </div>
-          <div className="relative mx-auto max-w-7xl px-6">
-            <Carousel opts={{ align: 'start', loop: true }} setApi={setCtaCarouselApi} className="">
-              <CarouselContent className="-ml-2 md:-ml-4">
-                {/* Patients */}
-                <CarouselItem className="pl-2 md:pl-4">
-                  <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
-                    <div>
-                      <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
-                        <Bot className="h-3.5 w-3.5" /> AskFleming
-                      </div>
-                      <h4 className="text-xl font-semibold">Your health assistant</h4>
-                      <p className="mt-2 text-white/70">Ask any health question and get safe, accurate answers instantly. Perfect for patients, students, and professionals.</p>
-                      <div className="mt-4 flex flex-wrap gap-3">
-                        <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
-                          <Button className="px-4">Ask Fleming</Button>
-                        </a>
-                      </div>
-                    </div>
-                    <div>
-                      <AspectRatio ratio={16 / 9}>
-                        <div className="relative h-full w-full overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-                          <div className="flex h-full w-full items-center justify-center bg-black/70">
-                            <span className="text-sm font-medium text-white/70">Coming soon</span>
-                          </div>
-                          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.55),transparent_40%)]" />
-                        </div>
-                      </AspectRatio>
-                    </div>
-                  </div>
-                </CarouselItem>
-
-                {/* Professionals */}
-                <CarouselItem className="pl-2 md:pl-4">
-                  <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
-                    <div>
-                      <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
-                        <Stethoscope className="h-3.5 w-3.5" /> Pro
-                      </div>
-                      <h4 className="text-xl font-semibold">AI-powered practice management</h4>
-                      <p className="mt-2 text-white/70">Voice to SOAP notes, diagnostic insights, automated claims, and complete practice management in one platform.</p>
-                      <div className="mt-4 flex flex-wrap gap-3">
-                        <a href="https://pro.perkily.io/login" target="_blank" rel="noreferrer">
-                          <Button className="px-4">Try Pro</Button>
-                        </a>
-                        <a href="/perkily-pro">
-                          <Button variant="outline" className="border-white/15 bg-white/5 px-4 text-white hover:bg-white/10">Learn More</Button>
-                        </a>
-                      </div>
-                    </div>
-                    <div>
-                      <AspectRatio ratio={16 / 9}>
-                        <div className="relative h-full w-full overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-                          <div className="flex h-full w-full items-center justify-center bg-black/70">
-                            <span className="text-sm font-medium text-white/70">Coming soon</span>
-                          </div>
-                          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.55),transparent_40%)]" />
-                        </div>
-                      </AspectRatio>
-                    </div>
-                  </div>
-                </CarouselItem>
-
-                {/* Fleming for everyone */}
-                <CarouselItem className="pl-2 md:pl-4">
-                  <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
-                    <div>
-                      <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
-                        <Bot className="h-3.5 w-3.5" /> Fleming
-                      </div>
-                      <h4 className="text-xl font-semibold">Fleming, ready to help</h4>
-                      <p className="mt-2 text-white/70">Instant guidance for general users, assistive drafting and triage for professionals, and safe learning patterns for medical students.</p>
-                      <div className="mt-4 flex flex-wrap gap-3">
-                        <a href="https://askfleming.perkily.io" target="_blank" rel="noreferrer">
-                          <Button className="px-4">Chat with Fleming</Button>
-                        </a>
-                        <a href="/contact">
-                          <Button variant="outline" className="border-white/15 bg-white/5 px-4 text-white hover:bg-white/10">Partner with us</Button>
-                        </a>
-                      </div>
-                    </div>
-                    <div>
-                      <AspectRatio ratio={16 / 9}>
-                        <div className="relative h-full w-full overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-                          <div className="flex h-full w-full items-center justify-center bg-black/70">
-                            <span className="text-sm font-medium text-white/70">Coming soon</span>
-                          </div>
-                          <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.55),transparent_40%)]" />
-                        </div>
-                      </AspectRatio>
-                    </div>
-                  </div>
-                </CarouselItem>
-              </CarouselContent>
-              <CarouselPrevious className="backdrop-blur border-white/20 text-white hover:bg-white/10 -left-3 md:-left-6" />
-              <CarouselNext className="backdrop-blur border-white/20 text-white hover:bg-white/10 -right-3 md:-right-6" />
-            </Carousel>
-          </div>
-
-          {/* Dots */}
-          <div className="mt-6 flex items-center justify-center gap-2">
-            {[0,1,2].map((i) => (
-              <button
-                key={i}
-                aria-label={`Go to slide ${i+1}`}
-                onClick={() => ctaCarouselApi?.scrollTo(i)}
-                className={`h-2.5 w-2.5 rounded-full transition-all ${ctaCurrent===i ? 'bg-white' : 'bg-white/30 hover:bg-white/60'}`}
-              />
-            ))}
-          </div>
+      {/* The Interface Section - Sleek with Text Reveal */}
+      <section id="wearable" className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
+        <div className="mx-auto max-w-4xl text-center mb-20">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80 mb-8">The Interface</span>
+          <h2 className="text-5xl font-light tracking-tight sm:text-6xl md:text-7xl mb-12 leading-tight">
+            The End of the Keyboard.
+          </h2>
         </div>
+        
+        {/* Text Reveal Component with Scroll-Synced Image */}
+        <InterfaceTextAndImage />
       </section>
 
-      {/* Blog section */}
-      <section className="mx-auto max-w-7xl px-6 py-16 sm:py-20">
-        {(() => {
-          const posts = [
+
+      {/* Blog section - Sleek redesign */}
+      <section className="mx-auto max-w-7xl px-6 py-24 sm:py-32">
+        <div className="mb-16">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80 mb-6">
+            From the journal
+          </div>
+          <h2 className="text-4xl md:text-5xl font-light tracking-tight text-white mb-4">
+            Ideas for better care
+          </h2>
+          <p className="text-lg text-white/60 font-light max-w-2xl">
+            Thoughtful product updates, design notes, and platform thinking.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
             {
               tag: 'Product',
               title: 'Meet Fleming — guidance that earns your trust',
@@ -467,7 +268,7 @@ const Index = () => {
               tag: 'Design',
               title: 'Designing for calm in healthcare software',
               excerpt:
-                'Interfaces that reduce cognitive load help everyone — patients, clinicians, students. Here’s how we think about it.',
+                'Interfaces that reduce cognitive load help everyone — patients, clinicians, students. Here\'s how we think about it.',
               date: 'Aug 2024',
               href: '/blog',
             },
@@ -475,109 +276,44 @@ const Index = () => {
               tag: 'Platform',
               title: 'Rewards that change behaviour (without noise)',
               excerpt:
-                'Building a rewards system that’s fair, transparent, and genuinely useful — not just another points program.',
+                'Building a rewards system that\'s fair, transparent, and genuinely useful — not just another points program.',
               date: 'Jul 2024',
               href: '/blog',
             },
-          ] as const;
-
-          const [featured, ...rest] = posts;
-
-          return (
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] p-6 sm:p-10">
-              <div className="pointer-events-none absolute -inset-24 -z-10 bg-[radial-gradient(60%_60%_at_30%_0%,rgba(59,130,246,0.18),transparent_60%),radial-gradient(50%_50%_at_100%_60%,rgba(139,92,246,0.12),transparent_60%)]" />
-
-              <div className="mx-auto max-w-3xl text-center">
-                <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">From the journal</span>
-                <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Ideas for better care</h2>
-                <p className="mt-2 text-white/70">Thoughtful product updates, design notes, and platform thinking.</p>
-              </div>
-
-              <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-                {/* Featured */}
-                <a href={featured.href} className="group relative isolate overflow-hidden rounded-2xl border border-white/10 bg-black/40 p-6 sm:p-8 md:col-span-2">
-                  <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.6),transparent_40%)]" />
-                  <div className="pointer-events-none absolute -top-24 -right-20 h-64 w-64 rounded-full bg-[conic-gradient(at_50%_50%,rgba(59,130,246,0.25),transparent_60%)] blur-2xl transition-transform duration-500 group-hover:scale-110" />
-                  <div className="relative">
-                    <div className="inline-flex items-center gap-2 text-xs text-white/70">
-                      <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] uppercase tracking-wide">{featured.tag}</span>
-                      <span className="text-white/50">{featured.date}</span>
-                    </div>
-                    <h3 className="mt-3 text-pretty text-2xl font-semibold leading-tight sm:text-3xl md:text-4xl group-hover:underline">
-                      {featured.title}
-                    </h3>
-                    <p className="mt-3 max-w-2xl text-white/70">{featured.excerpt}</p>
-                    <div className="mt-5 inline-flex items-center text-sm text-white/80">
-                      Read the journal <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                    </div>
-                  </div>
-                </a>
-
-                {/* Supporting */}
-                {rest.slice(0, 2).map((post, i) => (
+          ].map((post, i) => (
                   <a
                     key={i}
                     href={post.href}
-                    className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 transition-colors"
-                  >
-                    <div className="pointer-events-none absolute -inset-x-6 -top-20 h-32 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(99,102,241,0.18),transparent_70%)]" />
-                    <div className="relative">
-                      <div className="inline-flex items-center gap-2 text-xs text-white/70">
-                        <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] uppercase tracking-wide">{post.tag}</span>
-                        <span className="text-white/50">{post.date}</span>
+              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between"
+            >
+              <div>
+                <div className="inline-flex items-center gap-2 text-xs text-white/60 mb-4">
+                  <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] uppercase tracking-wide font-medium">{post.tag}</span>
+                  <span className="text-white/40">{post.date}</span>
                       </div>
-                      <h4 className="mt-3 text-xl font-semibold group-hover:underline">{post.title}</h4>
-                      <p className="mt-2 text-white/70">{post.excerpt}</p>
-                      <div className="mt-4 inline-flex items-center text-sm text-white/80">
-                        Read more <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <h3 className="text-xl font-medium text-white mb-3 group-hover:text-white/90 transition-colors">
+                  {post.title}
+                </h3>
+                <p className="text-white/50 text-sm leading-relaxed">{post.excerpt}</p>
                       </div>
+              <div className="mt-6 inline-flex items-center text-sm text-white/70 group-hover:text-white transition-colors">
+                Read more <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     </div>
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </a>
                 ))}
               </div>
 
-              <div className="mt-8 flex items-center justify-center">
+        <div className="mt-12 flex items-center justify-center">
                 <a href="/blog">
-                  <Button variant="outline" className="border-white/20 bg-white/5 text-white hover:bg-white/10">
+            <button className="border border-white/20 bg-white/5 text-white hover:bg-white/10 rounded-full px-6 py-2 text-sm font-medium transition-colors">
                     View all posts
-                  </Button>
+            </button>
                 </a>
               </div>
-            </div>
-          );
-        })()}
       </section>
 
-      {/* Award Banner */}
-      <section className="border-t border-white/10 bg-white/[0.02]">
-        <div className="mx-auto max-w-7xl px-6 py-16">
-          <div className="flex flex-col items-center justify-center gap-8 text-center">
-            <div className="flex items-center gap-4">
-              <div className="w-1 h-1 rounded-full bg-white/40"></div>
-              <span className="text-sm text-white/50 font-light tracking-wider uppercase">Recognition</span>
-              <div className="w-1 h-1 rounded-full bg-white/40"></div>
-            </div>
-            
-            <div className="flex items-center justify-center">
-              <Awards
-                variant="badge"
-                title="Startup of the Year"
-                subtitle="EPF Tech Awards"
-                date="2025"
-                level="gold"
-                className="text-white"
-              />
-            </div>
-            
-            <div className="max-w-2xl">
-              <p className="text-white/60 font-light leading-relaxed">
-                Recognized for innovation in healthcare technology and our commitment to making healthcare more accessible through AI.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      
+      {/* Footer */}
       <Footer />
     </main>
   );

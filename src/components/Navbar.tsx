@@ -3,6 +3,15 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { useScroll, motion } from 'framer-motion';
+
+const menuItems = [
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Perkily Pro', href: '/perkily-pro' },
+    { name: 'Help', href: '/help' },
+    { name: 'Contact', href: '/contact' },
+];
 
 const NavLink = ({ to, children }: { to: string; children: React.ReactNode }) => {
   const location = useLocation();
@@ -12,137 +21,111 @@ const NavLink = ({ to, children }: { to: string; children: React.ReactNode }) =>
     <Link 
       to={to} 
       className={cn(
-        "relative inline-flex items-center px-3 py-1.5 text-sm font-medium transition-colors duration-200 group",
-        isActive ? "text-white" : "text-white/70 hover:text-white"
+        "text-muted-foreground hover:text-accent-foreground block duration-150 transition-colors",
+        isActive && "text-foreground font-medium"
       )}
     >
-      <span
-        className={cn(
-          "absolute inset-0 -z-10 rounded-lg border border-white/10 bg-white/5 opacity-0 scale-95 transition-all duration-300",
-          isActive ? "opacity-100 scale-100" : "group-hover:opacity-100 group-hover:scale-100"
-        )}
-      />
-      <span className="relative z-10">{children}</span>
+      <span>{children}</span>
     </Link>
   );
 };
 
-const Navbar = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
-  useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
-      }
-    };
+const Navbar = ({ className }: { className?: string }) => {
+    const [menuState, setMenuState] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const { scrollYProgress } = useScroll();
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [scrolled]);
+    useEffect(() => {
+        const unsubscribe = scrollYProgress.on('change', (latest) => {
+            setScrolled(latest > 0.05);
+        });
+        return () => unsubscribe();
+    }, [scrollYProgress]);
 
-  return (
-    <nav 
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
-        scrolled 
-          ? 'bg-black/80 backdrop-blur-xl border-b border-white/[0.05] py-4' 
-          : 'bg-transparent backdrop-blur-none border-b border-transparent py-6'
-      )}
-    >
-      <div className="container max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 flex-shrink-0">
-            <img src="/logos/perkily-logo.png" alt="Perkily Logo" className="h-20 w-20" />
-            <span className="font-bold text-2xl text-white font-['Montserrat']">
-              Perkily
-            </span>
-          </Link>
+    return (
+        <header>
+            <nav
+                data-state={menuState && 'active'}
+                className={cn("group fixed z-50 w-full pt-2", className)}>
+                <div className={cn('mx-auto max-w-7xl rounded-3xl px-6 transition-all duration-300 lg:px-12', scrolled && 'bg-background/80 backdrop-blur-2xl border border-white/5')}>
+                    <motion.div
+                        key={1}
+                        className={cn('relative flex flex-wrap items-center justify-between gap-6 py-3 duration-200 lg:gap-0 lg:py-6', scrolled && 'lg:py-4')}>
+                        <div className="flex w-full items-center justify-between gap-12 lg:w-auto">
+                            <Link
+                                to="/"
+                                aria-label="home"
+                                className="flex items-center space-x-2">
+                                <Logo />
+                            </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/about">About</NavLink>
-            <NavLink to="/perkily-pro">Perkily Pro</NavLink>
-            <NavLink to="/help">Help</NavLink>
-            <NavLink to="/contact">Contact</NavLink>
-          </div>
+                            <button
+                                onClick={() => setMenuState(!menuState)}
+                                aria-label={menuState ? 'Close Menu' : 'Open Menu'}
+                                className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden">
+                                <Menu className="group-data-[state=active]:rotate-180 group-data-[state=active]:scale-0 group-data-[state=active]:opacity-0 m-auto size-6 duration-200" />
+                                <X className="group-data-[state=active]:rotate-0 group-data-[state=active]:scale-100 group-data-[state=active]:opacity-100 absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200" />
+                            </button>
 
-          {/* CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-3">
-            <Button 
-              variant="outline"
-              className="border-white/15 bg-white/5 text-white hover:bg-white/10"
-              onClick={() => window.location.href = 'https://pro.perkily.io/login'}
-            >
-              Log in
-            </Button>
-            <Button 
-              className="h-9 px-4 text-sm border-white/15 bg-white text-black hover:bg-white/90"
-              onClick={() => window.location.href = 'https://pro.perkily.io/login'}
-            >
-              Try Pro
-            </Button>
-          </div>
+                            <div className="hidden lg:block">
+                                <ul className="flex gap-8 text-sm">
+                                    {menuItems.map((item, index) => (
+                                        <li key={index}>
+                                            <NavLink to={item.href}>
+                                                {item.name}
+                                            </NavLink>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              className="text-white/70 hover:text-white p-2"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </Button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        <div 
-          className={cn(
-            "md:hidden absolute left-0 right-0 top-full px-4 pt-2 pb-4 bg-black/80 backdrop-blur-xl border-b border-white/[0.05] transition-all duration-300 transform",
-            mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
-          )}
-        >
-          <div className="space-y-4 py-4">
-            <Link to="/" className="block text-white/70 hover:text-white transition-colors duration-200 py-2">
-              Home
-            </Link>
-            <Link to="/about" className="block text-white/70 hover:text-white transition-colors duration-200 py-2">
-              About
-            </Link>
-            <Link to="/perkily-pro" className="block text-white/70 hover:text-white transition-colors duration-200 py-2">
-              Perkily Pro
-            </Link>
-            <Link to="/contact" className="block text-white/70 hover:text-white transition-colors duration-200 py-2">
-              Contact
-            </Link>
-            <Link to="/help" className="block text-white/70 hover:text-white transition-colors duration-200 py-2">
-              Help
-            </Link>
-            <div className="pt-4 grid grid-cols-2 gap-3">
-              <Button 
-                variant="outline" 
-                className="w-full border-white/15 bg-white/5 text-white hover:bg-white/10"
-                onClick={() => window.location.href = 'https://pro.perkily.io/login'}
-              >
-                Log in
-              </Button>
-              <Button 
-                className="w-full border-white/15 bg-white text-black hover:bg-white/90"
-                onClick={() => window.location.href = 'https://pro.perkily.io/login'}
-              >
-                Try Pro
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
+                        <div className="bg-background group-data-[state=active]:block lg:group-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
+                            <div className="lg:hidden">
+                                <ul className="space-y-6 text-base">
+                                    {menuItems.map((item, index) => (
+                                        <li key={index}>
+                                            <NavLink to={item.href}>
+                                                {item.name}
+                                            </NavLink>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
+                                <Button
+                                    asChild
+                                    variant="outline"
+                                    size="sm"
+                                    className="border-white/15 bg-white/5 text-white hover:bg-white/10">
+                                    <a href="https://pro.perkily.io/login">
+                                        <span>Log in</span>
+                                    </a>
+                                </Button>
+                                <Button
+                                    asChild
+                                    size="sm"
+                                    className="border-white/15 bg-white text-black hover:bg-white/90">
+                                    <a href="https://pro.perkily.io/signup">
+                                        <span>Try Pro</span>
+                                    </a>
+                                </Button>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
+            </nav>
+        </header>
+    );
 };
+
+const Logo = ({ className }: { className?: string }) => {
+    return (
+        <div className={cn("flex items-center gap-2", className)}>
+            <img src="/favicon-32x32.png" alt="Perkily Logo" className="h-8 w-8" />
+            <span className="text-xl font-bold font-['Montserrat']">Perkily</span>
+        </div>
+    );
+}
 
 export default Navbar;

@@ -35,6 +35,12 @@ const BlogPost: React.FC<Props> = () => {
         title={`${post.title} — Perkily Journal`}
         description={post.excerpt}
         canonical={`https://www.perkily.io/blog/${post.slug}`}
+        ogType="article"
+        ogImage={post.coverImage}
+        articlePublishedTime={post.date}
+        articleSection={post.tag}
+        articleTags={[post.tag]}
+        keywords={`${post.tag.toLowerCase()}, healthcare, AI, medical technology, ${post.title}`}
       />
       <Navbar />
 

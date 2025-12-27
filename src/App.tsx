@@ -17,6 +17,7 @@ import Partners from "./pages/Partners";
 import ComingSoon from "./pages/ComingSoon";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import AdminBlog from "./pages/AdminBlog";
 import PerkilyPro from "./pages/PerkilyPro";
 import Docs from "./pages/Docs";
 import Help from "./pages/Help";
@@ -53,6 +54,7 @@ const App = () => (
             {/* Blog */}
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/admin/blog" element={<AdminBlog />} />
             {/* Coming Soon Pages */}
             <Route path="/press" element={<ComingSoon />} />
             <Route path="/docs" element={<Docs />} />

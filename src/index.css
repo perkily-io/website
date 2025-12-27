@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -36,6 +37,9 @@
     --ring: 196 77% 49%;
     
     --radius: 0.75rem;
+    
+    --color-background: #000000;
+    --color-text: #ffffff;
   }
 }
 
@@ -77,5 +81,62 @@
   
   .glow-subtle {
     box-shadow: 0 0 20px 1px rgba(255, 255, 255, 0.02);
+  }
+
+  .rotatingGradient {
+    background: linear-gradient(var(--r), #3b82f6, #8b5cf6, #ec4899, #f59e0b, #10b981, #3b82f6);
+    background-size: 400% 400%;
+    animation: rotateGradient 8s linear infinite;
+  }
+
+  .rotatingGradient:hover::after {
+    opacity: 0.85;
+  }
+
+  @keyframes rotateGradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Database Animation Styles */
+  .database {
+    offset-anchor: 10px 0px;
+    animation: database-animation-path;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    animation-duration: 4s;
+    animation-delay: 1s;
+  }
+
+  .db-light-1 {
+    offset-path: path("M 31 10 v 15 q 0 5 5 5 h 59 q 5 0 5 5 v 25");
+  }
+
+  .db-light-2 {
+    offset-path: path("M 77 10 v 10 q 0 5 5 5 h 13 q 5 0 5 5 v 25");
+  }
+
+  .db-light-3 {
+    offset-path: path("M 124 10 v 10 q 0 5 -5 5 h -14 q -5 0 -5 5 v 25");
+  }
+
+  .db-light-4 {
+    offset-path: path("M 170 10 v 15 q 0 5 -5 5 h -60 q -5 0 -5 5 v 25");
+  }
+
+  @keyframes database-animation-path {
+    0% {
+      offset-distance: 0%;
+    }
+    100% {
+      offset-distance: 100%;
+    }
   }
 }

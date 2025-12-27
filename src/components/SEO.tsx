@@ -10,6 +10,12 @@ interface SEOProps {
   ogType?: 'website' | 'article';
   twitterCard?: 'summary' | 'summary_large_image';
   noindex?: boolean;
+  // Article-specific fields
+  articlePublishedTime?: string;
+  articleModifiedTime?: string;
+  articleAuthor?: string;
+  articleSection?: string;
+  articleTags?: string[];
 }
 
 const SEO = ({
@@ -20,7 +26,12 @@ const SEO = ({
   ogType = 'website',
   twitterCard = 'summary_large_image',
   noindex = false,
-  ogImage
+  ogImage,
+  articlePublishedTime,
+  articleModifiedTime,
+  articleAuthor = 'Perkily Team',
+  articleSection,
+  articleTags = []
 }: SEOProps) => {
   const fullTitle = `${title} | Perkily Health Technologies`;
   
@@ -58,28 +69,79 @@ const SEO = ({
       <meta name="theme-color" content="#000000" />
 
       {/* Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "name": "Perkily Health Technologies",
-          "url": "https://perkily.io",
-          "logo": "https://perkily.io/logo.png",
-          "sameAs": [
-            "https://twitter.com/HelloPerkily",
-            "https://www.linkedin.com/company/perkily-io",
-            "https://www.instagram.com/perkily.io"
-          ],
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+27-12-345-6789",
-            "contactType": "customer service",
-            "email": "hello@perkily.io",
-            "areaServed": "ZA",
-            "availableLanguage": "English"
-          }
-        })}
-      </script>
+      {ogType === 'article' ? (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": title,
+            "description": description,
+            "image": ogImage || "https://perkily.io/logo.png",
+            "datePublished": articlePublishedTime,
+            "dateModified": articleModifiedTime || articlePublishedTime,
+            "author": {
+              "@type": "Organization",
+              "name": articleAuthor
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Perkily Health Technologies",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://perkily.io/logo.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": canonical
+            },
+            ...(articleSection && { "articleSection": articleSection }),
+            ...(articleTags.length > 0 && { "keywords": articleTags.join(", ") })
+          })}
+        </script>
+      ) : (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Perkily Health Technologies",
+            "url": "https://perkily.io",
+            "logo": "https://perkily.io/logo.png",
+            "sameAs": [
+              "https://twitter.com/HelloPerkily",
+              "https://www.linkedin.com/company/perkily-io",
+              "https://www.instagram.com/perkily.io"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+27-12-345-6789",
+              "contactType": "customer service",
+              "email": "hello@perkily.io",
+              "areaServed": "ZA",
+              "availableLanguage": "English"
+            }
+          })}
+        </script>
+      )}
+      
+      {/* Article-specific Open Graph tags */}
+      {ogType === 'article' && articlePublishedTime && (
+        <>
+          <meta property="article:published_time" content={articlePublishedTime} />
+          {articleModifiedTime && (
+            <meta property="article:modified_time" content={articleModifiedTime} />
+          )}
+          {articleAuthor && (
+            <meta property="article:author" content={articleAuthor} />
+          )}
+          {articleSection && (
+            <meta property="article:section" content={articleSection} />
+          )}
+          {articleTags.map((tag, index) => (
+            <meta key={index} property="article:tag" content={tag} />
+          ))}
+        </>
+      )}
     </Helmet>
   );
 };

@@ -54,6 +54,9 @@ const RewardPartners = () => {
       name: 'Woolworths',
       logo: '/logos/woolworths%20logo.svg'
     },
+    {
+      name: 'EPF Tech Fund'
+    },
   ];
 
   return (
