@@ -86,7 +86,7 @@ const Hero = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
                   <img 
                     src="/img/pro.perkily.io_(iPhone 12 Pro).png"
-                    alt="Perkily Pro App"
+                    alt="ClinicalOS App"
                     className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
                   />
                 </div>

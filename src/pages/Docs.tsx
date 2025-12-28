@@ -19,11 +19,11 @@ const nav: NavGroup[] = [
     title: 'Start here',
     items: [
       { id: 'getting-started', label: 'Getting started' },
-      { id: 'activation', label: 'Activate Perkily Pro' },
+      { id: 'activation', label: 'Activate ClinicalOS' },
     ],
   },
   {
-    title: 'Perkily Pro (PMS)',
+    title: 'ClinicalOS',
     items: [
       { id: 'pro-overview', label: 'Overview' },
       { id: 'appointments', label: 'Appointments (step-by-step)' },
@@ -69,7 +69,7 @@ const Docs: React.FC = () => {
               Documentation
             </div>
             <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-5xl">Everything you need to get productive</h1>
-            <p className="mt-3 text-white/70 text-lg">Clear, step‑by‑step guides for Perkily Pro (PMS), patient features, and Fleming — designed for new users on any platform.</p>
+            <p className="mt-3 text-white/70 text-lg">Clear, step‑by‑step guides for ClinicalOS, patient features, and Fleming — designed for new users on any platform.</p>
 
             <div className="mx-auto mt-6 max-w-xl">
               <div className="relative">
@@ -91,7 +91,7 @@ const Docs: React.FC = () => {
 
             <div className="mt-6 flex items-center justify-center gap-3">
               <a href="#getting-started"><Button className="h-9 px-4">Start here</Button></a>
-              <a href="#pro-overview"><Button variant="outline" className="h-9 px-4 border-white/15 bg-white/5 text-white hover:bg-white/10">Perkily Pro</Button></a>
+              <a href="#pro-overview"><Button variant="outline" className="h-9 px-4 border-white/15 bg-white/5 text-white hover:bg-white/10">ClinicalOS</Button></a>
             </div>
           </div>
         </section>
@@ -161,26 +161,26 @@ const Docs: React.FC = () => {
             {/* Activation */}
             <Card id="activation" className="border-white/10 bg-white/5 scroll-mt-24">
               <CardHeader>
-                <CardTitle>Activate your Perkily Pro account</CardTitle>
+                <CardTitle>Activate your ClinicalOS account</CardTitle>
                 <CardDescription className="text-white/70">Add your practice details and get approved — usually under one hour.</CardDescription>
               </CardHeader>
               <CardContent>
                 <ol className="list-decimal pl-5 space-y-2 text-sm text-white/80">
-                  <li>Open Perkily Pro and go to Settings → Practice.</li>
+                  <li>Open ClinicalOS and go to Settings → Practice.</li>
                   <li>Enter practice details: name, address, HPCSA/registration numbers, billing preferences.</li>
                   <li>Add providers and roles; invite staff if needed.</li>
                   <li>Submit for review. You’ll receive an email once approved (typically &lt; 1 hour).</li>
                 </ol>
                 <div className="mt-4 inline-flex">
-                  <a href="/perkily-pro"><Button variant="outline" className="border-white/15 bg-white/5 text-white hover:bg-white/10">Explore Perkily Pro</Button></a>
+                  <a href="/clinicalos"><Button variant="outline" className="border-white/15 bg-white/5 text-white hover:bg-white/10">Explore ClinicalOS</Button></a>
                 </div>
               </CardContent>
             </Card>
 
-            {/* Perkily Pro Overview */}
+            {/* ClinicalOS Overview */}
             <Card id="pro-overview" className="border-white/10 bg-white/5 scroll-mt-24">
               <CardHeader>
-                <CardTitle>Perkily Pro (PMS) overview</CardTitle>
+                <CardTitle>ClinicalOS overview</CardTitle>
                 <CardDescription className="text-white/70">A practice management layer for intake, bookings, comms, claims, and reporting.</CardDescription>
               </CardHeader>
               <CardContent className="grid grid-cols-1 gap-4 md:grid-cols-3">

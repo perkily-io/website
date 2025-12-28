@@ -8,7 +8,7 @@ import { useScroll, motion } from 'framer-motion';
 const menuItems = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
-    { name: 'Perkily Pro', href: '/perkily-pro' },
+    { name: 'ClinicalOS', href: '/clinicalos' },
     { name: 'Help', href: '/help' },
     { name: 'Contact', href: '/contact' },
 ];

@@ -24,8 +24,8 @@ const CTAGalleryDemo = () => {
             Stop chasing claims. ClinicalOS maps clinical encounters to codes with surgical accuracy. From real-time eligibility checks to AI-powered claim generation, we've turned the back office into a high-performance engine.
               </p>
               <div className="flex gap-3 justify-center mt-6">
-              <a href="/perkily-pro">
-                <Button className="px-6">Explore Perkily Pro</Button>
+              <a href="/clinicalos">
+                <Button className="px-6">Explore ClinicalOS</Button>
               </a>
               <a href="/contact">
                 <Button variant="outline" className="border-white/15 bg-white/5 text-white hover:bg-white/10">Talk to us</Button>
