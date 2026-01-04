@@ -8,7 +8,9 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ArrowRight, Save, Eye, Image as ImageIcon, FileText, Search, Lock } from 'lucide-react';
+import { ArrowRight, Save, Eye, Image as ImageIcon, FileText, Search, Lock, Loader2 } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+import { toast } from '@/components/ui/sonner';
 
 const ADMIN_PASSWORD = 'PerkilyBlog2026#';
 
@@ -53,35 +55,121 @@ const AdminBlog = () => {
     keywords: '',
     ogImage: '',
   });
+  const [isSaving, setIsSaving] = useState(false);
+  const [isPublishing, setIsPublishing] = useState(false);
 
   const handleChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    
-    // Auto-generate slug from title
-    if (field === 'title') {
-      const slug = value
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/(^-|-$)/g, '');
-      setFormData(prev => ({ ...prev, slug }));
-    }
-    
-    // Auto-generate meta title from title if empty
-    if (field === 'title' && !formData.metaTitle) {
-      setFormData(prev => ({ ...prev, metaTitle: value }));
-    }
-    
-    // Auto-generate meta description from excerpt if empty
-    if (field === 'excerpt' && !formData.metaDescription) {
-      setFormData(prev => ({ ...prev, metaDescription: value }));
+    setFormData(prev => {
+      const updated = { ...prev, [field]: value };
+      
+      // Auto-generate slug from title
+      if (field === 'title') {
+        const slug = value
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)/g, '');
+        updated.slug = slug;
+      }
+      
+      // Auto-generate meta title from title if empty
+      if (field === 'title' && !prev.metaTitle) {
+        updated.metaTitle = value;
+      }
+      
+      // Auto-generate meta description from excerpt if empty
+      if (field === 'excerpt' && !prev.metaDescription) {
+        updated.metaDescription = value;
+      }
+      
+      return updated;
+    });
+  };
+
+  const savePost = async (status: 'draft' | 'published') => {
+    try {
+      if (status === 'published') {
+        setIsPublishing(true);
+      } else {
+        setIsSaving(true);
+      }
+
+      // Check if post with this slug already exists
+      const { data: existingPost } = await supabase
+        .from('blog_posts')
+        .select('id')
+        .eq('slug', formData.slug)
+        .single();
+
+      const postData = {
+        slug: formData.slug,
+        title: formData.title,
+        tag: formData.tag,
+        excerpt: formData.excerpt,
+        content: formData.content,
+        date: formData.date,
+        display_date: formData.displayDate || null,
+        reading_time: formData.readingTime,
+        cover_image: formData.coverImage,
+        meta_title: formData.metaTitle || formData.title,
+        meta_description: formData.metaDescription || formData.excerpt,
+        keywords: formData.keywords || null,
+        og_image: formData.ogImage || formData.coverImage,
+        status: status,
+      };
+
+      if (existingPost) {
+        // Update existing post
+        const { error } = await supabase
+          .from('blog_posts')
+          .update(postData)
+          .eq('id', existingPost.id);
+
+        if (error) throw error;
+        toast.success(status === 'published' ? 'Post published successfully!' : 'Post saved as draft!');
+      } else {
+        // Insert new post
+        const { error } = await supabase
+          .from('blog_posts')
+          .insert([postData]);
+
+        if (error) throw error;
+        toast.success(status === 'published' ? 'Post published successfully!' : 'Post saved as draft!');
+      }
+
+      // Clear form after successful save
+      if (status === 'published') {
+        setFormData({
+          slug: '',
+          title: '',
+          tag: 'Product',
+          excerpt: '',
+          content: '',
+          date: new Date().toISOString().split('T')[0],
+          displayDate: '',
+          readingTime: '5 min',
+          coverImage: '',
+          metaTitle: '',
+          metaDescription: '',
+          keywords: '',
+          ogImage: '',
+        });
+      }
+    } catch (error: any) {
+      console.error('Error saving post:', error);
+      toast.error(error.message || 'Failed to save post. Please try again.');
+    } finally {
+      setIsSaving(false);
+      setIsPublishing(false);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Blog post data:', formData);
-    // Here you would save to your backend/database
-    alert('Blog post saved! (This is a demo - integrate with your backend)');
+    await savePost('published');
+  };
+
+  const handleSaveDraft = async () => {
+    await savePost('draft');
   };
 
   const generateSlug = () => {
@@ -497,15 +585,34 @@ const AdminBlog = () => {
                     type="button"
                     variant="outline"
                     className="border-white/10 bg-white/5 text-white hover:bg-white/10"
+                    onClick={handleSaveDraft}
+                    disabled={isSaving || isPublishing}
                   >
-                    Save as Draft
+                    {isSaving ? (
+                      <>
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        Saving...
+                      </>
+                    ) : (
+                      'Save as Draft'
+                    )}
                   </Button>
                   <Button
                     type="submit"
                     className="bg-white text-black hover:bg-gray-200 rounded-full px-6"
+                    disabled={isSaving || isPublishing}
                   >
-                    <Save className="h-4 w-4 mr-2" />
-                    Publish Post
+                    {isPublishing ? (
+                      <>
+                        <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        Publishing...
+                      </>
+                    ) : (
+                      <>
+                        <Save className="h-4 w-4 mr-2" />
+                        Publish Post
+                      </>
+                    )}
                   </Button>
                 </div>
               </div>

@@ -1,22 +1,101 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { blogPosts, getAllTags } from './blogData';
-import { ArrowRight } from 'lucide-react';
+import { blogPosts as fallbackPosts, getAllTags } from './blogData';
+import { ArrowRight, Loader2 } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+
+type BlogPost = {
+  slug: string;
+  tag: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  displayDate: string;
+  readingTime: string;
+  coverImage: string;
+};
 
 const Blog: React.FC = () => {
-  const [activeTag, setActiveTag] = React.useState<string>('All');
-  const tags = React.useMemo(() => getAllTags(), []);
-  const posts = React.useMemo(
-    () => (activeTag === 'All' ? blogPosts : blogPosts.filter((p) => p.tag === activeTag)),
-    [activeTag]
+  const [activeTag, setActiveTag] = useState<string>('All');
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [tags, setTags] = useState<string[]>(['All']);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        setIsLoading(true);
+        const { data, error } = await supabase
+          .from('blog_posts')
+          .select('*')
+          .eq('status', 'published')
+          .order('date', { ascending: false });
+
+        if (error) {
+          console.error('Error fetching posts:', error);
+          // Fallback to static data on error
+          setPosts(fallbackPosts as BlogPost[]);
+          setTags(getAllTags());
+          return;
+        }
+
+        if (data && data.length > 0) {
+          // Transform Supabase data to match component expectations
+          const transformedPosts: BlogPost[] = data.map((post: any) => ({
+            slug: post.slug,
+            tag: post.tag,
+            title: post.title,
+            excerpt: post.excerpt,
+            date: post.date,
+            displayDate: post.display_date || new Date(post.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+            readingTime: post.reading_time || '5 min',
+            coverImage: post.cover_image,
+          }));
+          setPosts(transformedPosts);
+          
+          // Get unique tags
+          const uniqueTags = new Set(transformedPosts.map(p => p.tag));
+          setTags(['All', ...Array.from(uniqueTags)]);
+        } else {
+          // No posts in database, use fallback
+          setPosts(fallbackPosts as BlogPost[]);
+          setTags(getAllTags());
+        }
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+        setPosts(fallbackPosts as BlogPost[]);
+        setTags(getAllTags());
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
+  const filteredPosts = React.useMemo(
+    () => (activeTag === 'All' ? posts : posts.filter((p) => p.tag === activeTag)),
+    [activeTag, posts]
   );
 
-  const [featured, ...rest] = posts;
+  const [featured, ...rest] = filteredPosts;
+
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-black text-white selection:bg-white/10">
+        <Navbar />
+        <div className="flex items-center justify-center min-h-screen">
+          <Loader2 className="h-8 w-8 animate-spin text-white/60" />
+        </div>
+        <Footer />
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-black text-white selection:bg-white/10">

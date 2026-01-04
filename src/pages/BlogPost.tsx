@@ -1,20 +1,126 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SEO from '@/components/SEO';
-import { blogPosts } from './blogData';
+import { blogPosts as fallbackPosts } from './blogData';
 import { useParams } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Loader2 } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+// Note: Install react-markdown for full markdown support: npm install react-markdown
+// For now, rendering as plain text with whitespace preservation
 
-type Props = {
-  slug?: string;
+type BlogPost = {
+  slug: string;
+  tag: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  displayDate: string;
+  readingTime: string;
+  coverImage: string;
+  content: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  keywords?: string;
+  ogImage?: string;
 };
 
-const BlogPost: React.FC<Props> = () => {
+const BlogPost: React.FC = () => {
   const { slug = '' } = useParams<{ slug: string }>();
-  const post = blogPosts.find((p) => p.slug === slug);
+  const [post, setPost] = useState<BlogPost | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
-  if (!post) {
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        setIsLoading(true);
+        const { data, error } = await supabase
+          .from('blog_posts')
+          .select('*')
+          .eq('slug', slug)
+          .eq('status', 'published')
+          .single();
+
+        if (error || !data) {
+          // Try fallback data
+          const fallbackPost = fallbackPosts.find((p) => p.slug === slug);
+          if (fallbackPost) {
+            setPost({
+              slug: fallbackPost.slug,
+              tag: fallbackPost.tag,
+              title: fallbackPost.title,
+              excerpt: fallbackPost.excerpt,
+              date: fallbackPost.date,
+              displayDate: fallbackPost.displayDate,
+              readingTime: fallbackPost.readingTime,
+              coverImage: fallbackPost.coverImage,
+              content: typeof fallbackPost.content === 'string' ? fallbackPost.content : '',
+            });
+          } else {
+            setNotFound(true);
+          }
+          return;
+        }
+
+        // Transform Supabase data
+        setPost({
+          slug: data.slug,
+          tag: data.tag,
+          title: data.title,
+          excerpt: data.excerpt,
+          date: data.date,
+          displayDate: data.display_date || new Date(data.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+          readingTime: data.reading_time || '5 min',
+          coverImage: data.cover_image,
+          content: data.content,
+          metaTitle: data.meta_title,
+          metaDescription: data.meta_description,
+          keywords: data.keywords,
+          ogImage: data.og_image,
+        });
+      } catch (error) {
+        console.error('Error fetching post:', error);
+        // Try fallback data
+        const fallbackPost = fallbackPosts.find((p) => p.slug === slug);
+        if (fallbackPost) {
+          setPost({
+            slug: fallbackPost.slug,
+            tag: fallbackPost.tag,
+            title: fallbackPost.title,
+            excerpt: fallbackPost.excerpt,
+            date: fallbackPost.date,
+            displayDate: fallbackPost.displayDate,
+            readingTime: fallbackPost.readingTime,
+            coverImage: fallbackPost.coverImage,
+            content: typeof fallbackPost.content === 'string' ? fallbackPost.content : '',
+          });
+        } else {
+          setNotFound(true);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (slug) {
+      fetchPost();
+    }
+  }, [slug]);
+
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-black text-white selection:bg-white/10">
+        <Navbar />
+        <div className="flex items-center justify-center min-h-screen">
+          <Loader2 className="h-8 w-8 animate-spin text-white/60" />
+        </div>
+        <Footer />
+      </main>
+    );
+  }
+
+  if (notFound || !post) {
     return (
       <main className="min-h-screen bg-black text-white selection:bg-white/10">
         <Navbar />
@@ -32,15 +138,15 @@ const BlogPost: React.FC<Props> = () => {
   return (
     <main className="min-h-screen bg-black text-white selection:bg-white/10">
       <SEO
-        title={`${post.title} — Perkily Journal`}
-        description={post.excerpt}
+        title={post.metaTitle || `${post.title} — Perkily Journal`}
+        description={post.metaDescription || post.excerpt}
         canonical={`https://www.perkily.io/blog/${post.slug}`}
         ogType="article"
-        ogImage={post.coverImage}
+        ogImage={post.ogImage || post.coverImage}
         articlePublishedTime={post.date}
         articleSection={post.tag}
         articleTags={[post.tag]}
-        keywords={`${post.tag.toLowerCase()}, healthcare, AI, medical technology, ${post.title}`}
+        keywords={post.keywords || `${post.tag.toLowerCase()}, healthcare, AI, medical technology, ${post.title}`}
       />
       <Navbar />
 
@@ -64,7 +170,7 @@ const BlogPost: React.FC<Props> = () => {
         </div>
 
         <section className="prose prose-invert prose-headings:scroll-mt-24 prose-a:text-white/90 prose-a:no-underline hover:prose-a:underline prose-strong:text-white/90 mt-10 max-w-none">
-          {post.content}
+          <div className="text-white/80 whitespace-pre-wrap leading-relaxed">{post.content}</div>
         </section>
       </article>
 
