@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '@/components/Layout';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
@@ -8,9 +8,35 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ArrowRight, Save, Eye, Image as ImageIcon, FileText, Search } from 'lucide-react';
+import { ArrowRight, Save, Eye, Image as ImageIcon, FileText, Search, Lock } from 'lucide-react';
+
+const ADMIN_PASSWORD = 'PerkilyBlog2026#';
 
 const AdminBlog = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState(false);
+
+  // Check if already authenticated in session
+  useEffect(() => {
+    const authStatus = sessionStorage.getItem('adminBlogAuth');
+    if (authStatus === 'authenticated') {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
+  const handlePasswordSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      setPasswordError(false);
+      sessionStorage.setItem('adminBlogAuth', 'authenticated');
+    } else {
+      setPasswordError(true);
+      setPassword('');
+    }
+  };
+
   const [formData, setFormData] = useState({
     slug: '',
     title: '',
@@ -65,6 +91,61 @@ const AdminBlog = () => {
       .replace(/(^-|-$)/g, '');
     setFormData(prev => ({ ...prev, slug }));
   };
+
+  // Password protection screen
+  if (!isAuthenticated) {
+    return (
+      <Layout>
+        <SEO 
+          title="Admin Blog — Create & Edit Posts"
+          description="Admin interface for creating and managing blog posts"
+          canonical="https://www.perkily.io/admin/blog"
+          noindex={true}
+        />
+        <div className="min-h-screen bg-black text-white flex items-center justify-center py-24">
+          <Card className="max-w-md w-full border-white/10 bg-white/[0.02]">
+            <CardHeader>
+              <div className="flex items-center justify-center mb-4">
+                <Lock className="h-8 w-8 text-white/70" />
+              </div>
+              <CardTitle className="text-white text-center">Admin Access Required</CardTitle>
+              <CardDescription className="text-white/60 text-center">
+                Please enter the password to access the blog admin
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handlePasswordSubmit} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="adminPassword" className="text-white/90">Password</Label>
+                  <Input
+                    id="adminPassword"
+                    type="password"
+                    value={password}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      setPasswordError(false);
+                    }}
+                    placeholder="Enter password"
+                    className="bg-white/5 border-white/10 text-white placeholder:text-white/40"
+                    autoFocus
+                  />
+                  {passwordError && (
+                    <p className="text-sm text-red-400">Incorrect password. Please try again.</p>
+                  )}
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full bg-white text-black hover:bg-gray-200 rounded-full"
+                >
+                  Access Admin
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -437,4 +518,7 @@ const AdminBlog = () => {
 };
 
 export default AdminBlog;
+
+
+
 
