@@ -163,7 +163,7 @@ const ClinicalOSHero = () => (
 
         {/* Buttons - At robot waist on mobile, below text on desktop */}
         <div className="relative z-10 w-full lg:max-w-[600px] xl:max-w-[650px] mx-auto lg:mx-0 flex flex-col sm:flex-row gap-4 justify-center items-center lg:items-start px-4 sm:px-6 absolute top-[250px] sm:top-[300px] lg:relative lg:top-auto lg:pt-8 lg:-ml-[72px]" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif' }}>
-          <a href="https://pro.perkily.io/login" target="_blank" rel="noreferrer" className="w-full sm:w-auto">
+          <a href="/contact" className="w-full sm:w-auto">
             <Button className="bg-white hover:bg-white/90 text-black font-medium px-10 py-6 text-base rounded-full w-full sm:w-auto transition-all shadow-lg hover:shadow-xl" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif', fontWeight: 500 }}>
               Request Access
             </Button>
@@ -817,7 +817,7 @@ const FinalCTASection = () => (
           Start with AI clinical notes and automated claims. Expand into full practice management whenever you're ready.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a href="https://pro.perkily.io/login" target="_blank" rel="noreferrer">
+          <a href="/contact">
             <Button className="bg-white hover:bg-white/90 text-black font-medium px-10 py-6 text-base rounded-full transition-all shadow-lg hover:shadow-xl" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif', fontWeight: 500 }}>
               Request Access
             </Button>

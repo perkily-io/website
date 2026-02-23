@@ -98,7 +98,7 @@ const Navbar = ({ className }: { className?: string }) => {
                                     variant="outline"
                                     size="sm"
                                     className="border-white/15 bg-white/5 text-white hover:bg-white/10">
-                                    <a href="https://pro.perkily.io/login">
+                                    <a href="/contact">
                                         <span>Log in</span>
                                     </a>
                                 </Button>
@@ -106,7 +106,7 @@ const Navbar = ({ className }: { className?: string }) => {
                                     asChild
                                     size="sm"
                                     className="border-white/15 bg-white text-black hover:bg-white/90">
-                                    <a href="https://pro.perkily.io/signup">
+                                    <a href="/contact">
                                         <span>Try Pro</span>
                                     </a>
                                 </Button>

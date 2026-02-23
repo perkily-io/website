@@ -251,7 +251,7 @@ const About = () => {
               <Button 
                 size="lg"
                 className="bg-white text-black hover:bg-gray-200 rounded-full px-10 h-14 text-base font-medium transition-transform active:scale-95 shadow-lg shadow-white/10"
-                onClick={() => window.open('https://pro.perkily.io/login', '_blank')}
+                onClick={() => window.location.assign('/contact')}
               >
                 Request Access <ArrowRight className="ml-2 h-5 w-5" />
               </Button>

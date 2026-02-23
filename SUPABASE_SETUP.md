@@ -46,6 +46,7 @@ You can run all migrations in your Supabase SQL Editor:
 3. Run each migration file in order:
    - `create_blog_posts_table.sql`
    - `create_contact_submissions_table.sql`
+   - `add_contact_phone_to_contact_submissions.sql` (or run this if table already exists)
    - `create_partner_applications_table.sql`
    - `create_newsletter_signups_table.sql`
    - `create_waitlist_signups_table.sql`
@@ -81,6 +82,8 @@ The migrations create permissive policies for development. For production, you m
 
 ### Contact Submissions
 - Tracks user type (patient, professional, company)
+- Contact info: name, email, phone number
+- Practice/company name (for professionals and companies)
 - Status tracking (new, read, replied, archived)
 - Automatic timestamps
 

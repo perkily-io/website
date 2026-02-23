@@ -148,7 +148,7 @@ const Help: React.FC = () => {
             <p className="mt-2 text-white/70">Email us at <a href="mailto:hello@perkily.io" className="underline">hello@perkily.io</a> or send a message.</p>
             <div className="mt-4 flex items-center justify-center gap-3">
               <a href="/contact"><Button className="h-9 px-4">Contact</Button></a>
-              <a href="https://pro.perkily.io/login" target="_blank" rel="noreferrer"><Button variant="outline" className="h-9 px-4 border-white/15 bg-white/5 text-white hover:bg-white/10">Open the app</Button></a>
+              <a href="/contact"><Button variant="outline" className="h-9 px-4 border-white/15 bg-white/5 text-white hover:bg-white/10">Open the app</Button></a>
             </div>
           </div>
         </section>

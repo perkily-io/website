@@ -150,7 +150,7 @@ const Index: React.FC = () => {
             <Button 
               variant="link" 
               className="text-white/70 pl-0 hover:text-white transition-colors text-sm p-0 h-auto w-fit" 
-              onClick={() => window.open('https://pro.perkily.io/login', '_blank')}
+              onClick={() => window.location.assign('/contact')}
             >
               Request Access <ArrowRight className="ml-2 h-4 w-4" />
             </Button>

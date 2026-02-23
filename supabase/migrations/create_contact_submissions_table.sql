@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS contact_submissions (
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
   email TEXT NOT NULL,
+  phone TEXT,
   practice_name TEXT,
   company_name TEXT,
   message TEXT NOT NULL,

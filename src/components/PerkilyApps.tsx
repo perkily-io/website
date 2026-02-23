@@ -119,7 +119,7 @@ const PerkilyApps = () => {
             title="Pro"
             description="AI-powered practice management platform. Voice to SOAP notes, diagnostic insights, and automated claims."
             features={['AI Clinical Notes', 'Diagnostic Insights', 'Automated Claims', 'Practice Management']}
-            cta={{ text: 'Try Pro', link: 'https://pro.perkily.io/login' }}
+            cta={{ text: 'Try Pro', link: '/contact' }}
             gradientFrom="#8B5CF6"
             gradientTo="#A78BFA"
             icon={Stethoscope}

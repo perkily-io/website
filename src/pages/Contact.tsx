@@ -14,6 +14,7 @@ interface FormData {
   firstName: string;
   lastName: string;
   email: string;
+  phone: string;
   practiceName?: string;
   companyName?: string;
   message: string;
@@ -27,6 +28,7 @@ const ContactPage = () => {
     firstName: '',
     lastName: '',
     email: '',
+    phone: '',
     practiceName: '',
     companyName: '',
     message: ''
@@ -46,6 +48,7 @@ const ContactPage = () => {
             first_name: formData.firstName,
             last_name: formData.lastName,
             email: formData.email,
+            phone: formData.phone || null,
             practice_name: selectedType === 'professional' ? formData.practiceName : null,
             company_name: selectedType === 'company' ? formData.companyName : null,
             message: formData.message,
@@ -62,6 +65,7 @@ const ContactPage = () => {
         firstName: '',
         lastName: '',
         email: '',
+        phone: '',
         practiceName: '',
         companyName: '',
         message: ''
@@ -161,19 +165,34 @@ const ContactPage = () => {
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
-                  Email
-                </label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="jane@example.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required
-                  className="bg-white/5 border-white/10 text-white placeholder:text-white/40 h-12"
-                />
+              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-2">
+                    Email
+                  </label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="jane@example.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    required
+                    className="bg-white/5 border-white/10 text-white placeholder:text-white/40 h-12"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-white/80 mb-2">
+                    Phone number
+                  </label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    placeholder="+27 73 123 4567"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="bg-white/5 border-white/10 text-white placeholder:text-white/40 h-12"
+                  />
+                </div>
               </div>
 
               {selectedType === 'professional' && (
