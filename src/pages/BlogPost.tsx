@@ -138,7 +138,7 @@ const BlogPost: React.FC = () => {
   return (
     <main className="min-h-screen bg-black text-white selection:bg-white/10">
       <SEO
-        title={post.metaTitle || `${post.title} — Perkily Journal`}
+        title={post.metaTitle || post.title}
         description={post.metaDescription || post.excerpt}
         canonical={`https://www.perkily.io/blog/${post.slug}`}
         ogType="article"
@@ -146,7 +146,7 @@ const BlogPost: React.FC = () => {
         articlePublishedTime={post.date}
         articleSection={post.tag}
         articleTags={[post.tag]}
-        keywords={post.keywords || `${post.tag.toLowerCase()}, healthcare, AI, medical technology, ${post.title}`}
+        keywords={post.keywords || `${post.tag.toLowerCase()}, healthcare, AI, medical technology, Perkily, ${post.title}`}
       />
       <Navbar />
 

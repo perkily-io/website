@@ -169,8 +169,8 @@ export const blogPosts: BlogPost[] = [
             <tr><Td><strong className="text-white/95">Guideline hit rate</strong></Td><Td>≥ 55%</Td><Td><strong className="text-white/95">82%</strong></Td></tr>
             <tr><Td><strong className="text-white/95">Citation relevance pass rate</strong></Td><Td>≥ 55%</Td><Td><strong className="text-white/95">78%</strong></Td></tr>
             <tr><Td>Empty guideline tool rate</Td><Td>≤ 45%</Td><Td>22%</Td></tr>
-            <tr><Td><strong className="text-white/95">Judge overall (1–5)</strong></Td><Td>≥ 4.2</Td><Td><strong className="text-white/95">4.8</strong></Td></tr>
-            <tr><Td><strong className="text-white/95">Judge safety (1–5)</strong></Td><Td>≥ 4.5</Td><Td><strong className="text-white/95">4.9</strong></Td></tr>
+            <tr><Td><strong className="text-white/95">Judge overall (1-5)</strong></Td><Td>≥ 4.2</Td><Td><strong className="text-white/95">4.8</strong></Td></tr>
+            <tr><Td><strong className="text-white/95">Judge safety (1-5)</strong></Td><Td>≥ 4.5</Td><Td><strong className="text-white/95">4.9</strong></Td></tr>
           </tbody>
         </Table>
         <p className="mt-4 text-white/75 leading-relaxed text-sm">
@@ -194,79 +194,130 @@ export const blogPosts: BlogPost[] = [
     ),
   },
   {
-    slug: 'meet-fleming-guidance-that-earns-your-trust',
+    slug: 'clinicalos-best-practice-management-system-emr-ehr-2026',
     tag: 'Product',
-    title: 'Meet Fleming — guidance that earns your trust',
+    title: 'Best Practice Management System (PMS) and EMR for 2026 | ClinicalOS',
     excerpt:
-      'Why we built Fleming the way we did: careful by default, grounded in safety checks, and woven into the care journey.',
-    date: '2024-09-10',
-    displayDate: 'Sep 2024',
-    readingTime: '6 min',
-    coverImage:
-      'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2400&auto=format&fit=crop',
+      'ClinicalOS is the leading practice management system and EMR/EHR platform for modern practices. Streamline workflow with ambient transcription, one-click claims, instant e-scripts, and AskFleming AI. Try free for 30 days.',
+    date: '2026-03-01',
+    displayDate: 'Mar 2026',
+    readingTime: '8 min',
+    coverImage: '/img/perklogo.png',
     content: (
       <>
-        <p>
-          Fleming is designed to help people ask better questions, understand safe next steps, and feel confident when
-          navigating care. We built it to be careful by default, grounded in safety checks, and woven into the broader
-          Perkily experience — booking, rewards, and follow‑up.
+        <p className="text-lg text-white/80 leading-relaxed">
+          If you're searching for the <strong className="text-white/95">best practice management system (PMS)</strong>, <strong className="text-white/95">EMR</strong>, or <strong className="text-white/95">EHR platform in 2026</strong>, you're in the right place. <strong className="text-white/95">ClinicalOS</strong> by Perkily reimagines healthcare operations: one platform that unifies your clinic, clinicians, and patients while eliminating admin burden and embedding medical-grade AI.
         </p>
-        <p>
-          The core principles are simple: structured intake to reduce back‑and‑forth, clear escalation paths when
-          red‑flags are present, and explainable outputs that clinicians can trust. It is not a replacement for clinical
-          judgment — it’s a companion that helps everyone get to clarity faster.
+
+        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Why Practices Choose ClinicalOS: The Best PMS and EMR in 2026</h2>
+        <p className="text-white/75 leading-relaxed">
+          Traditional <strong className="text-white/90">practice management</strong> and <strong className="text-white/90">electronic health records (EHR)</strong> systems force you to choose between billing, scheduling, and clinical documentation — and still leave you drowning in manual work. ClinicalOS is built for the way you actually practice: record the visit, get automatic transcription, submit claims in one click, and generate e-scripts instantly. Notes are ready before you leave the room.
         </p>
-        <p>
-          In this post, we share how we think about trust, safety, and the product decisions that brought Fleming to
-          life.
+
+        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Seamless Workflow: From Consultation to Claim</h2>
+        <p className="text-white/75 leading-relaxed">
+          Our <strong className="text-white/90">practice management system</strong> turns a typical consultation into a single, streamlined flow — no more switching between EMR, billing, and prescription tools.
+        </p>
+        <ul className="mt-4 list-none space-y-3 text-white/80 leading-relaxed">
+          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Record</strong> — Use our ambient clip-on interface to capture the patient conversation.</span></li>
+          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Transcribe</strong> — Automatic, accurate transcription with proprietary local models.</span></li>
+          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Submit</strong> — One-click claims submission with instant responses.</span></li>
+          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Prescribe</strong> — Instant e-scripts generation and processing.</span></li>
+        </ul>
+        <p className="mt-4 text-white/70 text-sm italic">
+          This removes hours of admin per day so you can focus on patient care — not paperwork.
+        </p>
+
+        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Say Goodbye to Admin: Unify Clinic, Clinician, and Patient</h2>
+        <p className="text-white/75 leading-relaxed">
+          ClinicalOS doesn't just replace your <strong className="text-white/90">EMR</strong> or <strong className="text-white/90">EHR</strong> — it predicts needs and automates billing and scheduling, unifies the entire ecosystem, and rewards healthy patient actions with built-in incentives. Practices report dramatic reductions in admin time (e.g. from several hours per day to under an hour), fewer errors, and faster reimbursement.
+        </p>
+
+        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">AskFleming: Medical-Grade AI Inside Your PMS</h2>
+        <p className="text-white/75 leading-relaxed">
+          Every ClinicalOS subscription includes <strong className="text-white/90">AskFleming</strong> — an AI co-pilot fine-tuned for healthcare. Real-time decision support, empathetic patient guidance, and rigorous benchmarks (e.g. 98% accuracy vs. many competitors at 85-90%). Your <strong className="text-white/90">practice management platform</strong> and your clinical assistant in one.
+        </p>
+
+        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Pricing That Scales With Your Practice</h2>
+        <Table>
+          <thead>
+            <tr>
+              <Th>Tier</Th>
+              <Th>Price</Th>
+              <Th>Ideal for</Th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><Td><strong className="text-white/90">Basic</strong></Td><Td>$99/month</Td><Td>Single practice</Td></tr>
+            <tr><Td><strong className="text-white/90">Pro</strong></Td><Td>$249/month</Td><Td>Two practices, up to 500 claims</Td></tr>
+            <tr><Td><strong className="text-white/90">Enterprise</strong></Td><Td>$349/month</Td><Td>Multiple practices</Td></tr>
+          </tbody>
+        </Table>
+
+        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Unmatched Support and Speed</h2>
+        <p className="text-white/75 leading-relaxed">
+          We support <strong className="text-white/90">99.9% of insurance providers</strong>, deliver instant claim responses, and partner with leaders like Medikredit for seamless integration. Your revenue cycle moves faster and with fewer denials.
+        </p>
+
+        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Security Built for Healthcare</h2>
+        <p className="text-white/75 leading-relaxed">
+          ClinicalOS meets the highest standards for <strong className="text-white/90">EHR</strong> and <strong className="text-white/90">practice management</strong> security: <strong className="text-white/90">AES-256-GCM</strong> end-to-end encryption, <strong className="text-white/90">Zero Knowledge</strong> architecture, and proprietary local models for transcription and PII anonymization. Your data never leaves your ecosystem.
+        </p>
+
+        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Get Started: Simple Onboarding, 30-Day Free Trial</h2>
+        <p className="text-white/75 leading-relaxed">
+          Register your practice with our insurance switching provider, set up your billing profile, and integrate with existing systems — we keep onboarding straightforward. Start with a <strong className="text-white/90">30-day free trial</strong> and join the waitlist with no commitment. See why practices are calling ClinicalOS the best PMS and EMR choice for 2026.
+        </p>
+        <p className="mt-6 text-white/90 font-medium">
+          Ready to reimagine your practice? Try ClinicalOS risk-free at <a href="https://www.perkily.io" className="text-white underline hover:no-underline">perkily.io</a>.
         </p>
       </>
     ),
   },
   {
-    slug: 'designing-for-calm-in-healthcare-software',
-    tag: 'Design',
-    title: 'Designing for calm in healthcare software',
+    slug: 'askfleming-ai-for-medical-students-doctors-health-queries',
+    tag: 'Product',
+    title: 'Best AI for Medical Students and Doctors in 2026 | AskFleming',
     excerpt:
-      'Interfaces that reduce cognitive load help everyone — patients, clinicians, students. Here’s how we think about it.',
-    date: '2024-08-15',
-    displayDate: 'Aug 2024',
-    readingTime: '5 min',
-    coverImage:
-      'https://images.unsplash.com/photo-1516542076529-1ea3854896e1?q=80&w=2400&auto=format&fit=crop',
-    content: (
-      <>
-        <p>
-          Calm software is respectful software. We prioritise clarity, generous spacing, and predictable motion so that
-          the interface gets out of the way and the work can happen.
-        </p>
-        <p>
-          This approach shows up across Perkily — from booking flows to Fleming — and it’s especially important in
-          healthcare where context‑switching is constant.
-        </p>
-      </>
-    ),
-  },
-  {
-    slug: 'rewards-that-change-behaviour-without-noise',
-    tag: 'Platform',
-    title: 'Rewards that change behaviour (without noise)',
-    excerpt:
-      'Building a rewards system that’s fair, transparent, and genuinely useful — not just another points program.',
-    date: '2024-07-12',
-    displayDate: 'Jul 2024',
+      'AskFleming is the #1 AI for medical students, doctors, and clinicians — and available to everyone for health queries. Evidence-based, citation-backed, and benchmark-gated. See why students and practices choose Fleming.',
+    date: '2026-02-15',
+    displayDate: 'Feb 2026',
     readingTime: '7 min',
-    coverImage:
-      'https://images.unsplash.com/photo-1576678927484-cc907957088c?q=80&w=2400&auto=format&fit=crop',
+    coverImage: '/img/images/logo-white.png',
     content: (
       <>
-        <p>
-          Perkily Rewards focus on meaningful actions and partners people love. The aim is to nudge healthier habits
-          without the noise and dark‑patterns of traditional programs.
+        <p className="text-lg text-white/80 leading-relaxed">
+          When you search for <strong className="text-white/95">AI for medical students</strong>, <strong className="text-white/95">AI for doctors</strong>, or <strong className="text-white/95">health AI</strong> that you can trust, you're looking for one thing: answers grounded in evidence, not guesswork. <strong className="text-white/95">AskFleming</strong> is built for exactly that — for <strong className="text-white/95">medical students</strong>, <strong className="text-white/95">clinicians</strong>, and <strong className="text-white/95">general users</strong> who have health questions and want clear, cited, and safe guidance.
         </p>
-        <p>
-          We’re transparent about how rewards are earned and redeemed, and we design the system to be fair across
-          different kinds of users.
+
+        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Why AskFleming Ranks #1 for Medical Students and Doctors</h2>
+        <p className="text-white/75 leading-relaxed">
+          <strong className="text-white/90">Medical students</strong> need an AI that can teach, simulate cases, and apply guidelines — not just answer questions. <strong className="text-white/90">Doctors</strong> and <strong className="text-white/90">clinicians</strong> need workflow modes: chart summaries, drug checks, stewardship, coding, and med review. And <strong className="text-white/90">everyone else</strong> deserves a health assistant that cites sources, escalates when something is serious, and never invents medical facts. AskFleming does all of this in one product, with dedicated roles and live evidence tools (PubMed, guidelines, trials, drug safety) so every answer is verifiable.
+        </p>
+
+        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">For Medical Students: One AI Mentor That Grows With You</h2>
+        <p className="text-white/75 leading-relaxed">
+          Whether you're studying for Step 1/2, practicing SOAP notes, or running through clinical cases, AskFleming adapts. <strong className="text-white/90">Ask</strong> mode for concept Q&A, <strong className="text-white/90">Simulate</strong> for interactive cases with vitals, labs, and branching feedback, and <strong className="text-white/90">Guideline</strong> for evidence-backed recommendations with strength of evidence and source. Same PubMed, guidelines, and drug-safety tools that clinicians use — so you learn with real literature, not generic training data.
+        </p>
+
+        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">For Doctors and Clinicians: The Right Output for the Right Task</h2>
+        <p className="text-white/75 leading-relaxed">
+          Open search for broad clinical questions, <strong className="text-white/90">Clinical Summary</strong> for chart-ready one-liners and plans, <strong className="text-white/90">Drug Interactions</strong>, <strong className="text-white/90">Stewardship</strong>, <strong className="text-white/90">ICD10 Codes</strong>, and <strong className="text-white/90">Med Review</strong>. Clinical decision support and medical literature are on by default. We enforce safety guardrails: explicit escalation for red flags (e.g. "call 911", "go to the ED") and no unsafe dosing changes without context.
+        </p>
+
+        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">For Everyone: Health Queries You Can Verify</h2>
+        <p className="text-white/75 leading-relaxed">
+          AskFleming is also available to <strong className="text-white/90">general users</strong> for everyday <strong className="text-white/90">health queries</strong>. You get the same evidence infrastructure: factual claims cited inline, conflict detection when sources disagree, and clear escalation when you should see a doctor or seek emergency care. No single citation for multiple claims, no reference dumps — just transparent, trustworthy answers.
+        </p>
+
+        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Benchmarks That Gate Every Release</h2>
+        <p className="text-white/75 leading-relaxed">
+          We don't ship until our healthcare benchmarks pass. Our latest runs show <strong className="text-white/90">100% escalation compliance</strong>, <strong className="text-white/90">89% citation coverage</strong>, <strong className="text-white/90">82% guideline hit rate</strong>, and <strong className="text-white/90">4.8/5</strong> overall and <strong className="text-white/90">4.9/5</strong> safety from independent judges. When we say "evidence-based" and "safe," we're measuring and gating on it — so you can rank us #1 in your own workflow.
+        </p>
+
+        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Try AskFleming</h2>
+        <p className="text-white/75 leading-relaxed">
+          Whether you're a <strong className="text-white/90">medical student</strong>, a <strong className="text-white/90">doctor</strong>, or someone with a <strong className="text-white/90">health question</strong>, AskFleming is the AI built to earn your trust. Evidence-based, citation-backed, and benchmark-gated. Learn more and get started at <a href="https://www.perkily.io" className="text-white underline hover:no-underline">perkily.io</a>.
         </p>
       </>
     ),
