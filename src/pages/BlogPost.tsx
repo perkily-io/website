@@ -18,7 +18,7 @@ type BlogPost = {
   displayDate: string;
   readingTime: string;
   coverImage: string;
-  content: string;
+  content: string | React.ReactNode;
   metaTitle?: string;
   metaDescription?: string;
   keywords?: string;
@@ -55,7 +55,7 @@ const BlogPost: React.FC = () => {
               displayDate: fallbackPost.displayDate,
               readingTime: fallbackPost.readingTime,
               coverImage: fallbackPost.coverImage,
-              content: typeof fallbackPost.content === 'string' ? fallbackPost.content : '',
+              content: typeof fallbackPost.content === 'string' ? fallbackPost.content : fallbackPost.content,
             });
           } else {
             setNotFound(true);
@@ -93,7 +93,7 @@ const BlogPost: React.FC = () => {
             displayDate: fallbackPost.displayDate,
             readingTime: fallbackPost.readingTime,
             coverImage: fallbackPost.coverImage,
-            content: typeof fallbackPost.content === 'string' ? fallbackPost.content : '',
+            content: typeof fallbackPost.content === 'string' ? fallbackPost.content : fallbackPost.content,
           });
         } else {
           setNotFound(true);
@@ -165,12 +165,20 @@ const BlogPost: React.FC = () => {
           <p className="mt-4 text-lg text-white/70">{post.excerpt}</p>
         </header>
 
-        <div className="mt-8 overflow-hidden rounded-2xl border border-white/10">
-          <img src={post.coverImage} alt="" className="h-80 w-full object-cover" />
+        <div className={`mt-8 overflow-hidden rounded-2xl border border-white/10 ${post.coverImage?.includes('logo-white') ? 'flex items-center justify-center bg-white/[0.06] p-8 md:p-12' : ''}`}>
+          <img
+            src={post.coverImage}
+            alt=""
+            className={post.coverImage?.includes('logo-white') ? 'h-32 w-auto object-contain md:h-40' : 'h-80 w-full object-cover'}
+          />
         </div>
 
         <section className="prose prose-invert prose-headings:scroll-mt-24 prose-a:text-white/90 prose-a:no-underline hover:prose-a:underline prose-strong:text-white/90 mt-10 max-w-none">
-          <div className="text-white/80 whitespace-pre-wrap leading-relaxed">{post.content}</div>
+          {typeof post.content === 'string' ? (
+            <div className="text-white/80 whitespace-pre-wrap leading-relaxed">{post.content}</div>
+          ) : (
+            <div className="text-white/80 leading-relaxed">{post.content}</div>
+          )}
         </section>
       </article>
 

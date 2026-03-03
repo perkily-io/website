@@ -38,34 +38,28 @@ const Blog: React.FC = () => {
 
         if (error) {
           console.error('Error fetching posts:', error);
-          // Fallback to static data on error
-          setPosts(fallbackPosts as BlogPost[]);
-          setTags(getAllTags());
-          return;
         }
 
-        if (data && data.length > 0) {
-          // Transform Supabase data to match component expectations
-          const transformedPosts: BlogPost[] = data.map((post: any) => ({
-            slug: post.slug,
-            tag: post.tag,
-            title: post.title,
-            excerpt: post.excerpt,
-            date: post.date,
-            displayDate: post.display_date || new Date(post.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
-            readingTime: post.reading_time || '5 min',
-            coverImage: post.cover_image,
-          }));
-          setPosts(transformedPosts);
-          
-          // Get unique tags
-          const uniqueTags = new Set(transformedPosts.map(p => p.tag));
-          setTags(['All', ...Array.from(uniqueTags)]);
-        } else {
-          // No posts in database, use fallback
-          setPosts(fallbackPosts as BlogPost[]);
-          setTags(getAllTags());
-        }
+        // Build list: merge Supabase posts with static fallback (blogData)
+        // so static posts like the Fleming release always show; DB wins on same slug
+        const fromDb: BlogPost[] = (data || []).map((post: any) => ({
+          slug: post.slug,
+          tag: post.tag,
+          title: post.title,
+          excerpt: post.excerpt,
+          date: post.date,
+          displayDate: post.display_date || new Date(post.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+          readingTime: post.reading_time || '5 min',
+          coverImage: post.cover_image,
+        }));
+        const dbSlugs = new Set(fromDb.map((p) => p.slug));
+        const fromFallback = fallbackPosts.filter((p) => !dbSlugs.has(p.slug)) as BlogPost[];
+        const merged = [...fromDb, ...fromFallback].sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        );
+        setPosts(merged);
+        const uniqueTags = new Set(merged.map((p) => p.tag));
+        setTags(['All', ...Array.from(uniqueTags)]);
       } catch (error) {
         console.error('Error fetching posts:', error);
         setPosts(fallbackPosts as BlogPost[]);
@@ -162,9 +156,15 @@ const Blog: React.FC = () => {
                     </div>
                   </div>
                   <div className="relative">
-                    <div className="relative h-48 w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 md:h-full">
-                      <img src={featured.coverImage} alt="" className="h-full w-full object-cover" />
-                      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.55),transparent_40%)]" />
+                    <div className={`relative h-48 w-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 md:h-full ${featured.coverImage?.includes('logo-white') ? 'flex items-center justify-center p-6' : ''}`}>
+                      <img
+                        src={featured.coverImage}
+                        alt=""
+                        className={featured.coverImage?.includes('logo-white') ? 'h-20 w-auto max-h-full object-contain md:h-24' : 'h-full w-full object-cover'}
+                      />
+                      {!featured.coverImage?.includes('logo-white') && (
+                        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.55),transparent_40%)]" />
+                      )}
                     </div>
                   </div>
                 </div>
@@ -175,9 +175,15 @@ const Blog: React.FC = () => {
               {rest.map((post) => (
                 <a key={post.slug} href={`/blog/${post.slug}`} className="group">
                   <Card className="relative h-full overflow-hidden border-white/10 bg-white/5">
-                    <div className="relative h-40 w-full overflow-hidden border-b border-white/10 bg-white/5">
-                      <img src={post.coverImage} alt="" className="h-full w-full object-cover" />
-                      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.55),transparent_40%)]" />
+                    <div className={`relative h-40 w-full overflow-hidden border-b border-white/10 bg-white/5 ${post.coverImage?.includes('logo-white') ? 'flex items-center justify-center p-4' : ''}`}>
+                      <img
+                        src={post.coverImage}
+                        alt=""
+                        className={post.coverImage?.includes('logo-white') ? 'h-14 w-auto max-h-full object-contain' : 'h-full w-full object-cover'}
+                      />
+                      {!post.coverImage?.includes('logo-white') && (
+                        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.55),transparent_40%)]" />
+                      )}
                     </div>
                     <CardHeader>
                       <div className="inline-flex items-center gap-2 text-xs text-white/70">
