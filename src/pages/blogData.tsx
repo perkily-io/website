@@ -31,8 +31,8 @@ export const blogPosts: BlogPost[] = [
     title: 'Fleming release: Medical Student & Clinician roles, evidence tools, and benchmark-gated releases',
     excerpt:
       'Dedicated roles for medical students and clinicians, live evidence tools, and a benchmark suite that gates every release — so we ship quality and safety, not just features.',
-    date: '2025-03-03',
-    displayDate: 'Mar 2025',
+    date: '2026-01-15',
+    displayDate: 'Jan 2026',
     readingTime: '10 min',
     coverImage: '/img/images/logo-white.png',
     content: (
