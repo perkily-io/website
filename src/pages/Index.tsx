@@ -14,6 +14,7 @@ import { Awards } from '@/components/ui/award';
 import { TextRevealByWord } from '@/components/ui/text-reveal';
 import { Features } from '@/components/ui/features-6';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { blogPosts } from './blogData';
 
 // Combined Text Reveal and Image Component
 const InterfaceTextAndImage = () => {
@@ -255,41 +256,16 @@ const Index: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            {
-              tag: 'Product',
-              title: 'Meet Fleming — guidance that earns your trust',
-              excerpt:
-                'Why we built Fleming the way we did: careful by default, grounded in safety checks, and woven into the care journey.',
-              date: 'Sep 2024',
-              href: '/blog',
-            },
-            {
-              tag: 'Design',
-              title: 'Designing for calm in healthcare software',
-              excerpt:
-                'Interfaces that reduce cognitive load help everyone — patients, clinicians, students. Here\'s how we think about it.',
-              date: 'Aug 2024',
-              href: '/blog',
-            },
-            {
-              tag: 'Platform',
-              title: 'Rewards that change behaviour (without noise)',
-              excerpt:
-                'Building a rewards system that\'s fair, transparent, and genuinely useful — not just another points program.',
-              date: 'Jul 2024',
-              href: '/blog',
-            },
-          ].map((post, i) => (
+          {blogPosts.slice(0, 3).map((post) => (
                   <a
-                    key={i}
-                    href={post.href}
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
               className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-8 hover:border-white/20 hover:bg-white/[0.04] transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 <div className="inline-flex items-center gap-2 text-xs text-white/60 mb-4">
                   <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] uppercase tracking-wide font-medium">{post.tag}</span>
-                  <span className="text-white/40">{post.date}</span>
+                  <span className="text-white/40">{post.displayDate}</span>
                       </div>
                 <h3 className="text-xl font-medium text-white mb-3 group-hover:text-white/90 transition-colors">
                   {post.title}
