@@ -31,8 +31,8 @@ export const blogPosts: BlogPost[] = [
     title: 'Fleming release: Medical Student & Clinician roles, evidence tools, and benchmark-gated releases',
     excerpt:
       'Dedicated roles for medical students and clinicians, live evidence tools, and a benchmark suite that gates every release — so we ship quality and safety, not just features.',
-    date: '2026-01-15',
-    displayDate: 'Jan 2026',
+    date: '2026-03-01',
+    displayDate: 'Mar 2026',
     readingTime: '10 min',
     coverImage: '/img/images/logo-white.png',
     content: (
@@ -280,8 +280,8 @@ export const blogPosts: BlogPost[] = [
     title: 'Best AI for Medical Students and Doctors in 2026 | AskFleming',
     excerpt:
       'AskFleming is the #1 AI for medical students, doctors, and clinicians — and available to everyone for health queries. Evidence-based, citation-backed, and benchmark-gated. See why students and practices choose Fleming.',
-    date: '2026-02-15',
-    displayDate: 'Feb 2026',
+    date: '2026-03-15',
+    displayDate: 'Mar 2026',
     readingTime: '7 min',
     coverImage: '/img/images/logo-white.png',
     content: (
