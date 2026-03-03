@@ -26,7 +26,7 @@ const Td = ({ children }: { children: React.ReactNode }) => (
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: 'fleming-release-march-2025',
+    slug: 'fleming-release-march-2026',
     tag: 'Product',
     title: 'Fleming release: Medical Student & Clinician roles, evidence tools, and benchmark-gated releases',
     excerpt:
