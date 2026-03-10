@@ -18,6 +18,8 @@ interface SEOProps {
   articleTags?: string[];
 }
 
+const DEFAULT_OG_IMAGE = 'https://www.perkily.io/OGimage.jpeg';
+
 const SEO = ({
   title,
   description,
@@ -26,7 +28,7 @@ const SEO = ({
   ogType = 'website',
   twitterCard = 'summary_large_image',
   noindex = false,
-  ogImage,
+  ogImage = DEFAULT_OG_IMAGE,
   articlePublishedTime,
   articleModifiedTime,
   articleAuthor = 'Perkily Team',
@@ -34,6 +36,7 @@ const SEO = ({
   articleTags = []
 }: SEOProps) => {
   const fullTitle = `${title} | Perkily Health Technologies`;
+  const imageUrl = ogImage.startsWith('http') ? ogImage : `https://www.perkily.io${ogImage.startsWith('/') ? ogImage : '/' + ogImage}`;
   
   return (
     <Helmet>
@@ -51,7 +54,9 @@ const SEO = ({
       <meta property="og:description" content={description} />
       <meta property="og:type" content={ogType} />
       <meta property="og:url" content={canonical} />
-      {ogImage && <meta property="og:image" content={ogImage} />}
+      <meta property="og:image" content={imageUrl} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta property="og:site_name" content="Perkily Health Technologies" />
       <meta property="og:locale" content="en_US" />
 
@@ -60,7 +65,7 @@ const SEO = ({
       <meta name="twitter:site" content="@HelloPerkily" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
-      {ogImage && <meta name="twitter:image" content={ogImage} />}
+      <meta name="twitter:image" content={imageUrl} />
 
       {/* Additional SEO Tags */}
       <meta name="application-name" content="Perkily" />
@@ -76,7 +81,7 @@ const SEO = ({
             "@type": "BlogPosting",
             "headline": title,
             "description": description,
-            "image": ogImage || "https://perkily.io/logo.png",
+            "image": imageUrl,
             "datePublished": articlePublishedTime,
             "dateModified": articleModifiedTime || articlePublishedTime,
             "author": {
