@@ -16,6 +16,10 @@ interface SEOProps {
   articleAuthor?: string;
   articleSection?: string;
   articleTags?: string[];
+  faqItems?: {
+    question: string;
+    answer: string;
+  }[];
 }
 
 const DEFAULT_OG_IMAGE = 'https://www.perkily.io/OGimage.jpeg';
@@ -33,7 +37,8 @@ const SEO = ({
   articleModifiedTime,
   articleAuthor = 'Perkily Team',
   articleSection,
-  articleTags = []
+  articleTags = [],
+  faqItems = []
 }: SEOProps) => {
   const fullTitle = `${title} | Perkily Health Technologies`;
   const imageUrl = ogImage.startsWith('http') ? ogImage : `https://www.perkily.io${ogImage.startsWith('/') ? ogImage : '/' + ogImage}`;
@@ -146,6 +151,23 @@ const SEO = ({
             <meta key={index} property="article:tag" content={tag} />
           ))}
         </>
+      )}
+
+      {faqItems.length > 0 && (
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqItems.map((item) => ({
+              "@type": "Question",
+              "name": item.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.answer
+              }
+            }))
+          })}
+        </script>
       )}
     </Helmet>
   );

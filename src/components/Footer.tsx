@@ -67,7 +67,7 @@ const Footer = () => {
               <li><FooterLink to="/docs">Documentation</FooterLink></li>
               <li><FooterLink to="/help">Help Center</FooterLink></li>
               <li><FooterLink to="/privacy-policy">Privacy Policy</FooterLink></li>
-              <li><FooterLink to="/terms-of-service">Terms of Service</FooterLink></li>
+              <li><FooterLink to="/terms-of-service">Terms &amp; Conditions</FooterLink></li>
             </FooterSection>
           </div>
 
@@ -141,7 +141,7 @@ const Footer = () => {
               <span className="hidden md:inline">•</span>
               <Link to="/privacy-policy" className="hover:text-white transition-colors duration-200">Privacy</Link>
               <span className="hidden md:inline">•</span>
-              <Link to="/terms-of-service" className="hover:text-white transition-colors duration-200">Terms</Link>
+              <Link to="/terms-of-service" className="hover:text-white transition-colors duration-200">Terms &amp; Conditions</Link>
               <span className="hidden md:inline">•</span>
               <Link to="/cookies" className="hover:text-white transition-colors duration-200">Cookies</Link>
             </div>

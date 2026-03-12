@@ -56,6 +56,10 @@ const BlogPost: React.FC = () => {
               readingTime: fallbackPost.readingTime,
               coverImage: fallbackPost.coverImage,
               content: typeof fallbackPost.content === 'string' ? fallbackPost.content : fallbackPost.content,
+              metaTitle: fallbackPost.metaTitle,
+              metaDescription: fallbackPost.metaDescription,
+              keywords: fallbackPost.keywords,
+              ogImage: fallbackPost.ogImage,
             });
           } else {
             setNotFound(true);
@@ -94,6 +98,10 @@ const BlogPost: React.FC = () => {
             readingTime: fallbackPost.readingTime,
             coverImage: fallbackPost.coverImage,
             content: typeof fallbackPost.content === 'string' ? fallbackPost.content : fallbackPost.content,
+            metaTitle: fallbackPost.metaTitle,
+            metaDescription: fallbackPost.metaDescription,
+            keywords: fallbackPost.keywords,
+            ogImage: fallbackPost.ogImage,
           });
         } else {
           setNotFound(true);

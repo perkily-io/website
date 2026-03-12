@@ -6,7 +6,7 @@ export function Features() {
             <div className="mx-auto max-w-5xl space-y-12 px-6">
                 <div className="relative z-10 grid items-center gap-4 md:grid-cols-2 md:gap-12">
                     <h2 className="text-4xl font-semibold">Meet Fleming.<br />Your Clinical Co-Pilot.</h2>
-                    <p className="max-w-sm sm:ml-auto text-white/60">ChatGPT was built for the internet. Fleming was built for the clinic. Trained on the world's most rigorous medical data, Fleming provides real-time decision support for doctors and 24/7 empathetic guidance for patients.</p>
+                    <p className="max-w-sm sm:ml-auto text-white/60">Built for workflow completion, not just evidence lookup. Fleming delivers evidence-visible answers, real-time decision support, and safer handoffs while clinical review remains in provider control.</p>
                 </div>
                 <div className="relative rounded-3xl p-3 md:-mx-8 lg:col-span-3 overflow-hidden">
                     <div className="aspect-[88/36] relative overflow-hidden rounded-2xl">
@@ -18,30 +18,30 @@ export function Features() {
                     <div className="space-y-2">
                         <div className="flex items-center gap-2">
                             <Zap className="size-4 text-white" />
-                            <h3 className="text-sm font-medium text-white">Instant Answers</h3>
+                            <h3 className="text-sm font-medium text-white">Workflow-Ready Answers</h3>
                         </div>
-                        <p className="text-muted-foreground text-sm">Get accurate responses to your health questions in seconds.</p>
+                        <p className="text-muted-foreground text-sm">Get structured outputs you can use immediately in real clinical workflows.</p>
                     </div>
                     <div className="space-y-2">
                         <div className="flex items-center gap-2">
                             <Cpu className="size-4 text-white" />
-                            <h3 className="text-sm font-medium text-white">Medical-Grade Accuracy</h3>
+                            <h3 className="text-sm font-medium text-white">Benchmark-Backed Quality</h3>
                         </div>
-                        <p className="text-muted-foreground text-sm">Trained on medical literature with clinical validation.</p>
+                        <p className="text-muted-foreground text-sm">Release-gated quality checks before new capability reaches care teams.</p>
                     </div>
                     <div className="space-y-2">
                         <div className="flex items-center gap-2">
                             <Lock className="size-4 text-white" />
                             <h3 className="text-sm font-medium text-white">Privacy First</h3>
                         </div>
-                        <p className="text-muted-foreground text-sm">Your conversations are private and secure by design.</p>
+                        <p className="text-muted-foreground text-sm">Privacy and security controls are designed into every workflow from day one.</p>
                     </div>
                     <div className="space-y-2">
                         <div className="flex items-center gap-2">
                             <Sparkles className="size-4 text-white" />
-                            <h3 className="text-sm font-medium text-white">Safe Guidance</h3>
+                            <h3 className="text-sm font-medium text-white">Evidence-Visible Guidance</h3>
                         </div>
-                        <p className="text-muted-foreground text-sm">Evidence-based health guidance with built-in safety guardrails.</p>
+                        <p className="text-muted-foreground text-sm">See what answers are built on, with citations and built-in safety guardrails.</p>
                     </div>
                 </div>
             </div>

@@ -94,9 +94,10 @@ const Blog: React.FC = () => {
   return (
     <main className="min-h-screen bg-black text-white selection:bg-white/10">
       <SEO
-        title="Perkily Journal"
-        description="Thoughtful product updates, design notes, and platform thinking from the Perkily team."
+        title="Perkily Journal | Healthcare AI Insights"
+        description="Data-driven healthcare AI insights, workflow benchmarks, product updates, and implementation guides from the Perkily team."
         canonical="https://www.perkily.io/blog"
+        keywords="healthcare AI blog, clinical AI benchmarks, ambient documentation metrics, AI claims automation, medical workflow insights"
       />
       <Navbar />
 

@@ -8,7 +8,6 @@ import { useScroll, motion } from 'framer-motion';
 const menuItems = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
-    { name: 'ClinicalOS', href: '/clinicalos' },
     { name: 'Help', href: '/help' },
     { name: 'Contact', href: '/contact' },
 ];
@@ -70,11 +69,36 @@ const Navbar = ({ className }: { className?: string }) => {
                             <div className="hidden lg:block">
                                 <ul className="flex gap-8 text-sm">
                                     {menuItems.map((item, index) => (
-                                        <li key={index}>
-                                            <NavLink to={item.href}>
-                                                {item.name}
-                                            </NavLink>
-                                        </li>
+                                        <React.Fragment key={index}>
+                                            <li>
+                                                <NavLink to={item.href}>
+                                                    {item.name}
+                                                </NavLink>
+                                            </li>
+                                            {item.name === 'About' && (
+                                                <li className="relative group">
+                                                    <button className="text-muted-foreground hover:text-accent-foreground duration-150 transition-colors">
+                                                        Products
+                                                    </button>
+                                                    <div className="absolute left-0 top-full pt-3 opacity-0 pointer-events-none translate-y-1 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:translate-y-0 transition-all duration-200">
+                                                        <div className="min-w-[180px] rounded-xl border border-white/10 bg-black/95 p-2 backdrop-blur-xl shadow-xl">
+                                                            <Link
+                                                                to="/clinicalos"
+                                                                className="block rounded-lg px-3 py-2 text-sm text-white/80 hover:bg-white/10 hover:text-white transition-colors"
+                                                            >
+                                                                ClinicalOS
+                                                            </Link>
+                                                            <Link
+                                                                to="/fleming"
+                                                                className="mt-1 block rounded-lg px-3 py-2 text-sm text-white/80 hover:bg-white/10 hover:text-white transition-colors"
+                                                            >
+                                                                Fleming
+                                                            </Link>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            )}
+                                        </React.Fragment>
                                     ))}
                                 </ul>
                             </div>
@@ -84,11 +108,22 @@ const Navbar = ({ className }: { className?: string }) => {
                             <div className="lg:hidden">
                                 <ul className="space-y-6 text-base">
                                     {menuItems.map((item, index) => (
-                                        <li key={index}>
-                                            <NavLink to={item.href}>
-                                                {item.name}
-                                            </NavLink>
-                                        </li>
+                                        <React.Fragment key={index}>
+                                            <li>
+                                                <NavLink to={item.href}>
+                                                    {item.name}
+                                                </NavLink>
+                                            </li>
+                                            {item.name === 'About' && (
+                                                <li className="space-y-3">
+                                                    <span className="text-muted-foreground block text-sm uppercase tracking-wider">Products</span>
+                                                    <div className="space-y-3 pl-2 border-l border-white/10">
+                                                        <NavLink to="/clinicalos">ClinicalOS</NavLink>
+                                                        <NavLink to="/fleming">Fleming</NavLink>
+                                                    </div>
+                                                </li>
+                                            )}
+                                        </React.Fragment>
                                     ))}
                                 </ul>
                             </div>
@@ -98,7 +133,7 @@ const Navbar = ({ className }: { className?: string }) => {
                                     variant="outline"
                                     size="sm"
                                     className="border-white/15 bg-white/5 text-white hover:bg-white/10">
-                                    <a href="/contact">
+                                    <a href="https://askfleming.perkily.io" target="_blank" rel="noopener noreferrer">
                                         <span>Log in</span>
                                     </a>
                                 </Button>
@@ -106,8 +141,8 @@ const Navbar = ({ className }: { className?: string }) => {
                                     asChild
                                     size="sm"
                                     className="border-white/15 bg-white text-black hover:bg-white/90">
-                                    <a href="/contact">
-                                        <span>Try Pro</span>
+                                    <a href="https://askfleming.perkily.io" target="_blank" rel="noopener noreferrer">
+                                        <span>Try AskFleming</span>
                                     </a>
                                 </Button>
                             </div>

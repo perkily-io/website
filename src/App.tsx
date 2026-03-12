@@ -19,6 +19,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import AdminBlog from "./pages/AdminBlog";
 import PerkilyPro from "./pages/PerkilyPro";
+import Fleming from "./pages/Fleming";
 import Docs from "./pages/Docs";
 import Help from "./pages/Help";
 
@@ -60,6 +61,7 @@ const App = () => (
             <Route path="/docs" element={<Docs />} />
             <Route path="/help" element={<Help />} />
             <Route path="/clinicalos" element={<PerkilyPro />} />
+            <Route path="/fleming" element={<Fleming />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

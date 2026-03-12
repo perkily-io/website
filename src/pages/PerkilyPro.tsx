@@ -14,121 +14,56 @@ import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import {
   Mic,
-  FileText,
   Brain,
   Shield,
   Clock,
   Zap,
   CheckCircle,
-  Gift,
   Users,
   Calendar,
   TrendingDown,
   Package,
   CreditCard,
   BarChart3,
-  Play,
   Heart,
-  ArrowRight,
   Send,
-  Phone,
-  Box,
-  Sparkles,
-  Lock
 } from 'lucide-react';
 
-// FAQ Section for SEO
+const clinicalOsFaqItems = [
+  {
+    question: 'What is ClinicalOS?',
+    answer: 'ClinicalOS is an AI-powered practice management system for healthcare practices, combining documentation, claims, and operations in one platform.'
+  },
+  {
+    question: 'How does ClinicalOS handle clinical documentation?',
+    answer: 'ClinicalOS helps teams move from conversation to structured clinical documentation quickly, while clinicians review and approve outputs before finalizing records.'
+  },
+  {
+    question: 'Does ClinicalOS replace clinical judgement?',
+    answer: 'No. ClinicalOS is AI-assisted workflow support. Clinical review remains in provider control at every step.'
+  },
+  {
+    question: 'Can ClinicalOS support claims and billing workflows?',
+    answer: 'Yes. ClinicalOS creates claim-ready outputs from documentation and supports faster, cleaner billing operations for outpatient teams.'
+  },
+  {
+    question: 'Is ClinicalOS suitable for multi-location practices?',
+    answer: 'Yes. ClinicalOS is built for both solo operators and growing multi-location teams with role-based workflows and shared operational visibility.'
+  }
+];
+
 const ClinicalOSFAQ = () => (
   <section className="py-16 px-4 sm:px-6 bg-black border-t border-white/5">
     <div className="container max-w-4xl mx-auto">
       <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-white">Frequently Asked Questions</h2>
       <Accordion type="single" collapsible className="w-full space-y-2">
-        <AccordionItem value="q1">
-          <AccordionTrigger className="text-lg font-semibold text-emerald-400">How do AI clinical notes work?</AccordionTrigger>
-          <AccordionContent className="text-white/70">
-              Record the consultation and ClinicalOS automatically transcribes it into structured SOAP notes. You can review, edit, and publish to the patient record in seconds.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="q2">
-          <AccordionTrigger className="text-lg font-semibold text-emerald-400">What insights do I get from diagnostic reasoning?</AccordionTrigger>
-          <AccordionContent className="text-white/70">
-            Our model highlights differential diagnoses, flags missing data, and surfaces next-best questions, helping you document reasoning and reduce oversight risk.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="q3">
-          <AccordionTrigger className="text-lg font-semibold text-emerald-400">Are medical aid claims really automated?</AccordionTrigger>
-          <AccordionContent className="text-white/70">
-            Yes. Claims are generated directly from clinical notes with correct codes and submitted instantly. AI validations reduce rejections and speed up responses.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="q4">
-            <AccordionTrigger className="text-lg font-semibold text-emerald-400">Is ClinicalOS compliant and secure?</AccordionTrigger>
-          <AccordionContent className="text-white/70">
-            Data is encrypted in transit and at rest. We follow HIPAA-style safeguards and regional privacy requirements for South African healthcare.
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="q5">
-            <AccordionTrigger className="text-lg font-semibold text-emerald-400">Can ClinicalOS replace my practice management system?</AccordionTrigger>
-          <AccordionContent className="text-white/70">
-              Yes. ClinicalOS includes appointments, patient CRM, sales, inventory, billing, tasks, analytics, and a loyalty program in one platform.
-          </AccordionContent>
-        </AccordionItem>
+        {clinicalOsFaqItems.map((item, index) => (
+          <AccordionItem key={item.question} value={`q${index + 1}`}>
+            <AccordionTrigger className="text-lg font-semibold text-emerald-400">{item.question}</AccordionTrigger>
+            <AccordionContent className="text-white/70">{item.answer}</AccordionContent>
+          </AccordionItem>
+        ))}
       </Accordion>
-
-      {/* Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: [
-            {
-              '@type': 'Question',
-              name: 'How do AI clinical notes work?',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text:
-                  'Record the consultation and Perkily automatically transcribes it into structured SOAP notes. You can review, edit, and publish to the patient record in seconds.'
-              }
-            },
-            {
-              '@type': 'Question',
-              name: 'What insights do I get from diagnostic reasoning?',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text:
-                  'Our model highlights differential diagnoses, flags missing data, and surfaces next-best questions, helping you document reasoning and reduce oversight risk.'
-              }
-            },
-            {
-              '@type': 'Question',
-              name: 'Are medical aid claims really automated?',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text:
-                  'Yes. Claims are generated directly from clinical notes with correct codes and submitted instantly. AI validations reduce rejections and speed up responses.'
-              }
-            },
-            {
-              '@type': 'Question',
-              name: 'Is Perkily compliant and secure?',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text:
-                  'Data is encrypted in transit and at rest. We follow HIPAA-style safeguards and regional privacy requirements for South African healthcare.'
-              }
-            },
-            {
-              '@type': 'Question',
-              name: 'Can Perkily replace my practice management system?',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text:
-                  'Yes. Perkily includes appointments, patient CRM, sales, inventory, billing, tasks, analytics, and a loyalty program in one platform.'
-              }
-            }
-          ]
-        })}
-      </script>
     </div>
   </section>
 );
@@ -157,7 +92,7 @@ const ClinicalOSHero = () => (
             ClinicalOS
         </h1>
           <p className="text-xl sm:text-2xl md:text-3xl lg:text-3xl text-white/60 mb-0 leading-[1.4] font-light tracking-[-0.01em] max-w-2xl text-center lg:text-left" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif', fontWeight: 300 }}>
-            The Operating System of the Modern Clinic.
+            AI-powered practice management workflows from conversation to structured documentation and claim-ready outputs.
           </p>
         </div>
 
@@ -481,7 +416,7 @@ const CorePhilosophy = () => (
             Built for the encounter.<br />Not the entry.
           </h2>
           <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white/70 max-w-3xl mx-auto leading-relaxed font-light tracking-[-0.01em]" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif', fontWeight: 300 }}>
-            Most systems were built for billing departments. We built ClinicalOS for the exam room. It is an ambient workspace that anticipates your needs, automating the administrative burden so you can stay in the moment.
+            Most systems were built for billing departments. We built ClinicalOS for the exam room. It is an ambient workspace that supports care teams while clinical review remains in provider control.
           </p>
         </div>
       </div>
@@ -900,10 +835,11 @@ const PerkilyPro = () => {
     <main className="min-h-screen bg-black">
       <Navbar />
       <SEO
-        title="ClinicalOS | AI-Powered Practice Management"
-        description="Voice to SOAP notes. Diagnostic insights. Automated claims. Complete practice management. All powered by AI."
-        keywords="ClinicalOS, AI practice management, clinical notes, SOAP notes, automated claims, diagnostic insights, healthcare software, practice management system"
+        title="ClinicalOS | AI-Powered Practice Management System"
+        description="ClinicalOS is an AI-powered practice management system for healthcare practices, turning conversation into structured documentation and claim-ready outputs."
+        keywords="ClinicalOS, AI-powered practice management system, healthcare practice workflows, clinical documentation, claim-ready outputs, healthcare operations platform"
         canonical="https://www.perkily.io/clinicalos"
+        faqItems={clinicalOsFaqItems}
       />
       <ClinicalOSHero />
       <CorePhilosophy />
@@ -912,6 +848,7 @@ const PerkilyPro = () => {
       <AppreciationEngine />
       <PrivacyManifesto />
       <BillingSection />
+      <ClinicalOSFAQ />
       <FinalCTASection />
       <Footer />
     </main>

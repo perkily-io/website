@@ -1,30 +1,28 @@
 'use client'
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { InfiniteSlider } from '@/components/ui/infinite-slider'
 import { ProgressiveBlur } from '@/components/ui/progressive-blur'
-import { cn } from '@/lib/utils'
-import { ChevronRight, Stethoscope, Bot, Activity } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 
 export function HeroSection() {
     return (
         <>
-            <main className="overflow-x-hidden">
+            <div className="overflow-x-hidden">
                 <section>
                     <div className="py-24 md:pb-32 lg:pb-36 lg:pt-48">
                         <div className="relative z-10 mx-auto flex max-w-7xl flex-col px-6 lg:block lg:px-12">
                             <div className="mx-auto max-w-lg text-center lg:ml-0 lg:max-w-full lg:text-left">
-                                <h1 className="mt-8 max-w-2xl text-balance text-5xl font-bold md:text-6xl lg:mt-16 xl:text-7xl">The Clinical Operating System of the Future.</h1>
-                                <p className="mt-8 max-w-2xl text-balance text-lg text-muted-foreground">Built for the era of ambient intelligence. Perkily unifies the clinic, the clinician, and the patient into a single, seamless ecosystem.</p>
+                                <h1 className="mt-8 max-w-3xl text-balance text-5xl font-bold md:text-6xl lg:mt-16 xl:text-7xl">AI-Powered Healthcare Solutions for Modern Clinical Environments</h1>
+                                <p className="mt-8 max-w-2xl text-balance text-lg text-muted-foreground">ClinicalOS is our AI-powered practice management system, and AskFleming is our evidence-visible clinical copilot. Together they help teams move from conversation to structured documentation, safer decisions, and claim-ready outputs while clinical review remains in provider control.</p>
 
                                 <div className="mt-12 flex flex-col items-center justify-center gap-2 sm:flex-row lg:justify-start">
                                     <Button
                                         asChild
                                         size="lg"
                                         className="h-12 rounded-full pl-5 pr-3 text-base bg-white text-black hover:bg-gray-100 transition-colors">
-                                        <a href="https://calendly.com/hello-perkily" target="_blank" rel="noopener noreferrer">
-                                            <span className="text-nowrap">Request Early Access</span>
+                                        <a href="/clinicalos">
+                                            <span className="text-nowrap">Explore ClinicalOS</span>
                                             <ChevronRight className="ml-1" />
                                         </a>
                                     </Button>
@@ -34,8 +32,8 @@ export function HeroSection() {
                                         size="lg"
                                         variant="ghost"
                                         className="h-12 rounded-full px-5 text-base hover:bg-zinc-950/5 dark:hover:bg-white/5">
-                                        <a href="https://askfleming.perkily.io" target="_blank" rel="noopener noreferrer">
-                                            <span className="text-nowrap">Try Fleming</span>
+                                        <a href="/fleming">
+                                            <span className="text-nowrap">Explore Fleming</span>
                                         </a>
                                     </Button>
                                 </div>
@@ -59,25 +57,18 @@ export function HeroSection() {
                     <div className="group relative m-auto max-w-7xl px-6">
                         <div className="flex flex-col items-center md:flex-row">
                             <div className="md:max-w-44 md:border-r md:pr-6">
-                                <p className="text-end text-sm text-muted-foreground">Our partners</p>
+                                <h2 className="text-end text-sm font-medium text-muted-foreground">Our Partners</h2>
                             </div>
                             <div className="relative py-6 md:w-[calc(100%-11rem)]">
                                 <InfiniteSlider
-                                    speedOnHover={20}
-                                    speed={40}
+                                    durationOnHover={20}
+                                    duration={40}
                                     gap={112}>
-                                    <div className="flex items-center gap-2 text-muted-foreground">
-                                        <Stethoscope className="h-6 w-6" />
-                                        <span className="font-semibold">ONT Health</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 text-muted-foreground">
-                                        <Activity className="h-6 w-6" />
-                                        <span className="font-semibold">Medikredit</span>
-                                    </div>
-                                    <div className="flex items-center gap-2 text-muted-foreground">
-                                        <Bot className="h-6 w-6" />
-                                        <span className="font-semibold">AskFleming</span>
-                                    </div>
+                                    {['ONT Health', 'Medikredit', 'AskFleming', 'MedPrax', 'PubMed', 'OpenFDA', 'Guideline Search', 'ClinicalTrials.gov', 'Scholar Gateway', 'bioRxiv', 'CMS Coverage', 'ChEMBL', 'Synapse', 'Benchling', 'BioRender'].map((name) => (
+                                        <div key={name} className="flex items-center gap-2 text-muted-foreground">
+                                            <span className="font-semibold">{name}</span>
+                                        </div>
+                                    ))}
                                 </InfiniteSlider>
 
                                 <div className="bg-gradient-to-r from-background absolute inset-y-0 left-0 w-20"></div>
@@ -96,7 +87,7 @@ export function HeroSection() {
                         </div>
                     </div>
                 </section>
-            </main>
+            </div>
         </>
     )
 }
