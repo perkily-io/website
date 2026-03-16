@@ -119,12 +119,7 @@ export const SkeletonOne = () => {
 
 export const SkeletonThree = () => {
   return (
-    <a
-      href="https://www.youtube.com/watch?v=RPa3_AD1_Vs"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="relative flex gap-10 h-full group/image"
-    >
+    <div className="relative flex gap-10 h-full group/image">
       <div className="w-full mx-auto bg-transparent group h-full">
         <div className="flex flex-1 w-full h-full flex-col space-y-2 relative">
           <IconBrandYoutubeFilled className="h-20 w-20 absolute z-10 inset-0 text-red-500 m-auto" />
@@ -136,7 +131,7 @@ export const SkeletonThree = () => {
           />
         </div>
       </div>
-    </a>
+    </div>
   );
 };
 
