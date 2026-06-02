@@ -13,8 +13,6 @@ import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import Careers from "./pages/Careers";
-import Partners from "./pages/Partners";
-import ComingSoon from "./pages/ComingSoon";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import AdminBlog from "./pages/AdminBlog";
@@ -22,6 +20,7 @@ import PerkilyPro from "./pages/PerkilyPro";
 import Fleming from "./pages/Fleming";
 import Docs from "./pages/Docs";
 import Help from "./pages/Help";
+import Press from "./pages/Press";
 
 // ScrollToTop component that handles scrolling on route changes
 const ScrollToTop = () => {
@@ -49,15 +48,13 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/careers" element={<Careers />} />
-            <Route path="/partners" element={<Partners />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             {/* Blog */}
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/admin/blog" element={<AdminBlog />} />
-            {/* Coming Soon Pages */}
-            <Route path="/press" element={<ComingSoon />} />
+            <Route path="/press" element={<Press />} />
             <Route path="/docs" element={<Docs />} />
             <Route path="/help" element={<Help />} />
             <Route path="/clinicalos" element={<PerkilyPro />} />

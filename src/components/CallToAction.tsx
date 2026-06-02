@@ -34,7 +34,7 @@ const CallToAction = () => {
               
               <Button 
       className="group bg-gradient-to-r from-[#00A3FF] to-[#8B5CF6] text-white px-8 py-6 rounded-full hover:opacity-90 transition-all duration-300 text-lg"
-                onClick={() => window.location.href = 'https://perkily.io/partners'}
+                onClick={() => window.location.href = '/contact'}
               >
                 Become a Partner
                 <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />

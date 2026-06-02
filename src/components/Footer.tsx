@@ -58,7 +58,6 @@ const Footer = () => {
               <li><FooterLink to="/careers">Careers</FooterLink></li>
               <li><FooterLink to="/blog">Blog</FooterLink></li>
               <li><FooterLink to="/press">Press</FooterLink></li>
-              <li><FooterLink to="/partners">Partners</FooterLink></li>
             </FooterSection>
           </div>
 
