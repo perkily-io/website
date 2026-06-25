@@ -195,8 +195,12 @@ export default function GlassmorphismTrustHero({
               <span className="bg-gradient-to-br from-white via-white to-[#ffcd75] bg-clip-text text-transparent">
                 {titleLine2}
               </span>
-              <br />
-              {titleLine3}
+              {titleLine3 ? (
+                <>
+                  <br />
+                  {titleLine3}
+                </>
+              ) : null}
             </h1>
 
             <p className="animate-fade-in delay-300 max-w-xl text-lg text-zinc-400 leading-relaxed">

@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export type BlogPost = {
   slug: string;
-  tag: 'Product' | 'Design' | 'Platform' | string;
+  tag: 'Product' | 'Design' | 'Platform' | 'Company' | string;
   title: string;
   excerpt: string;
-  date: string; // ISO or human string
-  displayDate: string; // Friendly display
+  date: string;
+  displayDate: string;
   readingTime: string;
   coverImage: string;
   content: React.ReactNode;
@@ -16,870 +17,143 @@ export type BlogPost = {
   ogImage?: string;
 };
 
-const Table = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-  <div className={`my-8 overflow-hidden rounded-xl border border-white/10 ${className}`}>
-    <table className="w-full border-collapse text-left text-sm">{children}</table>
+const PullQuote = ({ children }: { children: React.ReactNode }) => (
+  <blockquote className="my-12 border-l border-white/20 pl-6 sm:pl-8">
+    <p className="text-xl sm:text-2xl font-light tracking-tight text-white/80 leading-snug">{children}</p>
+  </blockquote>
+);
+
+const Stat = ({ value, label }: { value: string; label: string }) => (
+  <div className="rounded-[1.25rem] border border-white/10 bg-white/[0.02] p-6 text-center">
+    <p className="text-3xl sm:text-4xl font-light tracking-tight text-white">{value}</p>
+    <p className="mt-2 text-[13px] text-white/40 font-light leading-relaxed">{label}</p>
   </div>
-);
-const Th = ({ children }: { children: React.ReactNode }) => (
-  <th className="border-b border-white/10 bg-white/[0.04] px-5 py-3.5 font-medium text-white/90">{children}</th>
-);
-const Td = ({ children }: { children: React.ReactNode }) => (
-  <td className="border-b border-white/5 px-5 py-3.5 text-white/75">{children}</td>
 );
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: 'ambient-clinical-documentation-metrics-2026',
-    tag: 'Platform',
-    title: 'Ambient AI Clinical Documentation: Benchmarks, Time Savings, and Implementation Metrics (2026)',
+    slug: 'clinicalos-launch-perkily-rebrand',
+    tag: 'Company',
+    title: 'Introducing ClinicalOS — practice medicine, not paperwork',
     excerpt:
-      'A data-driven guide to ambient AI documentation performance, including time-to-note, after-hours charting reduction, and quality control metrics healthcare leaders should track.',
-    date: '2026-03-28',
-    displayDate: 'Mar 2026',
-    readingTime: '11 min',
-    coverImage: '/img/insights.png',
-    metaTitle: 'Ambient AI Clinical Documentation Metrics (2026) | Perkily',
+      'Perkily Health Technologies is launching ClinicalOS: a single platform that runs your medical practice with ambient documentation, claims automation, and patient communication — all in one calm, clinician-first experience.',
+    date: '2025-06-25',
+    displayDate: 'Jun 2025',
+    readingTime: '6 min',
+    coverImage: '/favicon-32x32.png',
+    metaTitle: 'ClinicalOS Launch & Perkily Rebrand | Perkily Health Technologies',
     metaDescription:
-      'Explore ambient AI clinical documentation benchmarks, implementation KPIs, and measurable outcomes for modern healthcare teams.',
+      'Perkily Health Technologies launches ClinicalOS — AI that runs your medical practice. Ambient documentation, claims automation, and a rebrand built around one idea: practice medicine, not paperwork.',
     keywords:
-      'ambient AI clinical documentation, AI medical scribe metrics, healthcare AI productivity, clinician documentation time reduction, clinical workflow KPIs',
-    ogImage: '/img/insights.png',
+      'ClinicalOS launch, Perkily rebrand, medical practice AI, ambient clinical documentation, healthcare automation, Perkily Health Technologies',
+    ogImage: '/favicon-32x32.png',
     content: (
       <>
-        <p className="text-lg text-white/80 leading-relaxed">
-          Ambient AI documentation has moved from pilot curiosity to operational priority. For care teams, the question is no longer whether AI can generate notes - it is whether the workflow is reliable, safe, and measurable at scale. This guide summarizes practical benchmarks healthcare operators can use to evaluate performance in 2026.
+        <p className="text-[17px] text-white/55 font-light leading-[1.8]">
+          Today we are launching something we have been building toward since{' '}
+          <strong className="font-normal text-white/75">2024</strong>: a single product, a clear identity, and a
+          platform designed to give clinicians their time back. Perkily Health Technologies is now{' '}
+          <strong className="font-normal text-white/75">ClinicalOS</strong> — AI that runs your medical practice.
         </p>
 
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Why Documentation Metrics Matter Now</h2>
-        <p className="text-white/75 leading-relaxed">
-          Documentation quality directly affects clinical continuity, billing accuracy, and provider burnout. Teams that track only output volume miss important risks: incomplete histories, weak assessment logic, and delays between encounter completion and finalized charting. Strong implementations balance speed with review quality.
+        <PullQuote>
+          We are not building another dashboard. We are building the operating system for outpatient care.
+        </PullQuote>
+
+        <h2 className="mt-14 mb-5 text-2xl sm:text-3xl font-light tracking-tight text-white">
+          Why we rebranded
+        </h2>
+        <p className="text-[16px] text-white/55 font-light leading-[1.8]">
+          Healthcare software has a habit of multiplying. One tool for scheduling. Another for notes. A third for
+          billing. Each with its own login, its own learning curve, its own pile of admin. Clinicians end up working
+          for their software instead of the other way around.
+        </p>
+        <p className="mt-5 text-[16px] text-white/55 font-light leading-[1.8]">
+          We stepped back and asked a simpler question: what if one system could handle the work that happens{' '}
+          <em>after</em> the patient leaves the room? Documentation. Coding. Claims. Follow-up. The rebrand reflects
+          that focus — one company, one product, one promise.
         </p>
 
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Core KPI Set for Ambient Documentation Programs</h2>
-        <Table>
-          <thead>
-            <tr>
-              <Th>KPI</Th>
-              <Th>Operational target</Th>
-              <Th>Why it matters</Th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <Td><strong className="text-white/90">Time to draft note</strong></Td>
-              <Td>Under 3 minutes after encounter</Td>
-              <Td>Faster handoff and less context loss between patient and chart.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Same-day sign-off rate</strong></Td>
-              <Td>Above 85%</Td>
-              <Td>Reduces backlog and improves downstream billing speed.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">After-hours charting minutes</strong></Td>
-              <Td>25-40% reduction</Td>
-              <Td>Direct burnout and retention impact for clinicians.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Provider edit rate</strong></Td>
-              <Td>Stable decline over 6-8 weeks</Td>
-              <Td>Signals model adaptation and template fit by specialty.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Critical omission rate</strong></Td>
-              <Td>Near zero with mandatory checks</Td>
-              <Td>Protects safety by preventing missing red-flag details.</Td>
-            </tr>
-          </tbody>
-        </Table>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Data Patterns Seen Across Early Deployments</h2>
-        <p className="text-white/75 leading-relaxed">
-          Across mixed outpatient settings, teams typically report the largest gains in the first 30 to 60 days when templates and review rules are tuned by specialty. The strongest outcomes come from systems that combine ambient capture with structured quality checks before note finalization.
+        <h2 className="mt-14 mb-5 text-2xl sm:text-3xl font-light tracking-tight text-white">
+          What ClinicalOS does
+        </h2>
+        <p className="text-[16px] text-white/55 font-light leading-[1.8]">
+          ClinicalOS listens during the visit, drafts structured notes, prepares claim packets, and handles patient
+          communication — quietly, in the background, with human review at every step.
         </p>
-        <ul className="mt-4 list-none space-y-3 text-white/80 leading-relaxed">
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Week 1-2:</strong> Speed improves first, while edit rates remain elevated during onboarding.</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Week 3-6:</strong> Edit rates decline as workflow prompts and specialty language stabilize.</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Week 7+:</strong> Backlog reduction and cleaner handoffs become the primary value drivers.</span></li>
+
+        <div className="my-10 grid sm:grid-cols-3 gap-4">
+          <Stat value="Ambient" label="Documentation that drafts itself from the conversation" />
+          <Stat value="Claims" label="Pre-validated packets ready before you leave" />
+          <Stat value="Follow-up" label="Patient communication without the back-and-forth" />
+        </div>
+
+        <ul className="mt-6 space-y-4 text-[16px] text-white/55 font-light leading-[1.8]">
+          <li className="flex gap-4">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-white/30" />
+            <span>
+              <strong className="font-normal text-white/70">Ambient documentation</strong> — capture the visit,
+              receive a draft note in minutes, sign off same-day.
+            </span>
+          </li>
+          <li className="flex gap-4">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-white/30" />
+            <span>
+              <strong className="font-normal text-white/70">Claims automation</strong> — coding suggestions and
+              pre-submission checks tied directly to the clinical record.
+            </span>
+          </li>
+          <li className="flex gap-4">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-white/30" />
+            <span>
+              <strong className="font-normal text-white/70">Practice operations</strong> — scheduling, patient
+              messaging, and revenue cycle in one workflow.
+            </span>
+          </li>
         </ul>
 
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Implementation Blueprint for Better Results</h2>
-        <Table>
-          <thead>
-            <tr>
-              <Th>Phase</Th>
-              <Th>What to implement</Th>
-              <Th>Success signal</Th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <Td><strong className="text-white/90">Readiness</strong></Td>
-              <Td>Define required note fields, escalation terms, and review owners.</Td>
-              <Td>Zero ambiguity on what can auto-draft vs what needs manual confirmation.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Pilot</strong></Td>
-              <Td>Run limited specialty cohort with structured QA sampling.</Td>
-              <Td>Consistent sign-off quality and declining edits.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Scale</strong></Td>
-              <Td>Expand to multi-provider teams with role-based review controls.</Td>
-              <Td>Sustained same-day sign-off and lower after-hours documentation.</Td>
-            </tr>
-          </tbody>
-        </Table>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">What High-Performing Teams Do Differently</h2>
-        <p className="text-white/75 leading-relaxed">
-          The best programs do not treat AI notes as final outputs. They treat them as accelerated drafts with consistent guardrails. That means clear provider review ownership, explicit escalation language, and monitoring that ties documentation quality to real operational outcomes.
+        <h2 className="mt-14 mb-5 text-2xl sm:text-3xl font-light tracking-tight text-white">
+          A new look, same standard
+        </h2>
+        <p className="text-[16px] text-white/55 font-light leading-[1.8]">
+          The new site reflects how we think about the product: calm, precise, and built for people who do not have
+          time for noise. Dark surfaces. Clear typography. One idea per screen. No clutter, no stock-photo heroics —
+          just the product and the outcome.
         </p>
-        <p className="mt-4 text-white/75 leading-relaxed">
-          In practice, ambient AI succeeds when it is integrated into a broader operating model: documentation, coding, and claims flow as one system. That is where compounding time savings and quality gains appear.
-        </p>
-      </>
-    ),
-  },
-  {
-    slug: 'ai-claims-automation-clean-claim-rate-outpatient',
-    tag: 'Platform',
-    title: 'AI-Assisted Claims Automation in Outpatient Care: Clean-Claim Rate and Days-in-AR Benchmarks',
-    excerpt:
-      'How healthcare teams can measure AI-assisted claims performance using clean-claim rate, denial categories, and days-in-AR metrics that drive revenue cycle improvement.',
-    date: '2026-03-29',
-    displayDate: 'Mar 2026',
-    readingTime: '10 min',
-    coverImage: '/img/perklogo.png',
-    metaTitle: 'AI Claims Automation Benchmarks for Outpatient Teams | Perkily',
-    metaDescription:
-      'Learn how to track clean-claim rate, denial trends, and AR metrics when implementing AI-assisted claims workflows in outpatient healthcare.',
-    keywords:
-      'AI claims automation, clean claim rate healthcare, outpatient revenue cycle AI, denial management metrics, healthcare billing workflow',
-    ogImage: '/img/perklogo.png',
-    content: (
-      <>
-        <p className="text-lg text-white/80 leading-relaxed">
-          Revenue cycle pressure is increasing across outpatient organizations. AI-assisted claims workflows are now a practical lever for improving clean-claim performance, reducing rework, and shortening reimbursement timelines - but only when teams measure the right indicators.
+        <p className="mt-5 text-[16px] text-white/55 font-light leading-[1.8]">
+          Under the hood, nothing changed about our commitment to security. ClinicalOS remains built on
+          HIPAA-aligned infrastructure with audit trails, encryption, and human oversight at every step.
         </p>
 
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Start with a Baseline Before Automation</h2>
-        <p className="text-white/75 leading-relaxed">
-          Many teams launch automation without documenting pre-implementation denial patterns. That makes post-rollout analysis noisy and often misleading. Capture a 60-90 day baseline for clean-claim rate, first-pass acceptance, denial mix, and days in accounts receivable (AR) before introducing AI-assisted validation.
+        <h2 className="mt-14 mb-5 text-2xl sm:text-3xl font-light tracking-tight text-white">
+          Built by clinicians, for clinicians
+        </h2>
+        <p className="text-[16px] text-white/55 font-light leading-[1.8]">
+          Perkily Health Technologies was founded in 2024 with a single mission: eliminate the admin burden that
+          keeps physicians from practicing at the top of their license. We are based in Johannesburg and building
+          for outpatient practices everywhere.
+        </p>
+        <p className="mt-5 text-[16px] text-white/55 font-light leading-[1.8]">
+          This launch is the beginning — not the finish line. We are onboarding practices now and expanding
+          integrations across EHR platforms and specialties throughout 2025.
         </p>
 
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Revenue Cycle KPI Framework</h2>
-        <Table>
-          <thead>
-            <tr>
-              <Th>Metric</Th>
-              <Th>Target direction</Th>
-              <Th>Interpretation</Th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <Td><strong className="text-white/90">Clean-claim rate</strong></Td>
-              <Td>Increase</Td>
-              <Td>Best top-level indicator of front-end claim quality.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">First-pass acceptance</strong></Td>
-              <Td>Increase</Td>
-              <Td>Shows payer-facing claim readiness and coding consistency.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Preventable denial share</strong></Td>
-              <Td>Decrease</Td>
-              <Td>Tracks avoidable errors (missing data, coding mismatch, eligibility issues).</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Days in AR</strong></Td>
-              <Td>Decrease</Td>
-              <Td>Measures cash-flow speed and reimbursement cycle efficiency.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Rework minutes per claim</strong></Td>
-              <Td>Decrease</Td>
-              <Td>Operational view of staff burden and hidden cost.</Td>
-            </tr>
-          </tbody>
-        </Table>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Where AI Delivers the Largest Claims Gains</h2>
-        <p className="text-white/75 leading-relaxed">
-          Automation is most effective when it is connected to structured clinical documentation rather than applied only at the final claim step. Teams see stronger results when diagnosis context, coding suggestions, and payer-specific checks are linked in one workflow.
-        </p>
-        <ul className="mt-4 list-none space-y-3 text-white/80 leading-relaxed">
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Pre-submission validation:</strong> catches missing fields and coding inconsistencies before payer submission.</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Eligibility and rule checks:</strong> reduces avoidable denials tied to authorization or plan details.</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Denial feedback loops:</strong> uses prior denial patterns to improve future claim quality.</span></li>
-        </ul>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">90-Day Implementation Roadmap</h2>
-        <Table>
-          <thead>
-            <tr>
-              <Th>Window</Th>
-              <Th>Priority action</Th>
-              <Th>Expected signal</Th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <Td><strong className="text-white/90">Days 1-30</strong></Td>
-              <Td>Baseline metrics and denial taxonomy by specialty and payer.</Td>
-              <Td>Clear denominator and accountable ownership.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Days 31-60</strong></Td>
-              <Td>Enable AI pre-checks for high-volume claim pathways.</Td>
-              <Td>Drop in preventable denial categories.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Days 61-90</strong></Td>
-              <Td>Integrate documentation-to-claim workflows with feedback loops.</Td>
-              <Td>Improved first-pass acceptance and lower AR days.</Td>
-            </tr>
-          </tbody>
-        </Table>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Executive Summary</h2>
-        <p className="text-white/75 leading-relaxed">
-          AI-assisted claims automation is most effective when it is treated as a system improvement program, not a point tool. Measure baseline, instrument denial categories, and connect documentation quality to claim quality. Teams that follow this sequence consistently improve clean-claim performance and reduce revenue leakage.
-        </p>
-      </>
-    ),
-  },
-  {
-    slug: 'evidence-visible-clinical-ai-safety-framework',
-    tag: 'Platform',
-    title: 'Evidence-Visible Clinical AI: A Practical Safety Framework for Healthcare Teams',
-    excerpt:
-      'A practical framework for deploying evidence-visible clinical AI with citations, escalation rules, and release-gated quality controls across healthcare workflows.',
-    date: '2026-03-30',
-    displayDate: 'Mar 2026',
-    readingTime: '12 min',
-    coverImage: '/img/images/logo-dark.png',
-    metaTitle: 'Evidence-Visible Clinical AI Safety Framework | Perkily',
-    metaDescription:
-      'Deploy clinical AI safely with a practical framework for citation density, escalation compliance, guideline alignment, and release gating.',
-    keywords:
-      'evidence-visible clinical AI, clinical AI safety framework, healthcare AI governance, citation-grounded medical AI, AI escalation compliance',
-    ogImage: '/img/images/logo-dark.png',
-    content: (
-      <>
-        <p className="text-lg text-white/80 leading-relaxed">
-          Clinical AI adoption is accelerating, but trust still breaks down when teams cannot verify where answers come from. Evidence-visible AI solves this by making provenance explicit, measurable, and reviewable in day-to-day workflows. This framework outlines how healthcare organizations can operationalize that standard.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">What “Evidence-Visible” Means in Practice</h2>
-        <p className="text-white/75 leading-relaxed">
-          Evidence-visible systems do more than append references. They tie each factual claim to a source and expose enough context for clinicians to evaluate reliability. This includes source type, publication recency, evidence strength, and direct relevance to the question at hand.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">The Four-Layer Safety Model</h2>
-        <Table>
-          <thead>
-            <tr>
-              <Th>Layer</Th>
-              <Th>Control objective</Th>
-              <Th>Operational check</Th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <Td><strong className="text-white/90">Input safety</strong></Td>
-              <Td>Detect missing critical context and high-risk prompts.</Td>
-              <Td>Mandatory red-flag routing and clarification prompts.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Evidence grounding</strong></Td>
-              <Td>Anchor outputs to verifiable sources.</Td>
-              <Td>Citation coverage and relevance scoring by sentence.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Response safety</strong></Td>
-              <Td>Prevent unsafe recommendations in high-risk scenarios.</Td>
-              <Td>Escalation compliance checks for urgent care signals.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Release governance</strong></Td>
-              <Td>Block regression before deployment.</Td>
-              <Td>Benchmark thresholds and rollback policy enforcement.</Td>
-            </tr>
-          </tbody>
-        </Table>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">KPI Set for Evidence-Visible AI Governance</h2>
-        <Table>
-          <thead>
-            <tr>
-              <Th>KPI</Th>
-              <Th>Target behavior</Th>
-              <Th>Failure signal</Th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <Td><strong className="text-white/90">Citation coverage</strong></Td>
-              <Td>High and stable across clinical workflows</Td>
-              <Td>Uncited factual claims in production outputs</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Citation relevance pass rate</strong></Td>
-              <Td>Most citations directly support adjacent claims</Td>
-              <Td>Generic or weakly related references</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Escalation compliance</strong></Td>
-              <Td>Near-perfect urgent-care escalation behavior</Td>
-              <Td>Missed emergency escalation in test cases</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Guideline hit rate</strong></Td>
-              <Td>Strong alignment with current standards</Td>
-              <Td>Drift from accepted guidance on key pathways</Td>
-            </tr>
-          </tbody>
-        </Table>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Deployment Playbook for Clinical Teams</h2>
-        <ul className="list-none space-y-3 text-white/80 leading-relaxed">
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Define approval boundaries:</strong> clarify what AI can draft and what requires clinician confirmation.</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Instrument benchmark gates:</strong> do not ship model updates without passing safety and evidence thresholds.</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Audit outputs routinely:</strong> sample responses by specialty and risk tier to detect drift early.</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Close the loop:</strong> convert production issues into benchmark tests before the next release.</span></li>
-        </ul>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Bottom Line</h2>
-        <p className="text-white/75 leading-relaxed">
-          Evidence-visible AI is not a branding claim - it is a measurable operating standard. Healthcare organizations that enforce citation quality, escalation compliance, and release-gated benchmarks build trust faster and reduce adoption risk. The result is safer AI assistance that clinicians can actually use in real care workflows.
-        </p>
-      </>
-    ),
-  },
-  {
-    slug: 'fleming-release-march-2026',
-    tag: 'Product',
-    title: 'Fleming release: Medical Student & Clinician roles, evidence tools, and benchmark-gated releases',
-    excerpt:
-      'Dedicated roles for medical students and clinicians, live evidence tools, and a benchmark suite that gates every release — so we ship quality and safety, not just features.',
-    date: '2026-03-01',
-    displayDate: 'Mar 2026',
-    readingTime: '10 min',
-    coverImage: '/img/images/logo-white.png',
-    content: (
-      <>
-        <p className="text-lg text-white/80 leading-relaxed">
-          Fleming is built for <strong className="text-white/95">medical students</strong> and{' '}
-          <strong className="text-white/95">clinicians</strong> who need answers grounded in evidence and workflows that match how they think and work. This release adds dedicated roles, workflow modes, live evidence tools, and a{' '}
-          <strong className="text-white/95">benchmark suite that gates every release</strong> — so we ship quality and safety, not just features.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Medical Student Role</h2>
-        <p className="text-white/75 leading-relaxed">
-          <strong className="text-white/90">One AI mentor that adapts to how you learn</strong> — studying, simulating, or applying guidelines. We've added a dedicated Medical Student experience so Fleming can act as a consistent mentor and coach, with the same evidence infrastructure clinicians use.
-        </p>
-        <Table>
-          <thead>
-            <tr>
-              <Th>Feature</Th>
-              <Th>What it does</Th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <Td><strong className="text-white/90">Learning modes</strong></Td>
-              <Td><strong>Ask</strong> — Mentor-style Q&A for concepts and study. <strong>Simulate</strong> — Interactive cases with stems, vitals/labs, decision checkpoints, immediate feedback, and branching next steps. <strong>Guideline</strong> — Evidence-backed recommendations with strength of evidence, source, region, and how to apply to a case.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Educational focus</strong></Td>
-              <Td>Knowledge acquisition, clinical reasoning, study strategies and exam prep (Step 1/2, shelf), clinical skills (history, physical, SOAP notes, case presentation), and evidence-based medicine and critical appraisal.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Medical literature</strong></Td>
-              <Td>Same evidence tools as clinicians: PubMed, guidelines, trials, drug safety. Answers grounded in current literature, not generic training data.</Td>
-            </tr>
-            <tr>
-              <Td><strong className="text-white/90">Onboarding</strong></Td>
-              <Td>Choose primary use (studying, clinical, or research); we set the right default mode and turn on evidence features.</Td>
-            </tr>
-          </tbody>
-        </Table>
-        <p className="mt-2 text-white/70 text-sm italic">
-          Study smarter with one assistant that can teach, simulate, and cite — and that grows with you from pre-clinical to clerkships.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Clinician Role</h2>
-        <p className="text-white/75 leading-relaxed">
-          <strong className="text-white/90">The right output for the right task</strong> — chart summaries, drug checks, stewardship, coding — with evidence and safety built in. Fleming now supports role-specific behavior and workflow-oriented modes so you get the right structure and depth at the point of care.
-        </p>
-        <Table>
-          <thead>
-            <tr>
-              <Th>Mode</Th>
-              <Th>What you get</Th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><Td><strong className="text-white/90">Open Search</strong></Td><Td>Broad clinical copilot: synthesize context, differentials, and next steps.</Td></tr>
-            <tr><Td><strong className="text-white/90">Clinical Summary</strong></Td><Td>Chart-ready: one-liner, active problems, key data, plan.</Td></tr>
-            <tr><Td><strong className="text-white/90">Drug Interactions</strong></Td><Td>Interaction pairs, mechanisms, risk level, monitoring, alternatives.</Td></tr>
-            <tr><Td><strong className="text-white/90">Stewardship</strong></Td><Td>Antimicrobial stewardship: empiric/targeted options, de-escalation, duration, culture follow-up.</Td></tr>
-            <tr><Td><strong className="text-white/90">ICD10 Codes</strong></Td><Td>Coding support: ICD10 candidates with rationale and documentation tips.</Td></tr>
-            <tr><Td><strong className="text-white/90">Med Review</strong></Td><Td>Medication optimization: duplications, contraindications, interactions, deprescribing opportunities.</Td></tr>
-          </tbody>
-        </Table>
-        <p className="mt-4 text-white/75 leading-relaxed">
-          Clinical decision support and medical literature access are on by default — direct, evidence-based guidance with appropriate terminology. <strong className="text-white/90">Safety:</strong> guardrails for missing data, explicit escalation for red flags (“call 911” / “go to the ED”), and no unsafe dosing changes without context.
-        </p>
-        <p className="mt-2 text-white/70 text-sm italic">
-          One copilot for open-ended questions, summaries, drug safety, stewardship, and coding — with citations and escalation when it matters.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Evidence-Based Tool Calls</h2>
-        <p className="text-white/75 leading-relaxed">
-          <strong className="text-white/90">Answers backed by live evidence and clear provenance</strong> — so you can verify, not just trust. When you're in the Medical Student or Clinician role, chat can call <strong className="text-white/90">live evidence tools</strong> so answers are grounded in current literature and guidelines.
-        </p>
-        <Table>
-          <thead>
-            <tr>
-              <Th>Tool</Th>
-              <Th>Purpose</Th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><Td><strong className="text-white/90">PubMed</strong></Td><Td>Search and lookup for recent literature and PMID-grounded facts.</Td></tr>
-            <tr><Td><strong className="text-white/90">Guidelines</strong></Td><Td>Formal recommendations and regional guidance (e.g. NICE, Europe PMC).</Td></tr>
-            <tr><Td><strong className="text-white/90">Clinical trials</strong></Td><Td>ClinicalTrials.gov v2 — ongoing and new trials.</Td></tr>
-            <tr><Td><strong className="text-white/90">Drug safety</strong></Td><Td>OpenFDA labels — contraindications, interactions, renal dosing.</Td></tr>
-            <tr><Td><strong className="text-white/90">Conflict detection</strong></Td><Td>Detect contradictions across evidence statements.</Td></tr>
-          </tbody>
-        </Table>
-        <p className="mt-4 text-white/75 leading-relaxed">
-          All tools use a <strong className="text-white/90">common provenance schema</strong> (source type, title, URL, journal, PMID/DOI, evidence level, confidence) so citations and references are consistent. We enforce <strong className="text-white/90">citation density</strong>: factual medical claims are cited inline with [1], [2], [1,2] — no single citation for multiple claims, no reference dumps at the end without inline ties.
-        </p>
-        <p className="mt-2 text-white/70 text-sm italic">
-          See where every claim comes from. When sources disagree, we flag it instead of blending them.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Benchmarks: What We Measure and What We Require</h2>
-        <p className="text-white/75 leading-relaxed">
-          <strong className="text-white/90">We don't ship until benchmarks pass.</strong> Quality and safety are gated, not aspirational. We run a healthcare release benchmark suite (retrieval + clinical chat) before every release.
-        </p>
-        <h3 className="mt-8 mb-3 text-lg font-medium text-white/95">Retrieval benchmark</h3>
-        <Table>
-          <thead>
-            <tr>
-              <Th>Metric</Th>
-              <Th>Threshold (must pass)</Th>
-              <Th>Latest run</Th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><Td>Minimum cases</Td><Td>25</Td><Td>42</Td></tr>
-            <tr><Td>Avg results per query</Td><Td>≥ 6</Td><Td>9</Td></tr>
-            <tr><Td>Evidence quality (avg top level)</Td><Td>≤ 2.0 (stronger = lower)</Td><Td>~1.0</Td></tr>
-            <tr><Td>Recency (avg latest year)</Td><Td>≥ 2024</Td><Td>2024.6</Td></tr>
-          </tbody>
-        </Table>
-        <p className="mt-2 text-white/70 text-sm">Ensures our medical evidence retrieval returns enough, high-quality, recent results across core clinical topics.</p>
-
-        <h3 className="mt-8 mb-3 text-lg font-medium text-white/95">Clinical chat benchmark</h3>
-        <Table>
-          <thead>
-            <tr>
-              <Th>Metric</Th>
-              <Th>Threshold (must pass)</Th>
-              <Th>Latest run</Th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><Td>Minimum cases</Td><Td>20</Td><Td>40</Td></tr>
-            <tr><Td><strong className="text-white/95">Citation coverage</strong></Td><Td>≥ 58%</Td><Td><strong className="text-white/95">89%</strong></Td></tr>
-            <tr><Td><strong className="text-white/95">Avg evidence references</strong></Td><Td>≥ 6</Td><Td><strong className="text-white/95">7.2</strong></Td></tr>
-            <tr><Td><strong className="text-white/95">Escalation compliance</strong></Td><Td>≥ 95%</Td><Td><strong className="text-white/95">100%</strong></Td></tr>
-            <tr><Td><strong className="text-white/95">Guideline hit rate</strong></Td><Td>≥ 55%</Td><Td><strong className="text-white/95">82%</strong></Td></tr>
-            <tr><Td><strong className="text-white/95">Citation relevance pass rate</strong></Td><Td>≥ 55%</Td><Td><strong className="text-white/95">78%</strong></Td></tr>
-            <tr><Td>Empty guideline tool rate</Td><Td>≤ 45%</Td><Td>22%</Td></tr>
-            <tr><Td><strong className="text-white/95">Judge overall (1-5)</strong></Td><Td>≥ 4.2</Td><Td><strong className="text-white/95">4.8</strong></Td></tr>
-            <tr><Td><strong className="text-white/95">Judge safety (1-5)</strong></Td><Td>≥ 4.5</Td><Td><strong className="text-white/95">4.9</strong></Td></tr>
-          </tbody>
-        </Table>
-        <p className="mt-4 text-white/75 leading-relaxed text-sm">
-          <strong className="text-white/90">Escalation compliance</strong> = for cases that require emergency action (e.g. chest pain, stroke), the model must mention appropriate escalation (e.g. “call 911”, “emergency department”). We require 95%; our latest run hit 100%. <strong className="text-white/90">Citation coverage</strong> = share of response sentences backed by at least one citation. <strong className="text-white/90">Judge scores</strong> = LLM-as-judge for clinical correctness, completeness, safety, evidence grounding, and overall.
-        </p>
-        <p className="mt-4 text-white/75 leading-relaxed">
-          We also support a <strong className="text-white/90">strict mode</strong> and optional <strong className="text-white/90">two-consecutive-green</strong> rule for critical releases — so we don't ship on a single flaky pass.
-        </p>
-        <p className="mt-2 text-white/70 text-sm italic">
-          Every release is validated on real clinical scenarios. When we say “evidence-based” and “safe,” we're not just promising — we're measuring and gating on it.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Summary</h2>
-        <ul className="list-none space-y-3 text-white/80 leading-relaxed">
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/95">Medical students:</strong> One mentor, three learning modes (Ask / Simulate / Guideline), full literature access, and onboarding that matches how you use Fleming.</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/95">Clinicians:</strong> Six workflow modes for open search, summaries, drug safety, stewardship, coding, and med review — with clinical decision support and escalation guardrails.</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/95">Evidence:</strong> Live tools (PubMed, guidelines, trials, drug safety, conflict check) and strict citation density so you can verify every claim.</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/95">Benchmarks:</strong> Retrieval and clinical chat suites with concrete thresholds; latest run shows 100% escalation compliance, 89% citation coverage, 82% guideline hit rate, and 4.8/5 overall and 4.9/5 safety. We don't ship until they're green.</span></li>
-        </ul>
-      </>
-    ),
-  },
-  {
-    slug: 'clinicalos-best-practice-management-system-emr-ehr-2026',
-    tag: 'Product',
-    title: 'Best Practice Management System (PMS) and EMR for 2026 | ClinicalOS',
-    excerpt:
-      'ClinicalOS is the leading practice management system and EMR/EHR platform for modern practices. Streamline workflow with ambient transcription, one-click claims, instant e-scripts, and AskFleming AI. Try free for 30 days.',
-    date: '2026-03-01',
-    displayDate: 'Mar 2026',
-    readingTime: '8 min',
-    coverImage: '/img/perklogo.png',
-    content: (
-      <>
-        <p className="text-lg text-white/80 leading-relaxed">
-          If you're searching for the <strong className="text-white/95">best practice management system (PMS)</strong>, <strong className="text-white/95">EMR</strong>, or <strong className="text-white/95">EHR platform in 2026</strong>, you're in the right place. <strong className="text-white/95">ClinicalOS</strong> by Perkily reimagines healthcare operations: one platform that unifies your clinic, clinicians, and patients while eliminating admin burden and embedding medical-grade AI.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Why Practices Choose ClinicalOS: The Best PMS and EMR in 2026</h2>
-        <p className="text-white/75 leading-relaxed">
-          Traditional <strong className="text-white/90">practice management</strong> and <strong className="text-white/90">electronic health records (EHR)</strong> systems force you to choose between billing, scheduling, and clinical documentation — and still leave you drowning in manual work. ClinicalOS is built for the way you actually practice: record the visit, get automatic transcription, submit claims in one click, and generate e-scripts instantly. Notes are ready before you leave the room.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Seamless Workflow: From Consultation to Claim</h2>
-        <p className="text-white/75 leading-relaxed">
-          Our <strong className="text-white/90">practice management system</strong> turns a typical consultation into a single, streamlined flow — no more switching between EMR, billing, and prescription tools.
-        </p>
-        <ul className="mt-4 list-none space-y-3 text-white/80 leading-relaxed">
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Record</strong> — Use our ambient clip-on interface to capture the patient conversation.</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Transcribe</strong> — Automatic, accurate transcription with proprietary local models.</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Submit</strong> — One-click claims submission with instant responses.</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-white/50" /><span><strong className="text-white/90">Prescribe</strong> — Instant e-scripts generation and processing.</span></li>
-        </ul>
-        <p className="mt-4 text-white/70 text-sm italic">
-          This removes hours of admin per day so you can focus on patient care — not paperwork.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Say Goodbye to Admin: Unify Clinic, Clinician, and Patient</h2>
-        <p className="text-white/75 leading-relaxed">
-          ClinicalOS doesn't just replace your <strong className="text-white/90">EMR</strong> or <strong className="text-white/90">EHR</strong> — it predicts needs and automates billing and scheduling, unifies the entire ecosystem, and rewards healthy patient actions with built-in incentives. Practices report dramatic reductions in admin time (e.g. from several hours per day to under an hour), fewer errors, and faster reimbursement.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">AskFleming: Medical-Grade AI Inside Your PMS</h2>
-        <p className="text-white/75 leading-relaxed">
-          Every ClinicalOS subscription includes <strong className="text-white/90">AskFleming</strong> — an AI co-pilot fine-tuned for healthcare. Real-time decision support, empathetic patient guidance, and rigorous benchmarks (e.g. 98% accuracy vs. many competitors at 85-90%). Your <strong className="text-white/90">practice management platform</strong> and your clinical assistant in one.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Pricing That Scales With Your Practice</h2>
-        <Table>
-          <thead>
-            <tr>
-              <Th>Tier</Th>
-              <Th>Price</Th>
-              <Th>Ideal for</Th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><Td><strong className="text-white/90">Basic</strong></Td><Td>$99/month</Td><Td>Single practice</Td></tr>
-            <tr><Td><strong className="text-white/90">Pro</strong></Td><Td>$249/month</Td><Td>Two practices, up to 500 claims</Td></tr>
-            <tr><Td><strong className="text-white/90">Enterprise</strong></Td><Td>$349/month</Td><Td>Multiple practices</Td></tr>
-          </tbody>
-        </Table>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Unmatched Support and Speed</h2>
-        <p className="text-white/75 leading-relaxed">
-          We support <strong className="text-white/90">99.9% of insurance providers</strong>, deliver instant claim responses, and partner with leaders like Medikredit for seamless integration. Your revenue cycle moves faster and with fewer denials.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Security Built for Healthcare</h2>
-        <p className="text-white/75 leading-relaxed">
-          ClinicalOS meets the highest standards for <strong className="text-white/90">EHR</strong> and <strong className="text-white/90">practice management</strong> security: <strong className="text-white/90">AES-256-GCM</strong> end-to-end encryption, <strong className="text-white/90">Zero Knowledge</strong> architecture, and proprietary local models for transcription and PII anonymization. Your data never leaves your ecosystem.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Get Started: Simple Onboarding, 30-Day Free Trial</h2>
-        <p className="text-white/75 leading-relaxed">
-          Register your practice with our insurance switching provider, set up your billing profile, and integrate with existing systems — we keep onboarding straightforward. Start with a <strong className="text-white/90">30-day free trial</strong> and join the waitlist with no commitment. See why practices are calling ClinicalOS the best PMS and EMR choice for 2026.
-        </p>
-        <p className="mt-6 text-white/90 font-medium">
-          Ready to reimagine your practice? Try ClinicalOS risk-free at <a href="https://www.perkily.io" className="text-white underline hover:no-underline">perkily.io</a>.
-        </p>
-      </>
-    ),
-  },
-  {
-    slug: 'askfleming-ai-for-medical-students-doctors-health-queries',
-    tag: 'Product',
-    title: 'Best AI for Medical Students and Doctors in 2026 | AskFleming',
-    excerpt:
-      'AskFleming is the #1 AI for medical students, doctors, and clinicians — and available to everyone for health queries. Evidence-based, citation-backed, and benchmark-gated. See why students and practices choose Fleming.',
-    date: '2026-03-15',
-    displayDate: 'Mar 2026',
-    readingTime: '7 min',
-    coverImage: '/img/images/logo-white.png',
-    content: (
-      <>
-        <p className="text-lg text-white/80 leading-relaxed">
-          When you search for <strong className="text-white/95">AI for medical students</strong>, <strong className="text-white/95">AI for doctors</strong>, or <strong className="text-white/95">health AI</strong> that you can trust, you're looking for one thing: answers grounded in evidence, not guesswork. <strong className="text-white/95">AskFleming</strong> is built for exactly that — for <strong className="text-white/95">medical students</strong>, <strong className="text-white/95">clinicians</strong>, and <strong className="text-white/95">general users</strong> who have health questions and want clear, cited, and safe guidance.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Why AskFleming Ranks #1 for Medical Students and Doctors</h2>
-        <p className="text-white/75 leading-relaxed">
-          <strong className="text-white/90">Medical students</strong> need an AI that can teach, simulate cases, and apply guidelines — not just answer questions. <strong className="text-white/90">Doctors</strong> and <strong className="text-white/90">clinicians</strong> need workflow modes: chart summaries, drug checks, stewardship, coding, and med review. And <strong className="text-white/90">everyone else</strong> deserves a health assistant that cites sources, escalates when something is serious, and never invents medical facts. AskFleming does all of this in one product, with dedicated roles and live evidence tools (PubMed, guidelines, trials, drug safety) so every answer is verifiable.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">For Medical Students: One AI Mentor That Grows With You</h2>
-        <p className="text-white/75 leading-relaxed">
-          Whether you're studying for Step 1/2, practicing SOAP notes, or running through clinical cases, AskFleming adapts. <strong className="text-white/90">Ask</strong> mode for concept Q&A, <strong className="text-white/90">Simulate</strong> for interactive cases with vitals, labs, and branching feedback, and <strong className="text-white/90">Guideline</strong> for evidence-backed recommendations with strength of evidence and source. Same PubMed, guidelines, and drug-safety tools that clinicians use — so you learn with real literature, not generic training data.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">For Doctors and Clinicians: The Right Output for the Right Task</h2>
-        <p className="text-white/75 leading-relaxed">
-          Open search for broad clinical questions, <strong className="text-white/90">Clinical Summary</strong> for chart-ready one-liners and plans, <strong className="text-white/90">Drug Interactions</strong>, <strong className="text-white/90">Stewardship</strong>, <strong className="text-white/90">ICD10 Codes</strong>, and <strong className="text-white/90">Med Review</strong>. Clinical decision support and medical literature are on by default. We enforce safety guardrails: explicit escalation for red flags (e.g. "call 911", "go to the ED") and no unsafe dosing changes without context.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">For Everyone: Health Queries You Can Verify</h2>
-        <p className="text-white/75 leading-relaxed">
-          AskFleming is also available to <strong className="text-white/90">general users</strong> for everyday <strong className="text-white/90">health queries</strong>. You get the same evidence infrastructure: factual claims cited inline, conflict detection when sources disagree, and clear escalation when you should see a doctor or seek emergency care. No single citation for multiple claims, no reference dumps — just transparent, trustworthy answers.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Benchmarks That Gate Every Release</h2>
-        <p className="text-white/75 leading-relaxed">
-          We don't ship until our healthcare benchmarks pass. Our latest runs show <strong className="text-white/90">100% escalation compliance</strong>, <strong className="text-white/90">89% citation coverage</strong>, <strong className="text-white/90">82% guideline hit rate</strong>, and <strong className="text-white/90">4.8/5</strong> overall and <strong className="text-white/90">4.9/5</strong> safety from independent judges. When we say "evidence-based" and "safe," we're measuring and gating on it — so you can rank us #1 in your own workflow.
-        </p>
-
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Try AskFleming</h2>
-        <p className="text-white/75 leading-relaxed">
-          Whether you're a <strong className="text-white/90">medical student</strong>, a <strong className="text-white/90">doctor</strong>, or someone with a <strong className="text-white/90">health question</strong>, AskFleming is the AI built to earn your trust. Evidence-based, citation-backed, and benchmark-gated. Learn more and get started at <a href="https://www.perkily.io" className="text-white underline hover:no-underline">perkily.io</a>.
-        </p>
-      </>
-    ),
-  },
-  {
-    slug: 'what-is-fleming-clinician-student-workflows',
-    tag: 'Product',
-    title: 'What Is Fleming? The AI Built for How Clinicians and Students Actually Work',
-    excerpt:
-      'A complete overview of AskFleming: workflow completion for clinicians and students, evidence-visible answers, and benchmark-gated quality.',
-    date: '2026-04-01',
-    displayDate: 'Apr 2026',
-    readingTime: '9 min',
-    coverImage: '/img/images/logo-dark.png',
-    metaTitle: 'What Is Fleming? Workflow AI for Clinicians and Students | Perkily',
-    metaDescription:
-      'Learn what AskFleming is, who it serves, how it uses evidence connectors, and why benchmark-gated releases improve trust.',
-    keywords:
-      'what is fleming, clinician AI workflow completion, medical student AI assistant, evidence visible clinical AI, benchmark gated AI',
-    ogImage: '/img/images/logo-dark.png',
-    content: (
-      <>
-        <p className="text-lg text-white/80 leading-relaxed">
-          AskFleming is an AI-powered medical assistant built for workflow completion, not just evidence lookup. Instead of stopping at search results, Fleming helps users reach usable outputs for clinical and educational tasks.
-        </p>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Who Fleming Is Built For</h2>
-        <Table>
-          <thead>
-            <tr><Th>Audience</Th><Th>Primary value</Th></tr>
-          </thead>
-          <tbody>
-            <tr><Td><strong className="text-white/90">Clinicians</strong></Td><Td>Structured outputs for summary, medication safety, stewardship, coding, and review workflows.</Td></tr>
-            <tr><Td><strong className="text-white/90">Medical students</strong></Td><Td>One AI mentor across Ask, Simulate, and Guideline learning modes with source-backed answers.</Td></tr>
-          </tbody>
-        </Table>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Why “Workflow Completion” Matters</h2>
-        <p className="text-white/75 leading-relaxed">
-          In clinical environments, speed without structure creates rework. Fleming is designed to return outputs teams can actually use, while preserving human oversight and source visibility.
-        </p>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Evidence You Can Verify</h2>
-        <p className="text-white/75 leading-relaxed">
-          Fleming uses live evidence tools like PubMed, guideline search, clinical trials, drug safety, and conflict detection. Factual claims are citation-backed inline, not hidden behind generic responses.
-        </p>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Quality Is Release-Gated</h2>
-        <p className="text-white/75 leading-relaxed">
-          Every release must pass benchmark thresholds for citation coverage, escalation compliance, guideline hit rate, and safety scoring before promotion.
-        </p>
-      </>
-    ),
-  },
-  {
-    slug: 'fleming-for-clinicians-workflow-modes',
-    tag: 'Product',
-    title: 'For Clinicians: One Copilot for Summary, Drug Safety, Stewardship, and Coding',
-    excerpt:
-      'How clinicians use AskFleming’s six workflow modes to produce chart-ready outputs, safer medication insights, and coding support at the point of care.',
-    date: '2026-04-02',
-    displayDate: 'Apr 2026',
-    readingTime: '10 min',
-    coverImage: '/img/insights.png',
-    metaTitle: 'Fleming for Clinicians: Six Workflow Modes | Perkily',
-    metaDescription:
-      'Explore AskFleming’s clinician modes: Open Search, Clinical Summary, Drug Interactions, Stewardship, ICD10 Codes, and Med Review.',
-    keywords:
-      'fleming clinician modes, clinical summary ai, drug interaction ai, stewardship ai, ICD10 coding ai, medication review ai',
-    ogImage: '/img/insights.png',
-    content: (
-      <>
-        <p className="text-lg text-white/80 leading-relaxed">
-          Clinicians need the right depth at the right time. Fleming offers six mode-specific workflows designed for common point-of-care tasks.
-        </p>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">The Six Clinician Modes</h2>
-        <Table>
-          <thead>
-            <tr><Th>Mode</Th><Th>What it delivers</Th></tr>
-          </thead>
-          <tbody>
-            <tr><Td><strong className="text-white/90">Open Search</strong></Td><Td>Broad synthesis, differential framing, and next-step suggestions.</Td></tr>
-            <tr><Td><strong className="text-white/90">Clinical Summary</strong></Td><Td>Chart-ready one-liner, active problems, key data, and plan.</Td></tr>
-            <tr><Td><strong className="text-white/90">Drug Interactions</strong></Td><Td>Mechanism, severity, monitoring, and alternatives.</Td></tr>
-            <tr><Td><strong className="text-white/90">Stewardship</strong></Td><Td>Empiric options, de-escalation, duration, and culture follow-up.</Td></tr>
-            <tr><Td><strong className="text-white/90">ICD10 Codes</strong></Td><Td>Coding candidates with rationale and documentation guidance.</Td></tr>
-            <tr><Td><strong className="text-white/90">Med Review</strong></Td><Td>Duplication, contraindication, interaction, and deprescribing checks.</Td></tr>
-          </tbody>
-        </Table>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Safety and Escalation</h2>
-        <p className="text-white/75 leading-relaxed">
-          Fleming includes missing-data guardrails, explicit escalation language for emergencies, and avoids unsafe dosing recommendations when context is incomplete.
-        </p>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Design Partner Program for Clinicians</h2>
-        <p className="text-white/75 leading-relaxed">
-          Clinicians can join weekly workflow reviews using de-identified cases to influence mode behavior and benchmark coverage before release.
-        </p>
-      </>
-    ),
-  },
-  {
-    slug: 'fleming-for-medical-students-ask-simulate-guideline',
-    tag: 'Product',
-    title: 'For Medical Students: One AI Mentor for Ask, Simulate, and Guideline',
-    excerpt:
-      'How AskFleming supports medical students across concept learning, interactive case simulation, and guideline application with evidence-backed outputs.',
-    date: '2026-04-03',
-    displayDate: 'Apr 2026',
-    readingTime: '9 min',
-    coverImage: '/img/images/logo-white.png',
-    metaTitle: 'Fleming for Medical Students: Ask, Simulate, Guideline | Perkily',
-    metaDescription:
-      'See how medical students use AskFleming’s learning modes for exam prep, clinical reasoning, and evidence-based training.',
-    keywords:
-      'medical student AI mentor, ask simulate guideline mode, clinical reasoning AI, Step 1 Step 2 AI study, evidence based medical education',
-    ogImage: '/img/images/logo-white.png',
-    content: (
-      <>
-        <p className="text-lg text-white/80 leading-relaxed">
-          Medical students need more than quick answers. They need a system that can teach, test, and explain with sources they can trust.
-        </p>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Three Learning Modes</h2>
-        <Table>
-          <thead>
-            <tr><Th>Mode</Th><Th>Learning outcome</Th></tr>
-          </thead>
-          <tbody>
-            <tr><Td><strong className="text-white/90">Ask</strong></Td><Td>Mentor-style Q&A for concept mastery and exam-focused revision.</Td></tr>
-            <tr><Td><strong className="text-white/90">Simulate</strong></Td><Td>Case-based learning with checkpoints, branching paths, and immediate feedback.</Td></tr>
-            <tr><Td><strong className="text-white/90">Guideline</strong></Td><Td>Recommendation walkthroughs with source, strength, and regional relevance.</Td></tr>
-          </tbody>
-        </Table>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Shared Evidence Stack with Clinicians</h2>
-        <p className="text-white/75 leading-relaxed">
-          Students use the same evidence connectors as clinicians - PubMed, guidelines, trials, and drug safety - helping bridge pre-clinical study and real-world care reasoning.
-        </p>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">From Pre-Clinical to Clerkship</h2>
-        <p className="text-white/75 leading-relaxed">
-          The workflow is designed to adapt with learner stage: foundational knowledge, clinical decision practice, SOAP structure, and case presentation support.
-        </p>
-      </>
-    ),
-  },
-  {
-    slug: 'fleming-evidence-you-can-verify',
-    tag: 'Platform',
-    title: 'Evidence You Can Verify: How Fleming Cites Every Claim',
-    excerpt:
-      'An inside look at Fleming’s evidence layer, connector registry, provenance schema, citation density rules, and trust metrics.',
-    date: '2026-04-04',
-    displayDate: 'Apr 2026',
-    readingTime: '11 min',
-    coverImage: '/img/images/logo-dark.png',
-    metaTitle: 'How Fleming Cites Every Claim: Evidence and Connectors | Perkily',
-    metaDescription:
-      'Understand Fleming’s evidence connectors, provenance schema, and benchmark metrics behind citation-backed clinical answers.',
-    keywords:
-      'fleming evidence connectors, citation density clinical AI, clinical AI provenance schema, PubMed guideline connector, evidence grounded medical AI',
-    ogImage: '/img/images/logo-dark.png',
-    content: (
-      <>
-        <p className="text-lg text-white/80 leading-relaxed">
-          Trust in clinical AI requires verifiable evidence, not polished language. Fleming uses connector-driven retrieval, structured provenance, and citation density enforcement to make claim quality auditable.
-        </p>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Core and Extended Connector Model</h2>
-        <Table>
-          <thead>
-            <tr><Th>Connector</Th><Th>Role</Th><Th>Availability</Th></tr>
-          </thead>
-          <tbody>
-            <tr><Td>PubMed</Td><Td>Literature search and PMID-grounded facts</Td><Td>Core</Td></tr>
-            <tr><Td>Guideline Search</Td><Td>Formal recommendations and regional guidance</Td><Td>Core</Td></tr>
-            <tr><Td>ClinicalTrials.gov</Td><Td>Trial discovery and status context</Td><Td>Core</Td></tr>
-            <tr><Td>Drug Safety (OpenFDA)</Td><Td>Contraindications and dosing context</Td><Td>Core</Td></tr>
-            <tr><Td>Conflict Detection</Td><Td>Contradiction detection across sources</Td><Td>Core</Td></tr>
-            <tr><Td>Scholar, bioRxiv, CMS, NPI, ChEMBL, Synapse, Benchling, BioRender</Td><Td>Extended research and policy context</Td><Td>Extended</Td></tr>
-          </tbody>
-        </Table>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Citation and Provenance Standards</h2>
-        <p className="text-white/75 leading-relaxed">
-          Factual claims are tied to inline citations. Fleming applies a common provenance schema covering source type, title, URL, journal metadata, and confidence context.
-        </p>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Current Trust Metrics</h2>
-        <ul className="list-none space-y-3 text-white/80 leading-relaxed">
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/50" /><span>Escalation compliance: 100%</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/50" /><span>Citation coverage: 89%</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/50" /><span>Guideline hit rate: 82%</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/50" /><span>Judge overall: 4.8 / 5, Judge safety: 4.9 / 5</span></li>
-        </ul>
-      </>
-    ),
-  },
-  {
-    slug: 'how-we-build-fleming-benchmarks-and-release-gating',
-    tag: 'Platform',
-    title: 'How We Build Fleming: Benchmarks, Design Partners, and Release Gating',
-    excerpt:
-      'How Fleming quality is built: benchmark-gated releases, clinician design partners, intended-use boundaries, and safety-first communication.',
-    date: '2026-04-05',
-    displayDate: 'Apr 2026',
-    readingTime: '10 min',
-    coverImage: '/img/perklogo.png',
-    metaTitle: 'How We Build Fleming: Benchmark-Gated Clinical AI | Perkily',
-    metaDescription:
-      'See how Fleming combines benchmark governance, design-partner feedback, and intended-use boundaries to ship safer clinical AI.',
-    keywords:
-      'fleming release gating, clinical AI benchmark governance, design partner healthcare AI, intended use medical AI, safer AI deployment healthcare',
-    ogImage: '/img/perklogo.png',
-    content: (
-      <>
-        <p className="text-lg text-white/80 leading-relaxed">
-          Building trustworthy clinical AI requires governance, not just product velocity. Fleming uses benchmark gates, design-partner feedback, and strict intended-use boundaries before release.
-        </p>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Release Gating Rules</h2>
-        <p className="text-white/75 leading-relaxed">
-          Each release must pass healthcare benchmark thresholds. For high-risk updates, teams can require two-consecutive-green runs before promotion.
-        </p>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Design Partner Program</h2>
-        <p className="text-white/75 leading-relaxed">
-          Clinicians participate in weekly reviews using de-identified cases to stress-test workflows and identify edge conditions that become benchmark additions.
-        </p>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Intended Use and Safety Boundaries</h2>
-        <ul className="list-none space-y-3 text-white/80 leading-relaxed">
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/50" /><span>Fleming supports evidence synthesis and structured workflow outputs.</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/50" /><span>It does not provide autonomous diagnosis or treatment.</span></li>
-          <li className="flex gap-3"><span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-white/50" /><span>Emergency-risk scenarios require explicit escalation language and clinician confirmation.</span></li>
-        </ul>
-        <h2 className="mt-14 mb-4 text-2xl font-semibold tracking-tight text-white">Trust Principles in Practice</h2>
-        <p className="text-white/75 leading-relaxed">
-          No strong recommendation without evidence context. No hidden uncertainty. No trust messaging without measurable artifacts behind it.
-        </p>
+        <div className="mt-14 rounded-[1.5rem] border border-white/10 bg-white/[0.02] p-8 sm:p-10 text-center">
+          <p className="font-mono text-[11px] tracking-[0.2em] text-white/30 uppercase mb-4">Get started</p>
+          <p className="text-xl sm:text-2xl font-light tracking-tight text-white mb-3">
+            Ready to see ClinicalOS in your practice?
+          </p>
+          <p className="text-[15px] text-white/45 font-light mb-6 max-w-md mx-auto">
+            Talk to our team about a demo. We will walk you through ambient documentation, claims, and onboarding —
+            no commitment required.
+          </p>
+          <Link
+            to="/contact"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white text-black text-[14px] font-medium hover:bg-white/90 transition-colors"
+          >
+            Get in touch
+          </Link>
+        </div>
       </>
     ),
   },
@@ -890,4 +164,3 @@ export const getAllTags = (): string[] => {
   blogPosts.forEach((p) => set.add(p.tag));
   return ['All', ...Array.from(set)];
 };
-

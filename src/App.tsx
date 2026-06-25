@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { HelmetProvider } from 'react-helmet-async';
 import { useEffect } from "react";
 import { Analytics } from "@vercel/analytics/react";
@@ -19,7 +19,6 @@ import AdminBlog from "./pages/AdminBlog";
 import PerkilyPro from "./pages/PerkilyPro";
 import Fleming from "./pages/Fleming";
 import Docs from "./pages/Docs";
-import Help from "./pages/Help";
 import Press from "./pages/Press";
 
 // ScrollToTop component that handles scrolling on route changes
@@ -56,7 +55,7 @@ const App = () => (
             <Route path="/admin/blog" element={<AdminBlog />} />
             <Route path="/press" element={<Press />} />
             <Route path="/docs" element={<Docs />} />
-            <Route path="/help" element={<Help />} />
+            <Route path="/help" element={<Navigate to="/blog" replace />} />
             <Route path="/clinicalos" element={<PerkilyPro />} />
             <Route path="/fleming" element={<Fleming />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

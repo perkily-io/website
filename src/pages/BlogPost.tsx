@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import { Link, useParams } from 'react-router-dom';
+import Layout from '@/components/Layout';
 import SEO from '@/components/SEO';
 import { blogPosts as fallbackPosts } from './blogData';
-import { useParams } from 'react-router-dom';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
-// Note: Install react-markdown for full markdown support: npm install react-markdown
-// For now, rendering as plain text with whitespace preservation
+import { RevealOnView } from '@/components/home/RevealOnView';
+import { cn } from '@/lib/utils';
+
+const isLogoCover = (url?: string) =>
+  Boolean(url && (url.includes('logo-white') || url.includes('favicon')));
 
 type BlogPost = {
   slug: string;
@@ -25,7 +27,7 @@ type BlogPost = {
   ogImage?: string;
 };
 
-const BlogPost: React.FC = () => {
+const BlogPostPage: React.FC = () => {
   const { slug = '' } = useParams<{ slug: string }>();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -43,7 +45,6 @@ const BlogPost: React.FC = () => {
           .single();
 
         if (error || !data) {
-          // Try fallback data
           const fallbackPost = fallbackPosts.find((p) => p.slug === slug);
           if (fallbackPost) {
             setPost({
@@ -55,7 +56,10 @@ const BlogPost: React.FC = () => {
               displayDate: fallbackPost.displayDate,
               readingTime: fallbackPost.readingTime,
               coverImage: fallbackPost.coverImage,
-              content: typeof fallbackPost.content === 'string' ? fallbackPost.content : fallbackPost.content,
+              content:
+                typeof fallbackPost.content === 'string'
+                  ? fallbackPost.content
+                  : fallbackPost.content,
               metaTitle: fallbackPost.metaTitle,
               metaDescription: fallbackPost.metaDescription,
               keywords: fallbackPost.keywords,
@@ -67,14 +71,15 @@ const BlogPost: React.FC = () => {
           return;
         }
 
-        // Transform Supabase data
         setPost({
           slug: data.slug,
           tag: data.tag,
           title: data.title,
           excerpt: data.excerpt,
           date: data.date,
-          displayDate: data.display_date || new Date(data.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+          displayDate:
+            data.display_date ||
+            new Date(data.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
           readingTime: data.reading_time || '5 min',
           coverImage: data.cover_image,
           content: data.content,
@@ -85,7 +90,6 @@ const BlogPost: React.FC = () => {
         });
       } catch (error) {
         console.error('Error fetching post:', error);
-        // Try fallback data
         const fallbackPost = fallbackPosts.find((p) => p.slug === slug);
         if (fallbackPost) {
           setPost({
@@ -97,7 +101,10 @@ const BlogPost: React.FC = () => {
             displayDate: fallbackPost.displayDate,
             readingTime: fallbackPost.readingTime,
             coverImage: fallbackPost.coverImage,
-            content: typeof fallbackPost.content === 'string' ? fallbackPost.content : fallbackPost.content,
+            content:
+              typeof fallbackPost.content === 'string'
+                ? fallbackPost.content
+                : fallbackPost.content,
             metaTitle: fallbackPost.metaTitle,
             metaDescription: fallbackPost.metaDescription,
             keywords: fallbackPost.keywords,
@@ -118,33 +125,32 @@ const BlogPost: React.FC = () => {
 
   if (isLoading) {
     return (
-      <main className="min-h-screen bg-black text-white selection:bg-white/10">
-        <Navbar />
-        <div className="flex items-center justify-center min-h-screen">
-          <Loader2 className="h-8 w-8 animate-spin text-white/60" />
+      <Layout>
+        <div className="flex items-center justify-center min-h-[60vh]">
+          <Loader2 className="h-7 w-7 animate-spin text-white/40" />
         </div>
-        <Footer />
-      </main>
+      </Layout>
     );
   }
 
   if (notFound || !post) {
     return (
-      <main className="min-h-screen bg-black text-white selection:bg-white/10">
-        <Navbar />
-        <section className="mx-auto max-w-3xl px-6 py-24 text-center">
-          <h1 className="text-3xl font-semibold">Post not found</h1>
-          <a href="/blog" className="mt-6 inline-flex items-center gap-2 text-white/80 hover:underline">
+      <Layout>
+        <section className="px-4 sm:px-6 py-32 text-center">
+          <h1 className="text-3xl font-light text-white mb-4">Post not found</h1>
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors text-[14px]"
+          >
             <ArrowLeft className="h-4 w-4" /> Back to blog
-          </a>
+          </Link>
         </section>
-        <Footer />
-      </main>
+      </Layout>
     );
   }
 
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-white/10">
+    <Layout>
       <SEO
         title={post.metaTitle || post.title}
         description={post.metaDescription || post.excerpt}
@@ -154,46 +160,74 @@ const BlogPost: React.FC = () => {
         articlePublishedTime={post.date}
         articleSection={post.tag}
         articleTags={[post.tag]}
-        keywords={post.keywords || `${post.tag.toLowerCase()}, healthcare, AI, medical technology, Perkily, ${post.title}`}
+        keywords={
+          post.keywords ||
+          `${post.tag.toLowerCase()}, healthcare, AI, medical technology, Perkily, ${post.title}`
+        }
       />
-      <Navbar />
 
-      <article className="mx-auto max-w-3xl px-6 py-24">
-        <a href="/blog" className="mb-8 inline-flex items-center gap-2 text-white/70 hover:underline">
-          <ArrowLeft className="h-4 w-4" /> Back to all posts
-        </a>
+      <article className="px-4 sm:px-6 pt-32 pb-24 sm:pt-40 sm:pb-32">
+        <div className="max-w-[720px] mx-auto">
+          <RevealOnView>
+            <Link
+              to="/blog"
+              className="inline-flex items-center gap-2 text-[13px] text-white/40 hover:text-white transition-colors mb-10"
+            >
+              <ArrowLeft className="h-4 w-4" /> All posts
+            </Link>
 
-        <header>
-          <div className="inline-flex items-center gap-2 text-xs text-white/70">
-            <span className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] uppercase tracking-wide">{post.tag}</span>
-            <span className="text-white/50">{post.displayDate}</span>
-            <span className="text-white/50">• {post.readingTime}</span>
-          </div>
-          <h1 className="mt-3 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">{post.title}</h1>
-          <p className="mt-4 text-lg text-white/70">{post.excerpt}</p>
-        </header>
+            <header className="mb-10">
+              <div className="flex flex-wrap items-center gap-3 mb-5">
+                <span className="font-mono text-[10px] tracking-[0.15em] text-white/30 uppercase">
+                  {post.tag}
+                </span>
+                <span className="text-[12px] text-white/25">
+                  {post.displayDate} · {post.readingTime}
+                </span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-light tracking-tight text-white leading-[1.15]">
+                {post.title}
+              </h1>
+              <p className="mt-5 text-lg text-white/45 font-light leading-relaxed">{post.excerpt}</p>
+            </header>
+          </RevealOnView>
 
-        <div className={`mt-8 overflow-hidden rounded-2xl border border-white/10 ${post.coverImage?.includes('logo-white') ? 'flex items-center justify-center bg-white/[0.06] p-8 md:p-12' : ''}`}>
-          <img
-            src={post.coverImage}
-            alt=""
-            className={post.coverImage?.includes('logo-white') ? 'h-32 w-auto object-contain md:h-40' : 'h-80 w-full object-cover'}
-          />
+          <RevealOnView delay={0.08}>
+            <div
+              className={cn(
+                'overflow-hidden rounded-[1.5rem] border border-white/10 mb-10',
+                post.coverImage?.includes('logo-white') || isLogoCover(post.coverImage)
+                  ? 'flex items-center justify-center bg-surface p-10 md:p-14'
+                  : 'bg-surface'
+              )}
+            >
+              <img
+                src={post.coverImage}
+                alt=""
+                className={
+                  isLogoCover(post.coverImage)
+                    ? 'h-24 w-auto object-contain opacity-80 md:h-28'
+                    : 'w-full h-64 sm:h-80 object-cover opacity-90'
+                }
+              />
+            </div>
+          </RevealOnView>
+
+          <RevealOnView delay={0.12}>
+            <section className="prose prose-invert max-w-none prose-headings:font-light prose-headings:tracking-tight prose-p:text-white/55 prose-p:font-light prose-p:leading-relaxed prose-a:text-white prose-a:no-underline hover:prose-a:underline prose-strong:text-white/80">
+              {typeof post.content === 'string' ? (
+                <div className="text-[16px] text-white/55 whitespace-pre-wrap leading-[1.8] font-light">
+                  {post.content}
+                </div>
+              ) : (
+                <div className="text-[16px] text-white/55 leading-[1.8] font-light">{post.content}</div>
+              )}
+            </section>
+          </RevealOnView>
         </div>
-
-        <section className="prose prose-invert prose-headings:scroll-mt-24 prose-a:text-white/90 prose-a:no-underline hover:prose-a:underline prose-strong:text-white/90 mt-10 max-w-none">
-          {typeof post.content === 'string' ? (
-            <div className="text-white/80 whitespace-pre-wrap leading-relaxed">{post.content}</div>
-          ) : (
-            <div className="text-white/80 leading-relaxed">{post.content}</div>
-          )}
-        </section>
       </article>
-
-      <Footer />
-    </main>
+    </Layout>
   );
 };
 
-export default BlogPost;
-
+export default BlogPostPage;

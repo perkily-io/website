@@ -36,16 +36,12 @@ export const ContainerScroll = ({
 
   return (
     <div
-      className="h-[60rem] md:h-[80rem] flex items-center justify-center relative p-2 md:p-20"
-      style={{ backgroundColor: "#000000" }}
+      className="h-[60rem] md:h-[80rem] flex items-center justify-center relative p-2 md:p-20 bg-surface"
       ref={containerRef}
     >
       <div
         className="py-10 md:py-40 w-full relative"
-        style={{
-          perspective: "1000px",
-          backgroundColor: "#000000",
-        }}
+        style={{ perspective: "1000px" }}
       >
         <Header translate={translate} titleComponent={titleComponent} />
         <Card rotate={rotate} translate={translate} scale={scale}>
@@ -56,13 +52,11 @@ export const ContainerScroll = ({
   );
 };
 
-export const Header = ({ translate, titleComponent }: any) => {
+export const Header = ({ translate, titleComponent }: { translate: MotionValue<number>; titleComponent: string | React.ReactNode }) => {
   return (
     <motion.div
-      style={{
-        translateY: translate,
-      }}
-      className="div max-w-5xl mx-auto text-center"
+      style={{ translateY: translate }}
+      className="max-w-5xl mx-auto text-center"
     >
       {titleComponent}
     </motion.div>
@@ -84,21 +78,13 @@ export const Card = ({
       style={{
         rotateX: rotate,
         scale,
-        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4)",
-        backgroundColor: "#000000",
+        boxShadow: "0 24px 64px rgba(0, 0, 0, 0.4)",
       }}
-      className="max-w-5xl -mt-12 mx-auto h-[30rem] md:h-[40rem] w-full border border-white/10 rounded-lg overflow-hidden"
+      className="max-w-5xl -mt-12 mx-auto h-[30rem] md:h-[40rem] w-full border border-white/8 rounded-2xl overflow-hidden bg-canvas"
     >
-      <div 
-        className="h-full w-full overflow-hidden"
-        style={{ 
-          backgroundColor: "#000000",
-          display: "block"
-        }}
-      >
+      <div className="h-full w-full overflow-hidden">
         {children}
       </div>
     </motion.div>
   );
 };
-
